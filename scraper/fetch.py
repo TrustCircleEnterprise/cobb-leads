@@ -1,6 +1,5 @@
 """
 Cobb County, GA — Motivated Seller Lead Scraper
-Uses LandmarkWeb Filing Date Search.
 """
 
 import asyncio
@@ -167,80 +166,118 @@ async def scrape_landmark(date_from: str, date_to: str) -> list[dict]:
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(
             headless=True,
-            args=["--no-sandbox", "--disable-dev-shm-usage"]
+            args=[
+                "--no-sandbox",
+                "--disable-dev-shm-usage",
+                "--disable-blink-features=AutomationControlled",
+            ]
         )
         ctx = await browser.new_context(
-            user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36",
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
             ignore_https_errors=True,
+            viewport={"width": 1280, "height": 800},
+            java_script_enabled=True,
+            locale="en-US",
         )
+
+        # Hide webdriver flag
+        await ctx.add_init_script("""
+            Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
+            Object.defineProperty(navigator, 'plugins', { get: () => [1, 2, 3] });
+            Object.defineProperty(navigator, 'languages', { get: () => ['en-US', 'en'] });
+        """)
+
         page = await ctx.new_page()
 
         for attempt in range(MAX_RETRIES):
             try:
-                log.info(f"Loading search page (attempt {attempt+1}): {SEARCH_URL}")
-                await page.goto(SEARCH_URL, timeout=60000, wait_until="networkidle")
-                await asyncio.sleep(3)
+                log.info(f"Attempt {attempt+1}: navigating to search page")
 
-                # Log what we see
+                # First visit home page to get cookies
+                await page.goto(f"{LANDMARK_BASE}/home/index", timeout=60000, wait_until="networkidle")
+                await asyncio.sleep(3)
+                log.info(f"Home page URL: {page.url}")
+
+                # Now go to the filing date search
+                await page.goto(SEARCH_URL, timeout=60000, wait_until="networkidle")
+                await asyncio.sleep(4)
+                log.info(f"Search page URL: {page.url}")
+
                 html = await page.content()
                 soup = BeautifulSoup(html, "lxml")
+
+                # Log all inputs
                 inputs = soup.find_all(["input", "select", "textarea"])
                 log.info(f"Found {len(inputs)} form elements")
-                for el in inputs[:15]:
-                    log.info(f"  {el.name} id={el.get('id','')} name={el.get('name','')} type={el.get('type','')}")
+                for el in inputs[:20]:
+                    log.info(f"  {el.name} id={el.get('id','')} name={el.get('name','')} type={el.get('type','')} placeholder={el.get('placeholder','')}")
 
-                # Fill begin date
-                filled_begin = False
-                for sel in [
-                    "#beginDate", "#RecordDateFrom", "#dateFrom",
-                    "input[id*='begin' i]", "input[id*='from' i]",
-                    "input[name*='begin' i]", "input[name*='from' i]",
-                    "input[placeholder*='begin' i]", "input[placeholder*='start' i]",
+                # Log page title
+                title = soup.find("title")
+                log.info(f"Page title: {title.get_text() if title else 'none'}")
+
+                # Try to find date inputs using JavaScript evaluation
+                date_inputs = await page.evaluate("""() => {
+                    const inputs = document.querySelectorAll('input');
+                    return Array.from(inputs).map(i => ({
+                        id: i.id,
+                        name: i.name,
+                        type: i.type,
+                        placeholder: i.placeholder,
+                        className: i.className,
+                    }));
+                }""")
+                log.info(f"JS found {len(date_inputs)} inputs:")
+                for inp in date_inputs[:20]:
+                    log.info(f"  {inp}")
+
+                # Try filling date fields by various means
+                filled = False
+
+                # Method 1: by common IDs
+                for begin_sel, end_sel in [
+                    ("#beginDate", "#endDate"),
+                    ("#RecordDateFrom", "#RecordDateTo"),
+                    ("#dateFrom", "#dateTo"),
+                    ("#startDate", "#endDate"),
+                    ("input[name='beginDate']", "input[name='endDate']"),
+                    ("input[name='RecordDateFrom']", "input[name='RecordDateTo']"),
                 ]:
                     try:
-                        el = page.locator(sel).first
-                        if await el.count() > 0:
-                            await el.triple_click()
-                            await el.fill(date_from)
-                            log.info(f"Filled begin date via {sel}: {date_from}")
-                            filled_begin = True
+                        b = page.locator(begin_sel).first
+                        e = page.locator(end_sel).first
+                        if await b.count() > 0 and await e.count() > 0:
+                            await b.triple_click()
+                            await b.fill(date_from)
+                            await e.triple_click()
+                            await e.fill(date_to)
+                            log.info(f"Filled dates via {begin_sel} / {end_sel}")
+                            filled = True
                             break
                     except Exception:
                         pass
 
-                if not filled_begin:
-                    # Try all date-type inputs
-                    date_inputs = page.locator("input[type='date'], input[type='text']")
-                    count = await date_inputs.count()
-                    log.info(f"Fallback: found {count} text/date inputs")
-                    if count >= 1:
-                        await date_inputs.nth(0).triple_click()
-                        await date_inputs.nth(0).fill(date_from)
-                        log.info(f"Filled first input with {date_from}")
-                    if count >= 2:
-                        await date_inputs.nth(1).triple_click()
-                        await date_inputs.nth(1).fill(date_to)
-                        log.info(f"Filled second input with {date_to}")
-
-                await asyncio.sleep(0.5)
-
-                # Fill end date
-                for sel in [
-                    "#endDate", "#RecordDateTo", "#dateTo",
-                    "input[id*='end' i]", "input[id*='to' i]",
-                    "input[name*='end' i]", "input[name*='to' i]",
-                ]:
+                # Method 2: first two visible text inputs
+                if not filled:
                     try:
-                        el = page.locator(sel).first
-                        if await el.count() > 0:
-                            await el.triple_click()
-                            await el.fill(date_to)
-                            log.info(f"Filled end date via {sel}: {date_to}")
-                            break
-                    except Exception:
-                        pass
+                        visible = page.locator("input:visible")
+                        count = await visible.count()
+                        log.info(f"Visible inputs: {count}")
+                        if count >= 2:
+                            await visible.nth(0).triple_click()
+                            await visible.nth(0).fill(date_from)
+                            await visible.nth(1).triple_click()
+                            await visible.nth(1).fill(date_to)
+                            log.info("Filled via visible inputs fallback")
+                            filled = True
+                    except Exception as e:
+                        log.warning(f"Visible input fallback failed: {e}")
 
-                await asyncio.sleep(0.5)
+                if not filled:
+                    log.warning("Could not fill date fields — taking screenshot of page for debug")
+                    await page.screenshot(path="/tmp/debug.png")
+
+                await asyncio.sleep(1)
 
                 # Click submit
                 for sel in [
@@ -248,47 +285,38 @@ async def scrape_landmark(date_from: str, date_to: str) -> list[dict]:
                     "input[type='submit']",
                     "button:has-text('Search')",
                     "button:has-text('Submit')",
-                    "a:has-text('Search')",
-                    ".btn-search",
-                    "#searchButton",
                     "#btnSearch",
+                    "#searchButton",
+                    ".search-button",
                 ]:
                     try:
                         el = page.locator(sel).first
                         if await el.count() > 0:
                             await el.click()
-                            log.info(f"Clicked search via {sel}")
+                            log.info(f"Clicked submit via {sel}")
                             break
                     except Exception:
                         pass
 
                 await page.wait_for_load_state("networkidle", timeout=30000)
                 await asyncio.sleep(3)
+                log.info(f"After submit URL: {page.url}")
 
-                log.info(f"Results URL: {page.url}")
-
-                # Parse pages
+                # Parse results
                 page_num = 0
                 while True:
                     page_num += 1
                     html = await page.content()
                     soup2 = BeautifulSoup(html, "lxml")
                     tables = soup2.find_all("table")
-                    log.info(f"Page {page_num}: {len(tables)} tables")
+                    log.info(f"Page {page_num}: {len(tables)} tables found")
 
                     recs = _parse_results(html)
-                    log.info(f"Page {page_num}: {len(recs)} records")
+                    log.info(f"Page {page_num}: {len(recs)} matching records")
                     all_records.extend(recs)
 
-                    # Next page
                     next_btn = None
-                    for sel in [
-                        "a:has-text('Next')",
-                        "button:has-text('Next')",
-                        "[title='Next Page']",
-                        ".next a",
-                        "a[rel='next']",
-                    ]:
+                    for sel in ["a:has-text('Next')", "button:has-text('Next')", "[title='Next Page']", ".next a"]:
                         try:
                             el = page.locator(sel).first
                             if await el.count() > 0:
@@ -301,7 +329,6 @@ async def scrape_landmark(date_from: str, date_to: str) -> list[dict]:
                     await next_btn.click()
                     await asyncio.sleep(3)
 
-                log.info(f"Total records scraped: {len(all_records)}")
                 break
 
             except Exception as e:
