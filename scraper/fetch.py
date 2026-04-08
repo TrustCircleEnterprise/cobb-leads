@@ -1,7 +1,6 @@
 """
 Cobb County, GA — Motivated Seller Lead Scraper
-Fetches clerk filings for the last 7 days, enriches with parcel data,
-scores leads, and writes JSON output for the dashboard.
+Uses the Landmark portal at superiorcourtclerk.cobbcounty.gov/landmark
 """
 
 import asyncio
@@ -9,7 +8,6 @@ import csv
 import io
 import json
 import logging
-import os
 import re
 import sys
 import time
@@ -25,7 +23,7 @@ import requests
 from bs4 import BeautifulSoup
 
 try:
-    from playwright.async_api import async_playwright, TimeoutError as PWTimeoutError
+    from playwright.async_api import async_playwright
 except ImportError:
     print("playwright not installed")
     sys.exit(1)
@@ -42,35 +40,36 @@ logging.basicConfig(
 )
 log = logging.getLogger("cobb_scraper")
 
-CLERK_BASE = "https://superiorcourtclerk.cobbcounty.gov/records-search"
-PARCEL_BASE = "https://gis.cobbcountyga.gov"
+LANDMARK_URL = "https://superiorcourtclerk.cobbcounty.gov/landmark"
+SEARCH_URL   = f"{LANDMARK_URL}/web/search/DOCSEARCH303S1"
+PARCEL_BASE  = "https://gis.cobbcountyga.gov"
 LOOK_BACK_DAYS = 7
-MAX_RETRIES = 3
-RETRY_DELAY = 3
+MAX_RETRIES    = 3
+RETRY_DELAY    = 3
 
-REPO_ROOT = Path(__file__).parent.parent
+REPO_ROOT     = Path(__file__).parent.parent
 DASHBOARD_DIR = REPO_ROOT / "dashboard"
-DATA_DIR = REPO_ROOT / "data"
+DATA_DIR      = REPO_ROOT / "data"
 for d in (DASHBOARD_DIR, DATA_DIR):
     d.mkdir(parents=True, exist_ok=True)
 
 DOC_TYPES = {
-    "LP":      ("Lis Pendens",                    "lis_pendens"),
-    "NOFC":    ("Notice of Foreclosure",           "foreclosure"),
-    "TAXDEED": ("Tax Deed",                        "tax_deed"),
-    "JUD":     ("Judgment",                        "judgment"),
-    "CCJ":     ("Certified Judgment",              "judgment"),
-    "DRJUD":   ("Domestic Judgment",               "judgment"),
-    "LNCORPTX":("Corp Tax Lien",                   "tax_lien"),
-    "LNIRS":   ("IRS Lien",                        "tax_lien"),
-    "LNFED":   ("Federal Lien",                    "tax_lien"),
-    "LN":      ("Lien",                            "lien"),
-    "LNMECH":  ("Mechanic's Lien",                 "lien"),
-    "LNHOA":   ("HOA Lien",                        "lien"),
-    "MEDLN":   ("Medicaid Lien",                   "lien"),
-    "PRO":     ("Probate",                         "probate"),
-    "NOC":     ("Notice of Commencement",          "noc"),
-    "RELLP":   ("Release Lis Pendens",             "release"),
+    "LP":       ("Lis Pendens",           "lis_pendens"),
+    "NOFC":     ("Notice of Foreclosure", "foreclosure"),
+    "TAXDEED":  ("Tax Deed",              "tax_deed"),
+    "JUD":      ("Judgment",              "judgment"),
+    "CCJ":      ("Certified Judgment",    "judgment"),
+    "DRJUD":    ("Domestic Judgment",     "judgment"),
+    "LNCORPTX": ("Corp Tax Lien",         "tax_lien"),
+    "LNIRS":    ("IRS Lien",              "tax_lien"),
+    "LNFED":    ("Federal Lien",          "tax_lien"),
+    "LN":       ("Lien",                  "lien"),
+    "LNMECH":   ("Mechanic's Lien",       "lien"),
+    "LNHOA":    ("HOA Lien",              "lien"),
+    "MEDLN":    ("Medicaid Lien",         "lien"),
+    "PRO":      ("Probate",               "probate"),
+    "NOC":      ("Notice of Commencement","noc"),
+    "RELLP":    ("Release Lis Pendens",   "release"),
 }
 
 _parcel_index: dict[str, dict] = {}
@@ -79,7 +78,6 @@ _parcel_index: dict[str, dict] = {}
 def _norm(s: str) -> str:
     return re.sub(r"\s+", " ", str(s or "")).strip().upper()
 
-
 def _col(row: dict, *names: str) -> str:
     for n in names:
         v = row.get(n, "")
@@ -87,6 +85,8 @@ def _col(row: dict, *names: str) -> str:
             return str(v).strip()
     return ""
 
+
+# ── Parcel helpers (unchanged) ───────────────────────────────────────────────
 
 def build_parcel_index(dbf_path: Path) -> dict:
     if DBF is None:
@@ -97,36 +97,19 @@ def build_parcel_index(dbf_path: Path) -> dict:
         for row in table:
             try:
                 owner_raw = _col(row, "OWNER", "OWN1", "OWNERNAME")
-                site_addr = _col(row, "SITE_ADDR", "SITEADDR", "PROPADDR")
-                site_city = _col(row, "SITE_CITY", "SITECITY", "PROPCITY")
-                site_zip  = _col(row, "SITE_ZIP",  "SITEZIP",  "PROPZIP")
-                mail_adr  = _col(row, "ADDR_1", "MAILADR1", "MAILADDR")
-                mail_city = _col(row, "CITY", "MAILCITY")
-                mail_st   = _col(row, "STATE", "MAILSTATE")
-                mail_zip  = _col(row, "ZIP", "MAILZIP")
                 rec = {
-                    "prop_address": site_addr,
-                    "prop_city":    site_city,
+                    "prop_address": _col(row, "SITE_ADDR", "SITEADDR"),
+                    "prop_city":    _col(row, "SITE_CITY", "SITECITY"),
                     "prop_state":   "GA",
-                    "prop_zip":     site_zip,
-                    "mail_address": mail_adr,
-                    "mail_city":    mail_city,
-                    "mail_state":   mail_st,
-                    "mail_zip":     mail_zip,
+                    "prop_zip":     _col(row, "SITE_ZIP", "SITEZIP"),
+                    "mail_address": _col(row, "ADDR_1", "MAILADR1"),
+                    "mail_city":    _col(row, "CITY", "MAILCITY"),
+                    "mail_state":   _col(row, "STATE", "MAILSTATE"),
+                    "mail_zip":     _col(row, "ZIP", "MAILZIP"),
                 }
                 if not owner_raw:
                     continue
-                parts = re.split(r",\s*", owner_raw, maxsplit=1)
-                if len(parts) == 2:
-                    last, first = parts[0].strip(), parts[1].strip()
-                    variants = [
-                        _norm(owner_raw),
-                        _norm(f"{first} {last}"),
-                        _norm(f"{last} {first}"),
-                    ]
-                else:
-                    variants = [_norm(owner_raw)]
-                for v in variants:
+                for v in _name_variants(owner_raw):
                     if v:
                         idx[v] = rec
             except Exception:
@@ -137,272 +120,136 @@ def build_parcel_index(dbf_path: Path) -> dict:
     return idx
 
 
+def _name_variants(owner_raw: str) -> list[str]:
+    parts = re.split(r",\s*", owner_raw.strip(), maxsplit=1)
+    if len(parts) == 2:
+        last, first = parts
+        return list({_norm(owner_raw), _norm(f"{first} {last}"), _norm(f"{last} {first}")})
+    return [_norm(owner_raw)]
+
+
 def lookup_parcel(owner: str) -> Optional[dict]:
-    key = _norm(owner)
-    return _parcel_index.get(key)
+    return _parcel_index.get(_norm(owner))
 
 
 def download_parcel_dbf() -> Optional[Path]:
     cache_dir = REPO_ROOT / ".cache"
     cache_dir.mkdir(exist_ok=True)
     dbf_path = cache_dir / "parcels.dbf"
+    if dbf_path.exists() and (time.time() - dbf_path.stat().st_mtime) < 86400:
+        log.info("Using cached parcel DBF")
+        return dbf_path
 
-    if dbf_path.exists():
-        age = time.time() - dbf_path.stat().st_mtime
-        if age < 86400:
-            log.info("Using cached parcel DBF")
-            return dbf_path
-
-    candidate_urls = [
-        f"{PARCEL_BASE}/arcgis/rest/services/Cobb/ParcelData/MapServer/0/query"
-        "?where=1%3D1&outFields=*&f=geojson",
+    urls = [
         "https://gis.cobbcountyga.gov/download/parcels.zip",
         "https://gis.cobbcountyga.gov/download/Cobb_Parcels.zip",
         "https://www.cobbcountyga.gov/images/gis/data/parcels.zip",
     ]
-
     session = requests.Session()
-    session.headers.update({"User-Agent": "Mozilla/5.0 (compatible; CobbLeadScraper/1.0)"})
+    session.headers.update({"User-Agent": "Mozilla/5.0"})
+    for url in urls:
+        try:
+            r = session.get(url, timeout=60, verify=False, stream=True)
+            if r.status_code == 200:
+                zdata = b"".join(r.iter_content(65536))
+                with zipfile.ZipFile(io.BytesIO(zdata)) as zf:
+                    dbf_files = [n for n in zf.namelist() if n.lower().endswith(".dbf")]
+                    if dbf_files:
+                        dbf_path.write_bytes(zf.read(dbf_files[0]))
+                        log.info(f"Parcel DBF extracted from {url}")
+                        return dbf_path
+        except Exception as e:
+            log.warning(f"Parcel download failed {url}: {e}")
 
-    for url in candidate_urls:
-        for attempt in range(MAX_RETRIES):
-            try:
-                log.info(f"Attempting parcel download: {url} (attempt {attempt+1})")
-                r = session.get(url, timeout=60, stream=True, verify=False)
-                if r.status_code != 200:
-                    break
-                content_type = r.headers.get("Content-Type", "")
-                if "zip" in content_type or url.endswith(".zip"):
-                    zdata = b"".join(r.iter_content(65536))
-                    try:
-                        with zipfile.ZipFile(io.BytesIO(zdata)) as zf:
-                            dbf_files = [n for n in zf.namelist() if n.lower().endswith(".dbf")]
-                            if dbf_files:
-                                with zf.open(dbf_files[0]) as f:
-                                    dbf_path.write_bytes(f.read())
-                                log.info(f"Parcel DBF extracted from {url}")
-                                return dbf_path
-                    except zipfile.BadZipFile:
-                        pass
-                if "json" in content_type or "geojson" in content_type:
-                    data = r.json()
-                    _build_index_from_geojson(data)
-                    return None
-            except Exception as e:
-                log.warning(f"Parcel download attempt {attempt+1} failed: {e}")
-                time.sleep(RETRY_DELAY)
-
-    log.warning("Could not download parcel data — property enrichment will be skipped")
+    log.warning("Parcel data unavailable — skipping address enrichment")
     return None
 
 
-def _build_index_from_geojson(data: dict):
-    global _parcel_index
-    features = data.get("features", [])
-    log.info(f"Building parcel index from {len(features)} GeoJSON features")
-    for feat in features:
-        props = feat.get("properties", {}) or {}
-        owner = _col(props, "OWNER", "OWN1", "OWNERNAME", "OWNER_NAME")
-        if not owner:
-            continue
-        rec = {
-            "prop_address": _col(props, "SITE_ADDR", "SITEADDR", "ADDRESS"),
-            "prop_city":    _col(props, "SITE_CITY", "SITECITY", "CITY"),
-            "prop_state":   "GA",
-            "prop_zip":     _col(props, "SITE_ZIP", "SITEZIP", "ZIP"),
-            "mail_address": _col(props, "ADDR_1", "MAILADR1", "MAIL_ADDR"),
-            "mail_city":    _col(props, "CITY", "MAILCITY", "MAIL_CITY"),
-            "mail_state":   _col(props, "STATE", "MAILSTATE") or "GA",
-            "mail_zip":     _col(props, "ZIP", "MAILZIP", "MAIL_ZIP"),
-        }
-        for v in _name_variants(owner):
-            _parcel_index[v] = rec
+# ── Landmark scraper ─────────────────────────────────────────────────────────
 
-
-def _name_variants(owner_raw: str) -> list[str]:
-    parts = re.split(r",\s*", owner_raw.strip(), maxsplit=1)
-    if len(parts) == 2:
-        last, first = parts
-        return list({
-            _norm(owner_raw),
-            _norm(f"{first} {last}"),
-            _norm(f"{last} {first}"),
-        })
-    return [_norm(owner_raw)]
-
-
-async def scrape_clerk(doc_type: str, date_from: str, date_to: str) -> list[dict]:
-    records: list[dict] = []
+async def scrape_doc_type(page, doc_type: str, date_from: str, date_to: str) -> list[dict]:
+    """Search one doc type using the Landmark Document Type Search."""
     label, cat = DOC_TYPES.get(doc_type, (doc_type, "other"))
+    records = []
 
-    async with async_playwright() as pw:
-        browser = await pw.chromium.launch(headless=True, args=["--no-sandbox", "--disable-dev-shm-usage"])
-        ctx = await browser.new_context(
-            user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36",
-            ignore_https_errors=True,
-        )
-        page = await ctx.new_page()
+    try:
+        # Navigate to Document Type Search
+        await page.goto(f"{LANDMARK_URL}/web/search/DOCSEARCH303S1", timeout=30000, wait_until="domcontentloaded")
+        await asyncio.sleep(2)
 
-        for attempt in range(MAX_RETRIES):
-            try:
-                log.info(f"[{doc_type}] Loading clerk portal (attempt {attempt+1})")
-                await page.goto(CLERK_BASE, timeout=60000, wait_until="domcontentloaded")
-                await asyncio.sleep(3)
+        # Fill document type text box
+        dt_box = page.locator("textarea, input[type='text']").first
+        await dt_box.fill(doc_type)
+        await asyncio.sleep(0.5)
 
-                # Take snapshot to understand the page structure
-                html = await page.content()
-                soup = BeautifulSoup(html, "lxml")
+        # Fill begin date
+        begin = page.locator("input[id*='beginDate'], input[name*='beginDate'], input[id*='begin'], input[name*='begin']").first
+        if await begin.count() == 0:
+            begin = page.locator("input[type='text']").nth(1)
+        await begin.triple_click()
+        await begin.fill(date_from)
 
-                # Log all form inputs found
-                inputs = soup.find_all(["input", "select"])
-                log.info(f"[{doc_type}] Found {len(inputs)} form elements")
-                for inp in inputs[:20]:
-                    log.info(f"  {inp.get('type','?')} name={inp.get('name','')} id={inp.get('id','')} class={inp.get('class','')}")
+        # Fill end date
+        end = page.locator("input[id*='endDate'], input[name*='endDate'], input[id*='end'], input[name*='end']").first
+        if await end.count() == 0:
+            end = page.locator("input[type='text']").nth(2)
+        await end.triple_click()
+        await end.fill(date_to)
 
-                # Try to find and fill doc type
-                filled_type = False
-                for sel in [
-                    "select[name*='type' i]",
-                    "select[name*='doc' i]",
-                    "select[id*='type' i]",
-                    "select[id*='doc' i]",
-                    "select",
-                ]:
-                    try:
-                        els = page.locator(sel)
-                        count = await els.count()
-                        if count > 0:
-                            for i in range(count):
-                                el = els.nth(i)
-                                try:
-                                    await el.select_option(value=doc_type)
-                                    filled_type = True
-                                    log.info(f"[{doc_type}] Selected doc type via {sel}[{i}]")
-                                    break
-                                except Exception:
-                                    pass
-                        if filled_type:
-                            break
-                    except Exception:
-                        pass
+        # Click Submit
+        await page.locator("button:has-text('Submit'), input[value='Submit']").first.click()
+        await asyncio.sleep(4)
 
-                # Try to fill dates
-                for sel in ["input[name*='from' i]", "input[id*='from' i]", "input[type='date']", "input[name*='start' i]"]:
-                    try:
-                        el = page.locator(sel).first
-                        if await el.count() > 0:
-                            await el.fill(date_from)
-                            log.info(f"[{doc_type}] Filled date_from via {sel}")
-                            break
-                    except Exception:
-                        pass
+        # Parse results across pages
+        while True:
+            html = await page.content()
+            new_recs = _parse_landmark_results(html, doc_type, label, cat)
+            records.extend(new_recs)
+            log.info(f"[{doc_type}] Page batch: {len(new_recs)} records")
 
-                for sel in ["input[name*='to' i]", "input[id*='to' i]", "input[name*='end' i]"]:
-                    try:
-                        el = page.locator(sel).first
-                        if await el.count() > 0:
-                            await el.fill(date_to)
-                            log.info(f"[{doc_type}] Filled date_to via {sel}")
-                            break
-                    except Exception:
-                        pass
-
-                # Click search button
-                for sel in ["button[type='submit']", "input[type='submit']", "button:has-text('Search')", "a:has-text('Search')"]:
-                    try:
-                        el = page.locator(sel).first
-                        if await el.count() > 0:
-                            await el.click()
-                            log.info(f"[{doc_type}] Clicked search via {sel}")
-                            break
-                    except Exception:
-                        pass
-
-                await asyncio.sleep(5)
-                html = await page.content()
-
-                # Log page title and snippet for debugging
-                soup2 = BeautifulSoup(html, "lxml")
-                title = soup2.find("title")
-                log.info(f"[{doc_type}] Page title: {title.get_text() if title else 'none'}")
-
-                records = _parse_clerk_results(html, doc_type, label, cat)
-                log.info(f"[{doc_type}] Parsed {len(records)} records")
-
-                # Pagination
-                page_num = 1
-                while True:
-                    next_btn = None
-                    for sel in ["a:has-text('Next')", "a:has-text('>')", ".pager a:last-child", "[aria-label='Next']"]:
-                        try:
-                            el = page.locator(sel).first
-                            if await el.count() > 0:
-                                next_btn = el
-                                break
-                        except Exception:
-                            pass
-                    if not next_btn:
-                        break
-                    page_num += 1
-                    await next_btn.click()
-                    await asyncio.sleep(3)
-                    html = await page.content()
-                    new_recs = _parse_clerk_results(html, doc_type, label, cat)
-                    if not new_recs:
-                        break
-                    records.extend(new_recs)
-
+            # Check for next page
+            next_btn = page.locator("a:has-text('Next'), button:has-text('Next')").first
+            if await next_btn.count() == 0:
                 break
+            await next_btn.click()
+            await asyncio.sleep(3)
 
-            except Exception as e:
-                log.warning(f"[{doc_type}] Attempt {attempt+1} error: {e}")
-                if attempt == MAX_RETRIES - 1:
-                    log.error(f"[{doc_type}] All attempts failed")
-                else:
-                    await asyncio.sleep(RETRY_DELAY)
+    except Exception as e:
+        log.warning(f"[{doc_type}] Error: {e}")
 
-        await browser.close()
-
+    log.info(f"[{doc_type}] Total: {len(records)} records")
     return records
 
 
-def _parse_clerk_results(html: str, doc_type: str, label: str, cat: str) -> list[dict]:
+def _parse_landmark_results(html: str, doc_type: str, label: str, cat: str) -> list[dict]:
     soup = BeautifulSoup(html, "lxml")
     records = []
 
-    tables = soup.find_all("table")
-    log.info(f"  Found {len(tables)} tables on page")
-
-    table = None
-    for t in tables:
-        rows = t.find_all("tr")
-        if len(rows) > 1:
-            table = t
-            break
-
+    table = soup.find("table")
     if not table:
         return records
 
     rows = table.find_all("tr")
-    if not rows:
+    if len(rows) < 2:
         return records
 
     headers = [th.get_text(strip=True).lower() for th in rows[0].find_all(["th", "td"])]
-    log.info(f"  Table headers: {headers}")
+    log.info(f"  Headers: {headers}")
 
-    def col_idx(*names):
+    def ci(*names):
         for n in names:
             for i, h in enumerate(headers):
                 if n in h:
                     return i
         return None
 
-    idx_docnum  = col_idx("doc", "instrument", "book", "number")
-    idx_filed   = col_idx("filed", "date", "recorded")
-    idx_grantor = col_idx("grantor", "owner", "from", "name")
-    idx_grantee = col_idx("grantee", "to", "buyer")
-    idx_legal   = col_idx("legal", "description", "property")
-    idx_amount  = col_idx("amount", "consideration", "value")
+    idx_docnum  = ci("clerk", "file", "doc", "number", "instrument")
+    idx_filed   = ci("recorded", "filed", "date")
+    idx_grantor = ci("grantor", "owner", "from", "name")
+    idx_grantee = ci("grantee", "to", "buyer")
+    idx_legal   = ci("legal", "description")
+    idx_amount  = ci("amount", "consideration")
+    idx_type    = ci("type", "document type")
 
     for row in rows[1:]:
         try:
@@ -416,30 +263,28 @@ def _parse_clerk_results(html: str, doc_type: str, label: str, cat: str) -> list
                 return cells[idx].get_text(strip=True)
 
             link_tag = row.find("a", href=True)
-            href = link_tag["href"] if link_tag else ""
-            if href and not href.startswith("http"):
-                href = f"https://superiorcourtclerk.cobbcounty.gov{href}"
+            href = ""
+            if link_tag:
+                href = link_tag["href"]
+                if not href.startswith("http"):
+                    href = f"{LANDMARK_URL}{href}"
 
             doc_num = cell(idx_docnum) or (link_tag.get_text(strip=True) if link_tag else "")
-            filed   = cell(idx_filed)
             grantor = cell(idx_grantor)
-            grantee = cell(idx_grantee)
-            legal   = cell(idx_legal)
-            amount  = _parse_amount(cell(idx_amount))
 
             if not doc_num and not grantor:
                 continue
 
             records.append({
                 "doc_num":      doc_num,
-                "doc_type":     doc_type,
-                "filed":        _norm_date(filed),
+                "doc_type":     cell(idx_type) or doc_type,
+                "filed":        _norm_date(cell(idx_filed)),
                 "cat":          cat,
                 "cat_label":    label,
                 "owner":        grantor,
-                "grantee":      grantee,
-                "amount":       amount,
-                "legal":        legal,
+                "grantee":      cell(idx_grantee),
+                "amount":       _parse_amount(cell(idx_amount)),
+                "legal":        cell(idx_legal),
                 "clerk_url":    href,
                 "prop_address": "", "prop_city": "", "prop_state": "GA", "prop_zip": "",
                 "mail_address": "", "mail_city": "", "mail_state": "", "mail_zip": "",
@@ -453,8 +298,7 @@ def _parse_clerk_results(html: str, doc_type: str, label: str, cat: str) -> list
 
 def _parse_amount(raw: str) -> float:
     try:
-        cleaned = re.sub(r"[^\d.]", "", raw.replace(",", ""))
-        return float(cleaned) if cleaned else 0.0
+        return float(re.sub(r"[^\d.]", "", raw.replace(",", "")) or 0)
     except Exception:
         return 0.0
 
@@ -468,6 +312,8 @@ def _norm_date(raw: str) -> str:
     return raw.strip()
 
 
+# ── Scoring ──────────────────────────────────────────────────────────────────
+
 WEEK_AGO = (datetime.now() - timedelta(days=7)).strftime("%Y-%m-%d")
 
 
@@ -477,43 +323,30 @@ def compute_flags_and_score(rec: dict, all_records: list[dict]) -> tuple[list[st
     dt    = rec.get("doc_type", "")
     cat   = rec.get("cat", "")
     owner = rec.get("owner", "")
+    filed = rec.get("filed", "")
 
-    if dt in ("LP", "RELLP"):
-        flags.append("Lis pendens")
-    if dt == "NOFC":
-        flags.append("Pre-foreclosure")
-    if cat == "judgment":
-        flags.append("Judgment lien")
-    if cat == "tax_lien":
-        flags.append("Tax lien")
-    if dt == "LNMECH":
-        flags.append("Mechanic lien")
-    if cat == "probate":
-        flags.append("Probate / estate")
+    if dt in ("LP", "RELLP"):        flags.append("Lis pendens")
+    if dt == "NOFC":                  flags.append("Pre-foreclosure")
+    if cat == "judgment":             flags.append("Judgment lien")
+    if cat == "tax_lien":             flags.append("Tax lien")
+    if dt == "LNMECH":                flags.append("Mechanic lien")
+    if cat == "probate":              flags.append("Probate / estate")
     if owner and re.search(r"\b(LLC|INC|CORP|LTD|TRUST|ESTATE)\b", owner.upper()):
         flags.append("LLC / corp owner")
-    filed = rec.get("filed", "")
-    if filed >= WEEK_AGO:
-        flags.append("New this week")
+    if filed >= WEEK_AGO:             flags.append("New this week")
 
     score += len(flags) * 10
 
     owner_key  = _norm(owner)
-    owner_docs = {r["doc_type"] for r in all_records if _norm(r.get("owner", "")) == owner_key}
+    owner_docs = {r["doc_type"] for r in all_records if _norm(r.get("owner","")) == owner_key}
     if "LP" in owner_docs and "NOFC" in owner_docs:
         score += 20
 
-    amount = rec.get("amount", 0) or 0
-    if amount > 100_000:
-        score += 15
-    elif amount > 50_000:
-        score += 10
-
-    if filed >= WEEK_AGO:
-        score += 5
-
-    if rec.get("prop_address") or rec.get("mail_address"):
-        score += 5
+    amt = rec.get("amount", 0) or 0
+    if amt > 100_000:   score += 15
+    elif amt > 50_000:  score += 10
+    if filed >= WEEK_AGO: score += 5
+    if rec.get("prop_address") or rec.get("mail_address"): score += 5
 
     return flags, min(score, 100)
 
@@ -527,15 +360,15 @@ def enrich_record(rec: dict) -> dict:
     return rec
 
 
+# ── Output ───────────────────────────────────────────────────────────────────
+
 def _split_name(full: str) -> tuple[str, str]:
     full = full.strip()
     if "," in full:
-        parts = full.split(",", 1)
-        return parts[1].strip().title(), parts[0].strip().title()
-    parts = full.split()
-    if len(parts) >= 2:
-        return parts[0].title(), " ".join(parts[1:]).title()
-    return full.title(), ""
+        p = full.split(",", 1)
+        return p[1].strip().title(), p[0].strip().title()
+    p = full.split()
+    return (p[0].title(), " ".join(p[1:]).title()) if len(p) >= 2 else (full.title(), "")
 
 
 def write_outputs(records: list[dict], date_from: str, date_to: str):
@@ -554,39 +387,40 @@ def write_outputs(records: list[dict], date_from: str, date_to: str):
 
     ghl_path = DATA_DIR / "ghl_export.csv"
     fieldnames = [
-        "First Name", "Last Name", "Mailing Address", "Mailing City", "Mailing State",
-        "Mailing Zip", "Property Address", "Property City", "Property State", "Property Zip",
-        "Lead Type", "Document Type", "Date Filed", "Document Number", "Amount/Debt Owed",
-        "Seller Score", "Motivated Seller Flags", "Source", "Public Records URL",
+        "First Name","Last Name","Mailing Address","Mailing City","Mailing State","Mailing Zip",
+        "Property Address","Property City","Property State","Property Zip",
+        "Lead Type","Document Type","Date Filed","Document Number","Amount/Debt Owed",
+        "Seller Score","Motivated Seller Flags","Source","Public Records URL",
     ]
     with ghl_path.open("w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         for r in records:
-            first, last = _split_name(r.get("owner", ""))
+            first, last = _split_name(r.get("owner",""))
             writer.writerow({
-                "First Name":            first,
-                "Last Name":             last,
-                "Mailing Address":       r.get("mail_address", ""),
-                "Mailing City":          r.get("mail_city", ""),
-                "Mailing State":         r.get("mail_state", ""),
-                "Mailing Zip":           r.get("mail_zip", ""),
-                "Property Address":      r.get("prop_address", ""),
-                "Property City":         r.get("prop_city", ""),
-                "Property State":        r.get("prop_state", "GA"),
-                "Property Zip":          r.get("prop_zip", ""),
-                "Lead Type":             r.get("cat_label", ""),
-                "Document Type":         r.get("doc_type", ""),
-                "Date Filed":            r.get("filed", ""),
-                "Document Number":       r.get("doc_num", ""),
-                "Amount/Debt Owed":      r.get("amount", ""),
-                "Seller Score":          r.get("score", 0),
-                "Motivated Seller Flags":"; ".join(r.get("flags", [])),
-                "Source":                "Cobb County Superior Court Clerk",
-                "Public Records URL":    r.get("clerk_url", ""),
+                "First Name": first, "Last Name": last,
+                "Mailing Address": r.get("mail_address",""),
+                "Mailing City":    r.get("mail_city",""),
+                "Mailing State":   r.get("mail_state",""),
+                "Mailing Zip":     r.get("mail_zip",""),
+                "Property Address":r.get("prop_address",""),
+                "Property City":   r.get("prop_city",""),
+                "Property State":  r.get("prop_state","GA"),
+                "Property Zip":    r.get("prop_zip",""),
+                "Lead Type":       r.get("cat_label",""),
+                "Document Type":   r.get("doc_type",""),
+                "Date Filed":      r.get("filed",""),
+                "Document Number": r.get("doc_num",""),
+                "Amount/Debt Owed":r.get("amount",""),
+                "Seller Score":    r.get("score",0),
+                "Motivated Seller Flags": "; ".join(r.get("flags",[])),
+                "Source":          "Cobb County Superior Court Clerk",
+                "Public Records URL": r.get("clerk_url",""),
             })
     log.info(f"GHL CSV → {ghl_path}")
 
+
+# ── Main ─────────────────────────────────────────────────────────────────────
 
 async def main():
     global _parcel_index
@@ -596,30 +430,33 @@ async def main():
     date_from = (today - timedelta(days=LOOK_BACK_DAYS)).strftime("%m/%d/%Y")
     log.info(f"Scraping {date_from} → {date_to}")
 
-    log.info("Downloading parcel data…")
     dbf_path = download_parcel_dbf()
     if dbf_path and dbf_path.exists():
         _parcel_index = build_parcel_index(dbf_path)
-    else:
-        log.warning("Parcel index empty — address enrichment unavailable")
 
     all_records: list[dict] = []
-    doc_types = list(DOC_TYPES.keys())
 
-    batch_size = 3
-    for i in range(0, len(doc_types), batch_size):
-        batch = doc_types[i:i + batch_size]
-        log.info(f"Scraping batch: {batch}")
-        tasks = [scrape_clerk(dt, date_from, date_to) for dt in batch]
-        results = await asyncio.gather(*tasks, return_exceptions=True)
-        for dt, res in zip(batch, results):
-            if isinstance(res, Exception):
-                log.error(f"[{dt}] Failed: {res}")
-            else:
-                all_records.extend(res)
-        await asyncio.sleep(2)
+    async with async_playwright() as pw:
+        browser = await pw.chromium.launch(headless=True, args=["--no-sandbox","--disable-dev-shm-usage"])
+        ctx = await browser.new_context(
+            user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36",
+            ignore_https_errors=True,
+        )
+        page = await ctx.new_page()
 
-    log.info(f"Total raw records: {len(all_records)}")
+        for doc_type in DOC_TYPES.keys():
+            for attempt in range(MAX_RETRIES):
+                try:
+                    recs = await scrape_doc_type(page, doc_type, date_from, date_to)
+                    all_records.extend(recs)
+                    break
+                except Exception as e:
+                    log.warning(f"[{doc_type}] attempt {attempt+1} failed: {e}")
+                    await asyncio.sleep(RETRY_DELAY)
+
+        await browser.close()
+
+    log.info(f"Total records: {len(all_records)}")
 
     for rec in all_records:
         try:
@@ -628,13 +465,13 @@ async def main():
             rec["flags"] = flags
             rec["score"] = score
         except Exception as e:
-            log.warning(f"Scoring error for {rec.get('doc_num')}: {e}")
+            log.warning(f"Scoring error: {e}")
             rec["flags"] = []
             rec["score"] = 30
 
     all_records.sort(key=lambda r: r.get("score", 0), reverse=True)
     write_outputs(all_records, date_from, date_to)
-    log.info("✅ Scrape complete")
+    log.info("✅ Done")
 
 
 if __name__ == "__main__":
