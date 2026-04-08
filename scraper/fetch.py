@@ -1,5 +1,6 @@
 """
 Cobb County, GA — Motivated Seller Lead Scraper
+Uses the LandmarkWeb Search/GetSearchResultsExport endpoint.
 """
 
 import csv
@@ -152,88 +153,55 @@ def download_parcel_dbf() -> Optional[Path]:
     return None
 
 
-def make_session() -> tuple[requests.Session, str]:
-    """Returns (session, verification_token)"""
+def make_session() -> requests.Session:
     s = requests.Session()
     s.headers.update({
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
         "Accept-Language": "en-US,en;q=0.9",
-        "Accept-Encoding": "gzip, deflate, br",
         "Connection": "keep-alive",
-        "Upgrade-Insecure-Requests": "1",
     })
-
-    search_url = f"{LANDMARK_BASE}/search/index?theme=.blue&section=searchCriteriaRecordDate&quickSearchSelection="
-
-    # Visit page and grab token
-    token = ""
-    for attempt in range(MAX_RETRIES):
-        try:
-            r = s.get(search_url, timeout=30, verify=False)
-            log.info(f"Session page: {r.status_code}")
-            log.info(f"All cookies: {[(c.name, c.value[:20]) for c in s.cookies]}")
-
-            soup = BeautifulSoup(r.text, "lxml")
-            t = soup.find("input", {"name": "__RequestVerificationToken"})
-            if t:
-                token = t.get("value", "")
-                log.info(f"Form token: {token[:30]}...")
-            m = soup.find("meta", {"name": "__RequestVerificationToken"})
-            if m:
-                token = token or m.get("content", "")
-
-            if "ASP.NET_SessionId" in s.cookies:
-                log.info("Got session cookie")
-                return s, token
-        except Exception as e:
-            log.warning(f"Session attempt {attempt+1}: {e}")
-            time.sleep(RETRY_DELAY)
-
-    return s, token
+    url = f"{LANDMARK_BASE}/search/index?theme=.blue&section=searchCriteriaRecordDate&quickSearchSelection="
+    try:
+        r = s.get(url, timeout=30, verify=False)
+        log.info(f"Session: {r.status_code}, cookies: {list(s.cookies.keys())}")
+    except Exception as e:
+        log.warning(f"Session error: {e}")
+    return s
 
 
-def build_datatable_params(start: int = 0, length: int = 500, draw: int = 1) -> dict:
-    params = {
-        "draw": str(draw),
-        "start": str(start),
-        "length": str(length),
-        "search[value]": "",
-        "search[regex]": "false",
-        "order[0][column]": "7",
-        "order[0][dir]": "asc",
-    }
-    orderable_cols = {7, 8, 10, 11, 12}
-    for i in range(26):
-        params[f"columns[{i}][data]"] = str(i)
-        params[f"columns[{i}][name]"] = ""
-        params[f"columns[{i}][searchable]"] = "true"
-        params[f"columns[{i}][orderable]"] = "true" if i in orderable_cols else "false"
-        params[f"columns[{i}][search][value]"] = ""
-        params[f"columns[{i}][search][regex]"] = "false"
-    return params
+def get_token(s: requests.Session) -> str:
+    try:
+        url = f"{LANDMARK_BASE}/search/index?theme=.blue&section=searchCriteriaRecordDate&quickSearchSelection="
+        r = s.get(url, timeout=30, verify=False)
+        soup = BeautifulSoup(r.text, "lxml")
+        t = soup.find("input", {"name": "__RequestVerificationToken"})
+        if t:
+            v = t.get("value", "")
+            log.info(f"Token found: {v[:20]}...")
+            return v
+        # Check all inputs
+        inputs = soup.find_all("input", type="hidden")
+        log.info(f"Hidden inputs: {[(i.get('name',''), i.get('value','')[:15]) for i in inputs[:5]]}")
+    except Exception as e:
+        log.warning(f"Token error: {e}")
+    return ""
 
 
-def clean(s) -> str:
-    if s is None:
-        return ""
-    text = re.sub(r"<[^>]+>", " ", str(s))
-    text = re.sub(r"\\u[0-9a-fA-F]{4}", lambda m: chr(int(m.group()[2:], 16)), text)
-    return re.sub(r"\s+", " ", text).strip()
-
-
-def search_by_date(s: requests.Session, token: str, date_from: str, date_to: str) -> list[dict]:
+def search_landmark(s: requests.Session, date_from: str, date_to: str) -> list[dict]:
+    """
+    Two-step: RecordDateSearch to set session, then GetSearchResultsExport for CSV data.
+    """
     records = []
+    token = get_token(s)
 
     referer = f"{LANDMARK_BASE}/search/index?theme=.blue&section=searchCriteriaRecordDate&quickSearchSelection="
-
     ajax_headers = {
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
         "X-Requested-With": "XMLHttpRequest",
         "Referer": referer,
         "Origin": "https://superiorcourtclerk.cobbcounty.gov",
-        "Accept": "application/json, text/javascript, */*; q=0.01",
-        "Accept-Encoding": "gzip, deflate, br",
+        "Accept": "*/*",
         "Connection": "keep-alive",
     }
 
@@ -252,8 +220,7 @@ def search_by_date(s: requests.Session, token: str, date_from: str, date_to: str
 
     for attempt in range(MAX_RETRIES):
         try:
-            log.info(f"RecordDateSearch attempt {attempt+1}: {date_from} → {date_to}")
-            log.info(f"Cookies being sent: {[(c.name, c.value[:15]) for c in s.cookies]}")
+            log.info(f"RecordDateSearch attempt {attempt+1}")
             r = s.post(
                 f"{LANDMARK_BASE}/Search/RecordDateSearch",
                 data=search_data,
@@ -262,7 +229,6 @@ def search_by_date(s: requests.Session, token: str, date_from: str, date_to: str
                 verify=False,
             )
             log.info(f"RecordDateSearch: {r.status_code}, len={len(r.text)}")
-            log.info(f"Response cookies after search: {[(c.name, c.value[:15]) for c in s.cookies]}")
             if r.status_code == 200:
                 break
             time.sleep(RETRY_DELAY)
@@ -270,66 +236,163 @@ def search_by_date(s: requests.Session, token: str, date_from: str, date_to: str
             log.warning(f"RecordDateSearch error: {e}")
             time.sleep(RETRY_DELAY)
 
-    # Step 2: GetSearchResults
-    start = 0
-    page_size = 500
-    draw = 1
+    time.sleep(2)
 
-    while True:
-        params = build_datatable_params(start=start, length=page_size, draw=draw)
-        try:
-            log.info(f"GetSearchResults start={start}")
-            r = s.post(
-                f"{LANDMARK_BASE}/Search/GetSearchResults",
-                data=params,
-                headers=ajax_headers,
-                timeout=60,
-                verify=False,
-            )
-            log.info(f"GetSearchResults: {r.status_code}, len={len(r.content)}")
+    # Step 2: Try GetSearchResultsExport (CSV export)
+    export_headers = {
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "Referer": referer,
+        "Origin": "https://superiorcourtclerk.cobbcounty.gov",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Connection": "keep-alive",
+    }
 
-            if r.status_code != 200 or not r.content:
-                break
+    # Build column headers for export
+    col_names = ["","","Status","","Grantor","Grantee","Recording Date","Doc Type","Book Type","Book","Page","Clerk File No","","DocLinks"]
+    export_data = {
+        "cols": json.dumps([{"i": i} for i in range(len(col_names))]),
+        "headers": json.dumps(col_names),
+        "time": datetime.now().isoformat(),
+    }
 
-            log.info(f"Preview: {r.text[:300]}")
+    try:
+        log.info("Trying GetSearchResultsExport")
+        r = s.post(
+            f"{LANDMARK_BASE}/Search/GetSearchResultsExport",
+            data=export_data,
+            headers=export_headers,
+            timeout=60,
+            verify=False,
+        )
+        log.info(f"Export: {r.status_code}, len={len(r.content)}, type={r.headers.get('Content-Type','')}")
+        log.info(f"Export preview: {r.text[:500]}")
+
+        if r.status_code == 200 and r.content:
+            records = parse_export(r.text, date_from, date_to)
+            log.info(f"Export records: {len(records)}")
+            if records:
+                return records
+    except Exception as e:
+        log.warning(f"Export error: {e}")
+
+    # Step 3: Fallback — try GetSearchResults with JSON
+    log.info("Falling back to GetSearchResults JSON")
+    try:
+        params = {"draw": "1", "start": "0", "length": "500",
+                  "search[value]": "", "search[regex]": "false",
+                  "order[0][column]": "7", "order[0][dir]": "asc"}
+        for i in range(26):
+            params[f"columns[{i}][data]"] = str(i)
+            params[f"columns[{i}][name]"] = ""
+            params[f"columns[{i}][searchable]"] = "true"
+            params[f"columns[{i}][orderable]"] = "false"
+            params[f"columns[{i}][search][value]"] = ""
+            params[f"columns[{i}][search][regex]"] = "false"
+
+        r = s.post(
+            f"{LANDMARK_BASE}/Search/GetSearchResults",
+            data=params,
+            headers={**ajax_headers, "Accept": "application/json, text/javascript, */*; q=0.01"},
+            timeout=60,
+            verify=False,
+        )
+        log.info(f"GetSearchResults: {r.status_code}, len={len(r.content)}")
+        log.info(f"Preview: {r.text[:500]}")
+
+        if r.status_code == 200 and r.content:
             data = r.json()
             rows = data.get("data", [])
-            total = data.get("recordsTotal", 0)
-            log.info(f"Rows: {len(rows)}, Total: {total}")
-
-            if not rows:
-                break
-
+            log.info(f"JSON rows: {len(rows)}, total: {data.get('recordsTotal', 0)}")
             for row in rows:
-                try:
-                    rec = parse_row(row)
-                    if rec:
-                        records.append(rec)
-                except Exception as e:
-                    log.warning(f"Row parse error: {e}")
+                rec = parse_row(row)
+                if rec:
+                    records.append(rec)
+    except Exception as e:
+        log.warning(f"GetSearchResults fallback error: {e}")
 
-            start += len(rows)
-            draw += 1
-            if start >= total or len(rows) < page_size:
+    return records
+
+
+def parse_export(text: str, date_from: str, date_to: str) -> list[dict]:
+    """Parse the HTML export table."""
+    soup = BeautifulSoup(text, "lxml")
+    records = []
+
+    table = None
+    for t in soup.find_all("table"):
+        if len(t.find_all("tr")) >= 2:
+            table = t
+            break
+    if not table:
+        log.info("No table in export response")
+        return records
+
+    rows = table.find_all("tr")
+    headers = [th.get_text(strip=True).lower() for th in rows[0].find_all(["th","td"])]
+    log.info(f"Export headers: {headers}")
+
+    def ci(*names):
+        for n in names:
+            for i, h in enumerate(headers):
+                if n in h:
+                    return i
+        return None
+
+    idx_type    = ci("type", "doc type", "document")
+    idx_grantor = ci("grantor", "owner", "direct")
+    idx_grantee = ci("grantee", "reverse")
+    idx_filed   = ci("recording", "filed", "date")
+    idx_docnum  = ci("clerk", "file", "number", "cfn")
+
+    for row in rows[1:]:
+        cells = row.find_all(["td","th"])
+        if not cells:
+            continue
+        def cell(i):
+            if i is None or i >= len(cells):
+                return ""
+            return cells[i].get_text(strip=True)
+
+        raw_type = cell(idx_type).upper()
+        matched_type = None
+        for t in TARGET_TYPES:
+            if t == raw_type or raw_type.startswith(t):
+                matched_type = t
                 break
+        if not matched_type:
+            continue
 
-        except json.JSONDecodeError as e:
-            log.warning(f"JSON error: {e}, preview: {r.text[:300]}")
-            break
-        except Exception as e:
-            log.warning(f"GetSearchResults error: {e}")
-            break
+        label, cat = DOC_TYPE_MAP.get(matched_type, (raw_type, "other"))
+        link_tag = row.find("a", href=True)
+        href = ""
+        if link_tag:
+            href = link_tag["href"]
+            if not href.startswith("http"):
+                href = f"{LANDMARK_BASE}{href}"
 
+        records.append({
+            "doc_num":      cell(idx_docnum),
+            "doc_type":     matched_type,
+            "filed":        _norm_date(cell(idx_filed)),
+            "cat":          cat,
+            "cat_label":    label,
+            "owner":        cell(idx_grantor),
+            "grantee":      cell(idx_grantee),
+            "amount":       0.0,
+            "legal":        "",
+            "clerk_url":    href,
+            "prop_address": "", "prop_city": "", "prop_state": "GA", "prop_zip": "",
+            "mail_address": "", "mail_city": "", "mail_state": "", "mail_zip": "",
+            "flags": [], "score": 0,
+        })
     return records
 
 
 def parse_row(row: dict) -> Optional[dict]:
     grantor  = clean(row.get("5", ""))
-    grantee  = clean(row.get("6", ""))
     filed    = clean(row.get("7", ""))
     raw_type = clean(row.get("8", "")).upper().strip()
     doc_num  = clean(row.get("12", ""))
-    legal    = clean(row.get("15", ""))
     row_id   = str(row.get("DT_RowId", ""))
 
     clerk_url = ""
@@ -339,14 +402,13 @@ def parse_row(row: dict) -> Optional[dict]:
 
     matched_type = None
     for t in TARGET_TYPES:
-        if t == raw_type or raw_type.startswith(t + " ") or raw_type == t:
+        if t == raw_type or raw_type.startswith(t):
             matched_type = t
             break
     if not matched_type:
         return None
 
     label, cat = DOC_TYPE_MAP.get(matched_type, (raw_type, "other"))
-
     return {
         "doc_num":      doc_num.replace("nobreak_", ""),
         "doc_type":     matched_type,
@@ -354,14 +416,22 @@ def parse_row(row: dict) -> Optional[dict]:
         "cat":          cat,
         "cat_label":    label,
         "owner":        grantor,
-        "grantee":      grantee,
+        "grantee":      clean(row.get("6", "")),
         "amount":       0.0,
-        "legal":        legal,
+        "legal":        clean(row.get("15", "")),
         "clerk_url":    clerk_url,
         "prop_address": "", "prop_city": "", "prop_state": "GA", "prop_zip": "",
         "mail_address": "", "mail_city": "", "mail_state": "", "mail_zip": "",
         "flags": [], "score": 0,
     }
+
+
+def clean(s) -> str:
+    if s is None:
+        return ""
+    text = re.sub(r"<[^>]+>", " ", str(s))
+    text = re.sub(r"\\u[0-9a-fA-F]{4}", lambda m: chr(int(m.group()[2:], 16)), text)
+    return re.sub(r"\s+", " ", text).strip()
 
 
 def _norm_date(raw: str) -> str:
@@ -487,9 +557,8 @@ def main():
     if dbf_path and dbf_path.exists():
         _parcel_index = build_parcel_index(dbf_path)
 
-    session, token = make_session()
-    log.info(f"Token obtained: {bool(token)}")
-    records = search_by_date(session, token, date_from, date_to)
+    session = make_session()
+    records = search_landmark(session, date_from, date_to)
     log.info(f"Total matching records: {len(records)}")
 
     for rec in records:
