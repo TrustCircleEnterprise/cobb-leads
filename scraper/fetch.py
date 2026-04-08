@@ -154,7 +154,6 @@ def download_parcel_dbf() -> Optional[Path]:
 
 
 def make_session() -> requests.Session:
-    """Create a requests session with a valid ASP.NET session cookie."""
     s = requests.Session()
     s.headers.update({
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
@@ -162,55 +161,71 @@ def make_session() -> requests.Session:
         "Accept-Language": "en-US,en;q=0.9",
         "Accept-Encoding": "gzip, deflate, br",
     })
-
-    # Visit home page to get session cookie
     search_url = f"{LANDMARK_BASE}/search/index?theme=.blue&section=searchCriteriaRecordDate&quickSearchSelection="
     for attempt in range(MAX_RETRIES):
         try:
             r = s.get(search_url, timeout=30, verify=False)
-            log.info(f"Session init status: {r.status_code}, cookies: {dict(s.cookies)}")
-            if "ASP.NET_SessionId" in s.cookies:
-                log.info("Got valid session cookie")
-                return s
-            # Try home page if search page didn't give session
-            r2 = s.get(f"{LANDMARK_BASE}/home/index", timeout=30, verify=False)
-            log.info(f"Home page status: {r2.status_code}, cookies: {dict(s.cookies)}")
+            log.info(f"Session init: {r.status_code}, cookies: {dict(s.cookies)}")
             if s.cookies:
                 return s
         except Exception as e:
             log.warning(f"Session init attempt {attempt+1} failed: {e}")
             time.sleep(RETRY_DELAY)
-
     return s
 
 
 def get_verification_token(s: requests.Session) -> str:
-    """Extract ASP.NET request verification token from the search page."""
     try:
         url = f"{LANDMARK_BASE}/search/index?theme=.blue&section=searchCriteriaRecordDate&quickSearchSelection="
         r = s.get(url, timeout=30, verify=False)
         soup = BeautifulSoup(r.text, "lxml")
         token = soup.find("input", {"name": "__RequestVerificationToken"})
         if token:
-            val = token.get("value", "")
-            log.info(f"Got verification token: {val[:20]}...")
-            return val
-        # Also check meta tag
+            return token.get("value", "")
         meta = soup.find("meta", {"name": "__RequestVerificationToken"})
         if meta:
             return meta.get("content", "")
     except Exception as e:
-        log.warning(f"Could not get verification token: {e}")
+        log.warning(f"Token error: {e}")
     return ""
 
 
-def search_by_date(s: requests.Session, date_from: str, date_to: str) -> list[dict]:
-    """Call RecordDateSearch then GetSearchResults API."""
-    records = []
+def build_datatable_params(start: int = 0, length: int = 500) -> dict:
+    """Build the exact DataTables params the portal expects."""
+    params = {
+        "draw": "1",
+        "start": str(start),
+        "length": str(length),
+        "search[value]": "",
+        "search[regex]": "false",
+        "order[0][column]": "3",
+        "order[0][dir]": "asc",
+    }
+    # Add columns 0-14 matching the portal's table
+    orderable = {3, 4, 5, 6, 7, 8, 9, 10}
+    for i in range(15):
+        params[f"columns[{i}][data]"] = str(i)
+        params[f"columns[{i}][name]"] = ""
+        params[f"columns[{i}][searchable]"] = "true"
+        params[f"columns[{i}][orderable]"] = "true" if i in orderable else "false"
+        params[f"columns[{i}][search][value]"] = ""
+        params[f"columns[{i}][search][regex]"] = "false"
+    return params
 
-    # Step 1: Set the date search parameters
+
+def search_by_date(s: requests.Session, date_from: str, date_to: str) -> list[dict]:
+    records = []
     token = get_verification_token(s)
 
+    headers = {
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "X-Requested-With": "XMLHttpRequest",
+        "Referer": f"{LANDMARK_BASE}/search/index?theme=.blue&section=searchCriteriaRecordDate&quickSearchSelection=",
+        "Origin": "https://superiorcourtclerk.cobbcounty.gov",
+        "Accept": "application/json, text/javascript, */*; q=0.01",
+    }
+
+    # Step 1: Set date range
     search_data = {
         "beginDate": date_from,
         "endDate": date_to,
@@ -220,20 +235,12 @@ def search_by_date(s: requests.Session, date_from: str, date_to: str) -> list[di
         "townName": "",
         "mobileHomesOnly": "false",
     }
-
-    headers = {
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-        "X-Requested-With": "XMLHttpRequest",
-        "Referer": f"{LANDMARK_BASE}/search/index?theme=.blue&section=searchCriteriaRecordDate&quickSearchSelection=",
-        "Origin": "https://superiorcourtclerk.cobbcounty.gov",
-    }
-
     if token:
         search_data["__RequestVerificationToken"] = token
 
     for attempt in range(MAX_RETRIES):
         try:
-            log.info(f"Calling RecordDateSearch (attempt {attempt+1})")
+            log.info(f"RecordDateSearch attempt {attempt+1}: {date_from} → {date_to}")
             r = s.post(
                 f"{LANDMARK_BASE}/Search/RecordDateSearch",
                 data=search_data,
@@ -241,134 +248,122 @@ def search_by_date(s: requests.Session, date_from: str, date_to: str) -> list[di
                 timeout=60,
                 verify=False,
             )
-            log.info(f"RecordDateSearch status: {r.status_code}, length: {len(r.text)}")
+            log.info(f"RecordDateSearch: {r.status_code}, len={len(r.text)}")
             if r.status_code == 200:
                 break
+            time.sleep(RETRY_DELAY)
         except Exception as e:
-            log.warning(f"RecordDateSearch attempt {attempt+1} failed: {e}")
+            log.warning(f"RecordDateSearch attempt {attempt+1} error: {e}")
             time.sleep(RETRY_DELAY)
 
-    # Step 2: Get the actual results
+    # Step 2: Paginate through results
     start = 0
     page_size = 500
 
     while True:
-        results_data = {
-            "draw": "1",
-            "start": str(start),
-            "length": str(page_size),
-            "search[value]": "",
-            "search[regex]": "false",
-        }
-        # Add column definitions
-        for i in range(8):
-            results_data[f"columns[{i}][data]"] = str(i)
-            results_data[f"columns[{i}][searchable]"] = "true"
-            results_data[f"columns[{i}][orderable]"] = "true" if i > 2 else "false"
-            results_data[f"columns[{i}][search][value]"] = ""
-            results_data[f"columns[{i}][search][regex]"] = "false"
-
+        params = build_datatable_params(start=start, length=page_size)
         try:
-            log.info(f"Calling GetSearchResults start={start}")
+            log.info(f"GetSearchResults start={start}")
             r = s.post(
                 f"{LANDMARK_BASE}/Search/GetSearchResults",
-                data=results_data,
+                data=params,
                 headers=headers,
                 timeout=60,
                 verify=False,
             )
-            log.info(f"GetSearchResults status: {r.status_code}, length: {len(r.text)}")
+            log.info(f"GetSearchResults: {r.status_code}, len={len(r.content)}")
 
-            if r.status_code != 200:
+            if r.status_code != 200 or not r.content:
                 break
+
+            # Log raw response start for debugging
+            raw = r.text[:500]
+            log.info(f"Response preview: {raw}")
 
             data = r.json()
             rows = data.get("data", [])
             total = data.get("recordsTotal", 0)
-            log.info(f"Got {len(rows)} rows, total={total}")
+            log.info(f"Rows: {len(rows)}, Total: {total}")
 
             if not rows:
                 break
 
             for row in rows:
                 try:
-                    rec = parse_api_row(row)
+                    rec = parse_row(row)
                     if rec:
                         records.append(rec)
                 except Exception as e:
                     log.warning(f"Row parse error: {e}")
 
-            start += page_size
-            if start >= total:
+            start += len(rows)
+            if start >= total or len(rows) < page_size:
                 break
 
-        except Exception as e:
-            log.warning(f"GetSearchResults error: {e}")
-            # Try parsing as HTML if JSON fails
+        except json.JSONDecodeError as e:
+            log.warning(f"JSON decode error: {e}")
+            # Try HTML parse as fallback
             try:
                 html_recs = parse_html_results(r.text)
+                log.info(f"HTML fallback: {len(html_recs)} records")
                 records.extend(html_recs)
             except Exception:
                 pass
+            break
+        except Exception as e:
+            log.warning(f"GetSearchResults error: {e}")
             break
 
     return records
 
 
-def parse_api_row(row) -> Optional[dict]:
-    """Parse a row from the JSON API response."""
-    # Row can be a list or dict
+def clean(s) -> str:
+    if s is None:
+        return ""
+    return re.sub(r"<[^>]+>", "", str(s)).strip()
+
+
+def parse_row(row) -> Optional[dict]:
+    """Parse a row — can be list or dict from the JSON response."""
     if isinstance(row, list):
-        # Typical columns: status, grantor, grantee, filing_date, doc_type, book_type, book, page
-        if len(row) < 5:
-            return None
-        raw_type = str(row[4]).upper().strip() if len(row) > 4 else ""
-        grantor  = str(row[1]).strip() if len(row) > 1 else ""
-        grantee  = str(row[2]).strip() if len(row) > 2 else ""
-        filed    = str(row[3]).strip() if len(row) > 3 else ""
-        doc_num  = str(row[7]).strip() if len(row) > 7 else ""
-        link     = ""
+        # Columns: 0=status icon, 1=grantor, 2=grantee, 3=filing date,
+        #          4=doc type, 5=book type, 6=book, 7=page, 8=doc links...
+        grantor  = clean(row[1]) if len(row) > 1 else ""
+        grantee  = clean(row[2]) if len(row) > 2 else ""
+        filed    = clean(row[3]) if len(row) > 3 else ""
+        raw_type = clean(row[4]).upper() if len(row) > 4 else ""
+        doc_num  = clean(row[8]) if len(row) > 8 else ""
+        link_html = str(row[8]) if len(row) > 8 else ""
     elif isinstance(row, dict):
-        raw_type = str(row.get("DocType", row.get("documentType", row.get("4", "")))).upper().strip()
-        grantor  = str(row.get("Grantor", row.get("grantor", row.get("1", "")))).strip()
-        grantee  = str(row.get("Grantee", row.get("grantee", row.get("2", "")))).strip()
-        filed    = str(row.get("FilingDate", row.get("filingDate", row.get("3", "")))).strip()
-        doc_num  = str(row.get("DocNum", row.get("docNum", row.get("7", "")))).strip()
-        link     = str(row.get("DocLinks", row.get("docLinks", ""))).strip()
+        grantor  = clean(row.get("1", row.get("Grantor", "")))
+        grantee  = clean(row.get("2", row.get("Grantee", "")))
+        filed    = clean(row.get("3", row.get("FilingDate", "")))
+        raw_type = clean(row.get("4", row.get("DocType", ""))).upper()
+        doc_num  = clean(row.get("7", row.get("DocNum", "")))
+        link_html = str(row.get("8", row.get("DocLinks", "")))
     else:
         return None
 
-    # Strip HTML tags from all fields
-    for field in [raw_type, grantor, grantee, filed, doc_num]:
-        field = re.sub(r"<[^>]+>", "", field).strip()
-
-    raw_type = re.sub(r"<[^>]+>", "", raw_type).strip()
-    grantor  = re.sub(r"<[^>]+>", "", grantor).strip()
-    grantee  = re.sub(r"<[^>]+>", "", grantee).strip()
-    filed    = re.sub(r"<[^>]+>", "", filed).strip()
-    doc_num  = re.sub(r"<[^>]+>", "", doc_num).strip()
-
-    # Match doc type
+    # Match to our target types
     matched_type = None
     for t in TARGET_TYPES:
-        if t == raw_type or t in raw_type:
+        if t == raw_type or raw_type.startswith(t):
             matched_type = t
             break
-
     if not matched_type:
         return None
 
     label, cat = DOC_TYPE_MAP.get(matched_type, (raw_type, "other"))
 
-    # Extract link from HTML if present
-    if link:
-        soup = BeautifulSoup(link, "lxml")
+    # Extract link URL
+    href = ""
+    if link_html and "<a" in link_html:
+        soup = BeautifulSoup(link_html, "lxml")
         a = soup.find("a", href=True)
         if a:
             href = a["href"]
             if not href.startswith("http"):
                 href = f"{LANDMARK_BASE}{href}"
-            link = href
 
     return {
         "doc_num":      doc_num,
@@ -380,7 +375,7 @@ def parse_api_row(row) -> Optional[dict]:
         "grantee":      grantee,
         "amount":       0.0,
         "legal":        "",
-        "clerk_url":    link,
+        "clerk_url":    href,
         "prop_address": "", "prop_city": "", "prop_state": "GA", "prop_zip": "",
         "mail_address": "", "mail_city": "", "mail_state": "", "mail_zip": "",
         "flags": [], "score": 0,
@@ -388,7 +383,6 @@ def parse_api_row(row) -> Optional[dict]:
 
 
 def parse_html_results(html: str) -> list[dict]:
-    """Fallback: parse HTML table if JSON fails."""
     soup = BeautifulSoup(html, "lxml")
     records = []
     table = None
@@ -398,10 +392,9 @@ def parse_html_results(html: str) -> list[dict]:
             break
     if not table:
         return records
-
     rows = table.find_all("tr")
     headers = [th.get_text(strip=True).lower() for th in rows[0].find_all(["th","td"])]
-    log.info(f"HTML fallback headers: {headers}")
+    log.info(f"HTML headers: {headers}")
 
     def ci(*names):
         for n in names:
@@ -428,7 +421,7 @@ def parse_html_results(html: str) -> list[dict]:
         raw_type = cell(idx_type).upper()
         matched_type = None
         for t in TARGET_TYPES:
-            if t == raw_type or t in raw_type:
+            if t == raw_type or raw_type.startswith(t):
                 matched_type = t
                 break
         if not matched_type:
