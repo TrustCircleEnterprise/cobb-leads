@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Cobb County — Motivated Seller Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Barlow+Condensed:wght@300;500;700;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:       #0a0b0d;
+  --bg2:      #111316;
+  --bg3:      #181b1f;
+  --border:   #232830;
+  --border2:  #2e3540;
+  --text:     #d4dbe8;
+  --muted:    #5a6478;
+  --dim:      #3a4150;
+  --accent:   #e8a020;
+  --accent2:  #f0c060;
+  --red:      #e03030;
+  --orange:   #d06020;
+  --green:    #2a9d60;
+  --blue:     #3070c8;
+  --teal:     #20909a;
+  --purple:   #8050c0;
+  --mono:     'Space Mono', monospace;
+  --cond:     'Barlow Condensed', sans-serif;
+  --body:     'Barlow', sans-serif;
+  --radius:   3px;
+}
+
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--body);
+  font-size:14px;
+  line-height:1.5;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size:256px;
+  pointer-events:none;
+  z-index:9999;
+  opacity:.5;
+}
+
+body::after{
+  content:'';
+  position:fixed;inset:0;
+  background:repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,.03) 2px,
+    rgba(0,0,0,.03) 4px
+  );
+  pointer-events:none;
+  z-index:9998;
+}
+
+h1,h2,h3{font-family:var(--cond);letter-spacing:.02em}
+code,samp,.mono{font-family:var(--mono);font-size:.85em}
+
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--dim)}
+
+#topbar{
+  position:sticky;top:0;z-index:100;
+  background:rgba(10,11,13,.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:20px;
+  padding:0 28px;
+  height:56px;
+}
+#topbar .logo{
+  font-family:var(--cond);
+  font-weight:900;
+  font-size:18px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--accent);
+  white-space:nowrap;
+}
+#topbar .logo span{color:var(--text);font-weight:300}
+#topbar .sep{width:1px;height:24px;background:var(--border2)}
+#topbar .status-pill{
+  display:flex;align-items:center;gap:6px;
+  font-family:var(--mono);font-size:11px;color:var(--muted);
+}
+#topbar .status-pill .dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 6px var(--green);
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+#topbar .spacer{flex:1}
+#export-btn{
+  font-family:var(--cond);font-weight:700;font-size:13px;
+  letter-spacing:.08em;text-transform:uppercase;
+  background:var(--accent);color:#000;
+  border:none;border-radius:var(--radius);
+  padding:7px 18px;cursor:pointer;
+  transition:background .15s;
+}
+#export-btn:hover{background:var(--accent2)}
+
+#hero{
+  padding:32px 28px 24px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:flex-start;gap:40px;flex-wrap:wrap;
+}
+.hero-title{
+  font-family:var(--cond);
+  font-weight:900;
+  font-size:clamp(28px,4vw,48px);
+  line-height:1;
+  text-transform:uppercase;
+  color:var(--text);
+}
+.hero-title .county{color:var(--accent)}
+.hero-meta{
+  font-family:var(--mono);font-size:11px;
+  color:var(--muted);margin-top:8px;
+  display:flex;gap:16px;flex-wrap:wrap;
+}
+.metric-strip{
+  display:flex;gap:0;margin-left:auto;flex-wrap:wrap;
+}
+.metric{
+  padding:12px 28px;
+  border-left:1px solid var(--border2);
+  text-align:center;
+  min-width:110px;
+}
+.metric:first-child{border-left:none}
+.metric .val{
+  font-family:var(--cond);font-weight:900;
+  font-size:36px;line-height:1;
+  color:var(--accent);
+}
+.metric .lbl{
+  font-family:var(--mono);font-size:10px;
+  color:var(--muted);text-transform:uppercase;
+  letter-spacing:.08em;margin-top:4px;
+}
+
+#toolbar{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:16px 28px;
+  border-bottom:1px solid var(--border);
+  background:var(--bg2);
+}
+.filter-group{display:flex;align-items:center;gap:6px}
+.filter-label{
+  font-family:var(--mono);font-size:10px;
+  color:var(--muted);text-transform:uppercase;letter-spacing:.06em;
+}
+input[type=text],select{
+  background:var(--bg3);
+  border:1px solid var(--border2);
+  color:var(--text);
+  font-family:var(--mono);font-size:12px;
+  padding:6px 10px;
+  border-radius:var(--radius);
+  outline:none;
+  transition:border-color .15s;
+}
+input[type=text]{width:220px}
+input[type=text]:focus,select:focus{border-color:var(--accent)}
+select option{background:var(--bg3)}
+.chip-row{display:flex;gap:6px;flex-wrap:wrap}
+.chip{
+  font-family:var(--mono);font-size:10px;
+  padding:4px 10px;border-radius:12px;
+  cursor:pointer;border:1px solid var(--border2);
+  background:var(--bg3);color:var(--muted);
+  transition:all .15s;white-space:nowrap;
+}
+.chip.active{
+  background:var(--accent);color:#000;
+  border-color:var(--accent);
+  font-weight:700;
+}
+.chip:hover:not(.active){border-color:var(--dim);color:var(--text)}
+#result-count{
+  font-family:var(--mono);font-size:11px;
+  color:var(--muted);margin-left:auto;
+}
+
+#main{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:0;
+}
+
+#table-wrap{overflow-x:auto}
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:12.5px;
+}
+thead tr{
+  background:var(--bg3);
+  border-bottom:2px solid var(--accent);
+}
+thead th{
+  font-family:var(--cond);font-weight:700;
+  font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);padding:10px 14px;
+  text-align:left;white-space:nowrap;
+  cursor:pointer;user-select:none;
+}
+thead th:hover{color:var(--text)}
+thead th.sorted-asc::after{content:" ↑";color:var(--accent)}
+thead th.sorted-desc::after{content:" ↓";color:var(--accent)}
+tbody tr{
+  border-bottom:1px solid var(--border);
+  cursor:pointer;
+  transition:background .1s;
+}
+tbody tr:hover{background:var(--bg2)}
+tbody tr.selected{background:rgba(232,160,32,.07)!important}
+tbody td{
+  padding:9px 14px;
+  vertical-align:middle;
+  white-space:nowrap;
+}
+tbody td.wrap{white-space:normal;max-width:220px}
+
+.score-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:38px;height:38px;border-radius:50%;
+  font-family:var(--mono);font-size:12px;font-weight:700;
+  border:2px solid currentColor;
+}
+.score-hot  {color:var(--red);background:rgba(224,48,48,.12)}
+.score-warm {color:var(--orange);background:rgba(208,96,32,.12)}
+.score-mid  {color:var(--accent);background:rgba(232,160,32,.12)}
+.score-cool {color:var(--teal);background:rgba(32,144,154,.12)}
+
+.cat-pill{
+  display:inline-block;
+  font-family:var(--mono);font-size:10px;
+  padding:3px 8px;border-radius:2px;
+  font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+}
+.cat-lis_pendens {background:rgba(224,48,48,.18);color:#ff6060}
+.cat-foreclosure {background:rgba(224,48,48,.22);color:#ff4040}
+.cat-tax_deed    {background:rgba(208,96,32,.18);color:#ff9040}
+.cat-judgment    {background:rgba(128,80,192,.18);color:#b07aff}
+.cat-tax_lien    {background:rgba(208,96,32,.18);color:#e07820}
+.cat-lien        {background:rgba(90,100,120,.18);color:#8090aa}
+.cat-probate     {background:rgba(32,144,154,.18);color:#40c0cc}
+.cat-noc         {background:rgba(48,112,200,.18);color:#60a0f0}
+.cat-release     {background:rgba(42,157,96,.18);color:#40c080}
+.cat-other       {background:rgba(60,65,80,.18);color:#6a7090}
+
+.flag-list{display:flex;gap:4px;flex-wrap:wrap}
+.flag{
+  font-family:var(--mono);font-size:9px;
+  padding:2px 6px;border-radius:2px;
+  background:rgba(232,160,32,.1);
+  color:var(--accent2);
+  border:1px solid rgba(232,160,32,.2);
+  white-space:nowrap;
+}
+
+.amount{font-family:var(--mono);color:var(--text)}
+.amount.large{color:var(--red)}
+
+a.doc-link{
+  color:var(--blue);font-family:var(--mono);font-size:11px;
+  text-decoration:none;
+}
+a.doc-link:hover{color:var(--accent);text-decoration:underline}
+
+#detail-panel{
+  position:fixed;right:0;top:56px;bottom:0;
+  width:400px;
+  background:var(--bg2);
+  border-left:1px solid var(--border);
+  overflow-y:auto;
+  transform:translateX(100%);
+  transition:transform .25s cubic-bezier(.4,0,.2,1);
+  z-index:200;
+  display:flex;flex-direction:column;
+}
+#detail-panel.open{transform:translateX(0)}
+#detail-close{
+  position:sticky;top:0;
+  background:var(--bg2);
+  border-bottom:1px solid var(--border);
+  padding:12px 16px;
+  display:flex;align-items:center;justify-content:space-between;
+  z-index:1;
+}
+#detail-close .title{
+  font-family:var(--cond);font-weight:700;font-size:15px;
+  text-transform:uppercase;letter-spacing:.06em;
+}
+#detail-close button{
+  background:none;border:1px solid var(--border2);
+  color:var(--muted);font-size:16px;
+  width:28px;height:28px;border-radius:var(--radius);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+}
+#detail-close button:hover{color:var(--text);border-color:var(--dim)}
+#detail-body{padding:20px 16px;flex:1}
+.detail-section{margin-bottom:24px}
+.detail-section h4{
+  font-family:var(--cond);font-weight:700;
+  font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:10px;
+  border-bottom:1px solid var(--border);padding-bottom:6px;
+}
+.detail-row{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:5px 0;
+  border-bottom:1px solid rgba(35,40,48,.5);
+}
+.detail-row:last-child{border-bottom:none}
+.detail-key{font-family:var(--mono);font-size:10px;color:var(--muted);flex-shrink:0;margin-right:12px}
+.detail-val{font-size:12.5px;color:var(--text);text-align:right;word-break:break-word}
+.score-ring{
+  display:flex;align-items:center;justify-content:center;
+  margin:16px auto;
+  width:90px;height:90px;border-radius:50%;
+  font-family:var(--cond);font-weight:900;font-size:36px;
+  border:3px solid var(--accent);
+  color:var(--accent);
+  box-shadow:0 0 24px rgba(232,160,32,.25);
+}
+
+#empty{
+  display:none;
+  padding:80px 28px;
+  text-align:center;
+  font-family:var(--cond);
+  font-size:18px;color:var(--dim);
+}
+
+#loading{
+  display:flex;align-items:center;justify-content:center;
+  padding:80px;gap:12px;
+  font-family:var(--mono);font-size:13px;color:var(--muted);
+}
+.spinner{
+  width:20px;height:20px;border-radius:50%;
+  border:2px solid var(--border2);
+  border-top-color:var(--accent);
+  animation:spin .7s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+#cat-summary{
+  display:flex;gap:0;
+  border-bottom:1px solid var(--border);
+  overflow-x:auto;
+}
+.cat-stat{
+  flex:1;min-width:100px;
+  padding:12px 16px;
+  border-right:1px solid var(--border);
+  text-align:center;
+}
+.cat-stat:last-child{border-right:none}
+.cat-stat .n{
+  font-family:var(--cond);font-weight:900;font-size:24px;
+  line-height:1;
+}
+.cat-stat .l{
+  font-family:var(--mono);font-size:9px;
+  color:var(--muted);text-transform:uppercase;
+  letter-spacing:.05em;margin-top:3px;
+}
+
+@media(max-width:768px){
+  #hero{flex-direction:column;gap:16px}
+  .metric-strip{margin-left:0}
+  #detail-panel{width:100%;top:0}
+  table{font-size:11px}
+  tbody td{padding:7px 8px}
+  #topbar{padding:0 14px}
+  #toolbar{padding:12px 14px}
+  #hero{padding:20px 14px}
+}
+</style>
+</head>
+<body>
+
+<nav id="topbar">
+  <div class="logo">COBB<span>LEADS</span></div>
+  <div class="sep"></div>
+  <div class="status-pill"><div class="dot"></div><span id="last-fetched">Loading…</span></div>
+  <div class="spacer"></div>
+  <button id="export-btn" onclick="exportCSV()">⬇ Export GHL CSV</button>
+</nav>
+
+<section id="hero">
+  <div>
+    <div class="hero-title"><span class="county">Cobb County</span><br>Motivated Sellers</div>
+    <div class="hero-meta">
+      <span id="date-range">—</span>
+      <span>·</span>
+      <span>Superior Court Clerk + GIS Parcel Data</span>
+    </div>
+  </div>
+  <div class="metric-strip">
+    <div class="metric"><div class="val" id="m-total">—</div><div class="lbl">Total Leads</div></div>
+    <div class="metric"><div class="val" id="m-hot">—</div><div class="lbl">Hot (≥80)</div></div>
+    <div class="metric"><div class="val" id="m-addr">—</div><div class="lbl">With Address</div></div>
+    <div class="metric"><div class="val" id="m-week">—</div><div class="lbl">New This Week</div></div>
+  </div>
+</section>
+
+<div id="cat-summary"></div>
+
+<div id="toolbar">
+  <div class="filter-group">
+    <span class="filter-label">Search</span>
+    <input type="text" id="q" placeholder="Owner, address, doc #…" oninput="applyFilters()"/>
+  </div>
+  <div class="filter-group">
+    <span class="filter-label">Type</span>
+    <select id="f-type" onchange="applyFilters()">
+      <option value="">All Types</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <span class="filter-label">Score</span>
+    <select id="f-score" onchange="applyFilters()">
+      <option value="">Any Score</option>
+      <option value="80">Hot (≥80)</option>
+      <option value="60">Warm (≥60)</option>
+      <option value="45">Medium (≥45)</option>
+    </select>
+  </div>
+  <div class="chip-row" id="flag-chips"></div>
+  <div id="result-count">—</div>
+</div>
+
+<div id="main">
+  <div id="loading"><div class="spinner"></div>Loading records…</div>
+  <div id="empty">No records match the current filters.</div>
+  <div id="table-wrap" style="display:none">
+    <table id="records-table">
+      <thead>
+        <tr>
+          <th onclick="sortBy('score')"       data-col="score">Score</th>
+          <th onclick="sortBy('cat_label')"   data-col="cat_label">Type</th>
+          <th onclick="sortBy('doc_type')"    data-col="doc_type">Code</th>
+          <th onclick="sortBy('filed')"       data-col="filed">Filed</th>
+          <th onclick="sortBy('owner')"       data-col="owner">Owner / Grantor</th>
+          <th onclick="sortBy('prop_address')" data-col="prop_address">Property Address</th>
+          <th onclick="sortBy('amount')"      data-col="amount">Amount</th>
+          <th>Flags</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<div id="detail-panel">
+  <div id="detail-close">
+    <span class="title">Lead Detail</span>
+    <button onclick="closeDetail()">✕</button>
+  </div>
+  <div id="detail-body"></div>
+</div>
+
+<script>
+let ALL_RECORDS = [];
+let filtered    = [];
+let sortCol     = 'score';
+let sortDir     = -1;
+
+const CAT_COLORS = {
+  lis_pendens:'#ff6060', foreclosure:'#ff4040', tax_deed:'#ff9040',
+  judgment:'#b07aff',    tax_lien:'#e07820',    lien:'#8090aa',
+  probate:'#40c0cc',     noc:'#60a0f0',          release:'#40c080',
+  other:'#6a7090',
+};
+
+async function init() {
+  try {
+    const res = await fetch('records.json');
+    if (!res.ok) throw new Error('records.json not found');
+    const data = await res.json();
+    ALL_RECORDS = data.records || [];
+
+    document.getElementById('last-fetched').textContent =
+      'Updated ' + new Date(data.fetched_at).toLocaleString();
+    document.getElementById('date-range').textContent =
+      `${data.date_range?.from || ''} → ${data.date_range?.to || ''}`;
+    document.getElementById('m-total').textContent = data.total || ALL_RECORDS.length;
+    document.getElementById('m-hot').textContent =
+      ALL_RECORDS.filter(r => r.score >= 80).length;
+    document.getElementById('m-addr').textContent = data.with_address || '—';
+    document.getElementById('m-week').textContent =
+      ALL_RECORDS.filter(r => r.flags && r.flags.includes('New this week')).length;
+
+    buildCatSummary();
+    buildTypeFilter();
+    buildFlagChips();
+    applyFilters();
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('table-wrap').style.display = 'block';
+  } catch(e) {
+    document.getElementById('loading').innerHTML =
+      `<span style="color:var(--red)">⚠ Could not load records.json — run the scraper first.<br><small style="color:var(--muted)">${e.message}</small></span>`;
+  }
+}
+
+function buildCatSummary() {
+  const counts = {};
+  ALL_RECORDS.forEach(r => {
+    const k = r.cat_label || r.cat || 'Other';
+    counts[k] = (counts[k] || 0) + 1;
+  });
+  const sorted = Object.entries(counts).sort((a,b) => b[1]-a[1]);
+  const wrap = document.getElementById('cat-summary');
+  wrap.innerHTML = sorted.map(([l,n]) => {
+    const cat = ALL_RECORDS.find(r => r.cat_label === l)?.cat || 'other';
+    const col = CAT_COLORS[cat] || '#6a7090';
+    return `<div class="cat-stat" style="cursor:pointer" onclick="filterCat('${l}')">
+      <div class="n" style="color:${col}">${n}</div>
+      <div class="l">${l}</div>
+    </div>`;
+  }).join('');
+}
+
+function buildTypeFilter() {
+  const types = [...new Set(ALL_RECORDS.map(r => r.doc_type))].sort();
+  const sel = document.getElementById('f-type');
+  types.forEach(t => {
+    const o = document.createElement('option');
+    o.value = t; o.textContent = t;
+    sel.appendChild(o);
+  });
+}
+
+const FLAG_OPTIONS = [
+  'Lis pendens','Pre-foreclosure','Judgment lien','Tax lien',
+  'Mechanic lien','Probate / estate','LLC / corp owner','New this week'
+];
+let activeFlags = new Set();
+
+function buildFlagChips() {
+  const wrap = document.getElementById('flag-chips');
+  wrap.innerHTML = FLAG_OPTIONS.map(f =>
+    `<span class="chip" onclick="toggleFlag('${f}')" data-flag="${f}">${f}</span>`
+  ).join('');
+}
+
+function toggleFlag(f) {
+  if (activeFlags.has(f)) activeFlags.delete(f);
+  else activeFlags.add(f);
+  document.querySelectorAll('[data-flag]').forEach(el => {
+    el.classList.toggle('active', activeFlags.has(el.dataset.flag));
+  });
+  applyFilters();
+}
+
+let activeCat = '';
+function filterCat(label) {
+  activeCat = activeCat === label ? '' : label;
+  applyFilters();
+}
+
+function applyFilters() {
+  const q      = document.getElementById('q').value.toLowerCase();
+  const fType  = document.getElementById('f-type').value;
+  const fScore = parseInt(document.getElementById('f-score').value) || 0;
+
+  filtered = ALL_RECORDS.filter(r => {
+    if (fType  && r.doc_type  !== fType)   return false;
+    if (fScore && r.score < fScore)        return false;
+    if (activeCat && r.cat_label !== activeCat) return false;
+    if (activeFlags.size) {
+      const rf = new Set(r.flags || []);
+      for (const f of activeFlags) if (!rf.has(f)) return false;
+    }
+    if (q) {
+      const haystack = [
+        r.owner, r.grantee, r.doc_num, r.prop_address,
+        r.mail_address, r.doc_type, r.cat_label, r.legal
+      ].join(' ').toLowerCase();
+      if (!haystack.includes(q)) return false;
+    }
+    return true;
+  });
+
+  filtered.sort((a,b) => {
+    let av = a[sortCol] ?? '', bv = b[sortCol] ?? '';
+    if (typeof av === 'number') return sortDir * (av - bv);
+    return sortDir * String(av).localeCompare(String(bv));
+  });
+
+  document.getElementById('result-count').textContent =
+    `${filtered.length.toLocaleString()} leads`;
+
+  renderTable();
+}
+
+function sortBy(col) {
+  if (sortCol === col) sortDir *= -1;
+  else { sortCol = col; sortDir = -1; }
+  document.querySelectorAll('thead th').forEach(th => {
+    th.classList.remove('sorted-asc','sorted-desc');
+    if (th.dataset.col === col)
+      th.classList.add(sortDir === 1 ? 'sorted-asc' : 'sorted-desc');
+  });
+  applyFilters();
+}
+
+function scoreClass(s) {
+  if (s >= 80) return 'score-hot';
+  if (s >= 60) return 'score-warm';
+  if (s >= 45) return 'score-mid';
+  return 'score-cool';
+}
+
+function fmt$(n) {
+  if (!n) return '—';
+  return Number(n).toLocaleString('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0});
+}
+
+function renderTable() {
+  const tbody = document.getElementById('tbody');
+  const empty = document.getElementById('empty');
+  const wrap  = document.getElementById('table-wrap');
+
+  if (!filtered.length) {
+    tbody.innerHTML = '';
+    empty.style.display = 'block';
+    wrap.style.display = 'none';
+    return;
+  }
+  empty.style.display = 'none';
+  wrap.style.display = 'block';
+
+  const rows = filtered.slice(0, 500);
+  tbody.innerHTML = rows.map((r, i) => {
+    const sc = r.score || 0;
+    const addr = [r.prop_address, r.prop_city].filter(Boolean).join(', ') || '—';
+    const flagHtml = (r.flags||[]).slice(0,3).map(f =>
+      `<span class="flag">${f}</span>`).join('');
+    const amtHtml = r.amount > 100000
+      ? `<span class="amount large">${fmt$(r.amount)}</span>`
+      : `<span class="amount">${r.amount ? fmt$(r.amount) : '—'}</span>`;
+    const linkHtml = r.clerk_url
+      ? `<a class="doc-link" href="${r.clerk_url}" target="_blank" rel="noopener" onclick="event.stopPropagation()">↗</a>`
+      : '—';
+
+    return `<tr onclick="openDetail(${i})" data-idx="${i}">
+      <td><span class="score-badge ${scoreClass(sc)}">${sc}</span></td>
+      <td><span class="cat-pill cat-${r.cat||'other'}">${r.cat_label||r.cat||'—'}</span></td>
+      <td><code>${r.doc_type||'—'}</code></td>
+      <td class="mono">${r.filed||'—'}</td>
+      <td class="wrap">${r.owner||'—'}</td>
+      <td class="wrap">${addr}</td>
+      <td>${amtHtml}</td>
+      <td><div class="flag-list">${flagHtml}</div></td>
+      <td>${linkHtml}</td>
+    </tr>`;
+  }).join('');
+
+  if (filtered.length > 500) {
+    tbody.innerHTML += `<tr><td colspan="9" style="text-align:center;padding:14px;color:var(--muted);font-family:var(--mono);font-size:11px">
+      Showing 500 of ${filtered.length} — refine filters to see more.
+    </td></tr>`;
+  }
+}
+
+function openDetail(idx) {
+  const r = filtered[idx];
+  if (!r) return;
+
+  document.querySelectorAll('tbody tr').forEach((tr,i) => {
+    tr.classList.toggle('selected', i === idx);
+  });
+
+  const sc = r.score || 0;
+  const propAddr = [r.prop_address, r.prop_city, r.prop_state, r.prop_zip].filter(Boolean).join(', ');
+  const mailAddr = [r.mail_address, r.mail_city, r.mail_state, r.mail_zip].filter(Boolean).join(', ');
+
+  document.getElementById('detail-body').innerHTML = `
+    <div class="score-ring">${sc}</div>
+    <div style="text-align:center;margin-bottom:20px">
+      <div style="font-family:var(--cond);font-weight:900;font-size:20px">${r.owner||'Unknown Owner'}</div>
+      <div style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:4px">${r.cat_label||''} · ${r.doc_type||''}</div>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:20px">
+      ${(r.flags||[]).map(f=>`<span class="flag" style="font-size:10px">${f}</span>`).join('')}
+    </div>
+    <div class="detail-section">
+      <h4>Document</h4>
+      <div class="detail-row"><span class="detail-key">Doc Number</span><span class="detail-val mono">${r.doc_num||'—'}</span></div>
+      <div class="detail-row"><span class="detail-key">Type</span><span class="detail-val">${r.cat_label||'—'} (${r.doc_type||'—'})</span></div>
+      <div class="detail-row"><span class="detail-key">Filed</span><span class="detail-val mono">${r.filed||'—'}</span></div>
+      <div class="detail-row"><span class="detail-key">Amount</span><span class="detail-val" style="color:${r.amount>100000?'var(--red)':'inherit'}">${r.amount?fmt$(r.amount):'—'}</span></div>
+      <div class="detail-row"><span class="detail-key">Grantee</span><span class="detail-val">${r.grantee||'—'}</span></div>
+      <div class="detail-row"><span class="detail-key">Legal Desc</span><span class="detail-val" style="font-size:11px;max-width:220px;white-space:normal;text-align:right">${r.legal||'—'}</span></div>
+    </div>
+    <div class="detail-section">
+      <h4>Property</h4>
+      <div class="detail-row"><span class="detail-key">Site Address</span><span class="detail-val" style="white-space:normal;text-align:right">${propAddr||'—'}</span></div>
+      <div class="detail-row"><span class="detail-key">Mail Address</span><span class="detail-val" style="white-space:normal;text-align:right">${mailAddr||'—'}</span></div>
+    </div>
+    <div class="detail-section">
+      <h4>Links</h4>
+      ${r.clerk_url ? `<div class="detail-row"><span class="detail-key">Clerk Portal</span>
+        <a class="doc-link" href="${r.clerk_url}" target="_blank" rel="noopener">View Document ↗</a></div>` : ''}
+    </div>
+  `;
+
+  document.getElementById('detail-panel').classList.add('open');
+}
+
+function closeDetail() {
+  document.getElementById('detail-panel').classList.remove('open');
+  document.querySelectorAll('tbody tr').forEach(tr => tr.classList.remove('selected'));
+}
+
+function exportCSV() {
+  const cols = [
+    'First Name','Last Name','Mailing Address','Mailing City','Mailing State','Mailing Zip',
+    'Property Address','Property City','Property State','Property Zip',
+    'Lead Type','Document Type','Date Filed','Document Number',
+    'Amount/Debt Owed','Seller Score','Motivated Seller Flags','Source','Public Records URL'
+  ];
+  const rows = [cols.join(',')];
+
+  filtered.forEach(r => {
+    const owner = (r.owner || '').trim();
+    let first = '', last = '';
+    if (owner.includes(',')) {
+      const [l, f] = owner.split(',');
+      last = l.trim(); first = f.trim();
+    } else {
+      const parts = owner.split(' ');
+      first = parts[0] || '';
+      last  = parts.slice(1).join(' ');
+    }
+
+    const vals = [
+      first, last,
+      r.mail_address||'', r.mail_city||'', r.mail_state||'', r.mail_zip||'',
+      r.prop_address||'', r.prop_city||'', r.prop_state||'GA', r.prop_zip||'',
+      r.cat_label||'', r.doc_type||'', r.filed||'', r.doc_num||'',
+      r.amount||'', r.score||0,
+      (r.flags||[]).join('; '),
+      'Cobb County Superior Court Clerk',
+      r.clerk_url||''
+    ].map(v => `"${String(v).replace(/"/g,'""')}"`);
+
+    rows.push(vals.join(','));
+  });
+
+  const blob = new Blob([rows.join('\n')], {type:'text/csv'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `cobb_leads_${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+}
+
+document.addEventListener('click', e => {
+  const panel = document.getElementById('detail-panel');
+  if (panel.classList.contains('open')
+    && !panel.contains(e.target)
+    && !e.target.closest('tbody tr')) {
+    closeDetail();
+  }
+});
+
+init();
+</script>
+</body>
+</html>
