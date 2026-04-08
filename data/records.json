@@ -1,1 +1,11 @@
-{"records":[]}
+{
+  "fetched_at": "2026-04-08T01:30:21.965053Z",
+  "source": "Cobb County Superior Court Clerk",
+  "date_range": {
+    "from": "04/01/2026",
+    "to": "04/08/2026"
+  },
+  "total": 0,
+  "with_address": 0,
+  "records": []
+}
