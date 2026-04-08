@@ -152,43 +152,48 @@ def download_parcel_dbf() -> Optional[Path]:
     return None
 
 
-def make_session() -> requests.Session:
+def make_session() -> tuple[requests.Session, str]:
+    """Returns (session, verification_token)"""
     s = requests.Session()
     s.headers.update({
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
         "Accept-Language": "en-US,en;q=0.9",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Connection": "keep-alive",
+        "Upgrade-Insecure-Requests": "1",
     })
-    url = f"{LANDMARK_BASE}/search/index?theme=.blue&section=searchCriteriaRecordDate&quickSearchSelection="
+
+    search_url = f"{LANDMARK_BASE}/search/index?theme=.blue&section=searchCriteriaRecordDate&quickSearchSelection="
+
+    # Visit page and grab token
+    token = ""
     for attempt in range(MAX_RETRIES):
         try:
-            r = s.get(url, timeout=30, verify=False)
-            log.info(f"Session init: {r.status_code}, cookies: {dict(s.cookies)}")
-            if s.cookies:
-                return s
+            r = s.get(search_url, timeout=30, verify=False)
+            log.info(f"Session page: {r.status_code}")
+            log.info(f"All cookies: {[(c.name, c.value[:20]) for c in s.cookies]}")
+
+            soup = BeautifulSoup(r.text, "lxml")
+            t = soup.find("input", {"name": "__RequestVerificationToken"})
+            if t:
+                token = t.get("value", "")
+                log.info(f"Form token: {token[:30]}...")
+            m = soup.find("meta", {"name": "__RequestVerificationToken"})
+            if m:
+                token = token or m.get("content", "")
+
+            if "ASP.NET_SessionId" in s.cookies:
+                log.info("Got session cookie")
+                return s, token
         except Exception as e:
             log.warning(f"Session attempt {attempt+1}: {e}")
             time.sleep(RETRY_DELAY)
-    return s
 
-
-def get_verification_token(s: requests.Session) -> str:
-    try:
-        url = f"{LANDMARK_BASE}/search/index?theme=.blue&section=searchCriteriaRecordDate&quickSearchSelection="
-        r = s.get(url, timeout=30, verify=False)
-        soup = BeautifulSoup(r.text, "lxml")
-        t = soup.find("input", {"name": "__RequestVerificationToken"})
-        if t:
-            return t.get("value", "")
-        m = soup.find("meta", {"name": "__RequestVerificationToken"})
-        if m:
-            return m.get("content", "")
-    except Exception as e:
-        log.warning(f"Token error: {e}")
-    return ""
+    return s, token
 
 
 def build_datatable_params(start: int = 0, length: int = 500, draw: int = 1) -> dict:
-    """Build DataTables params using numeric string keys matching the portal."""
     params = {
         "draw": str(draw),
         "start": str(start),
@@ -198,7 +203,6 @@ def build_datatable_params(start: int = 0, length: int = 500, draw: int = 1) -> 
         "order[0][column]": "7",
         "order[0][dir]": "asc",
     }
-    # 26 columns matching the portal (numeric keys 0-25)
     orderable_cols = {7, 8, 10, 11, 12}
     for i in range(26):
         params[f"columns[{i}][data]"] = str(i)
@@ -218,19 +222,22 @@ def clean(s) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
-def search_by_date(s: requests.Session, date_from: str, date_to: str) -> list[dict]:
+def search_by_date(s: requests.Session, token: str, date_from: str, date_to: str) -> list[dict]:
     records = []
-    token = get_verification_token(s)
+
+    referer = f"{LANDMARK_BASE}/search/index?theme=.blue&section=searchCriteriaRecordDate&quickSearchSelection="
 
     ajax_headers = {
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
         "X-Requested-With": "XMLHttpRequest",
-        "Referer": f"{LANDMARK_BASE}/search/index?theme=.blue&section=searchCriteriaRecordDate&quickSearchSelection=",
+        "Referer": referer,
         "Origin": "https://superiorcourtclerk.cobbcounty.gov",
         "Accept": "application/json, text/javascript, */*; q=0.01",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Connection": "keep-alive",
     }
 
-    # Step 1: Set the date search
+    # Step 1: RecordDateSearch
     search_data = {
         "beginDate": date_from,
         "endDate": date_to,
@@ -246,6 +253,7 @@ def search_by_date(s: requests.Session, date_from: str, date_to: str) -> list[di
     for attempt in range(MAX_RETRIES):
         try:
             log.info(f"RecordDateSearch attempt {attempt+1}: {date_from} → {date_to}")
+            log.info(f"Cookies being sent: {[(c.name, c.value[:15]) for c in s.cookies]}")
             r = s.post(
                 f"{LANDMARK_BASE}/Search/RecordDateSearch",
                 data=search_data,
@@ -254,6 +262,7 @@ def search_by_date(s: requests.Session, date_from: str, date_to: str) -> list[di
                 verify=False,
             )
             log.info(f"RecordDateSearch: {r.status_code}, len={len(r.text)}")
+            log.info(f"Response cookies after search: {[(c.name, c.value[:15]) for c in s.cookies]}")
             if r.status_code == 200:
                 break
             time.sleep(RETRY_DELAY)
@@ -261,7 +270,7 @@ def search_by_date(s: requests.Session, date_from: str, date_to: str) -> list[di
             log.warning(f"RecordDateSearch error: {e}")
             time.sleep(RETRY_DELAY)
 
-    # Step 2: Get results with correct numeric column params
+    # Step 2: GetSearchResults
     start = 0
     page_size = 500
     draw = 1
@@ -269,7 +278,7 @@ def search_by_date(s: requests.Session, date_from: str, date_to: str) -> list[di
     while True:
         params = build_datatable_params(start=start, length=page_size, draw=draw)
         try:
-            log.info(f"GetSearchResults start={start} draw={draw}")
+            log.info(f"GetSearchResults start={start}")
             r = s.post(
                 f"{LANDMARK_BASE}/Search/GetSearchResults",
                 data=params,
@@ -282,7 +291,7 @@ def search_by_date(s: requests.Session, date_from: str, date_to: str) -> list[di
             if r.status_code != 200 or not r.content:
                 break
 
-            log.info(f"Preview: {r.text[:200]}")
+            log.info(f"Preview: {r.text[:300]}")
             data = r.json()
             rows = data.get("data", [])
             total = data.get("recordsTotal", 0)
@@ -315,20 +324,6 @@ def search_by_date(s: requests.Session, date_from: str, date_to: str) -> list[di
 
 
 def parse_row(row: dict) -> Optional[dict]:
-    """
-    Parse a row from the API. Keys are numeric strings "0"-"25".
-    From the observed response:
-      "5"  = grantor name (plain text)
-      "6"  = grantor with HTML divs
-      "7"  = date (12/16/1902)
-      "8"  = doc type (PLAT, LP, etc.)
-      "9"  = book type
-      "10" = book
-      "11" = page
-      "12" = clerk file no (nobreak_1400000023)
-      "15" = legal description
-      "DT_RowId" = "doc_7613682_1"
-    """
     grantor  = clean(row.get("5", ""))
     grantee  = clean(row.get("6", ""))
     filed    = clean(row.get("7", ""))
@@ -337,25 +332,14 @@ def parse_row(row: dict) -> Optional[dict]:
     legal    = clean(row.get("15", ""))
     row_id   = str(row.get("DT_RowId", ""))
 
-    # Also try grantee from field 6 but strip HTML divs for cleaner name
-    # Field 6 has "POWER PINKNEY J\u003cdiv...\u003eSTROUP MARGARET" format
-    # Use field 5 for grantor and parse field 6 for grantee
-    # Actually field 5 and 6 are both grantor variants — look for reversename
-    # Try field 6 as grantee since it sometimes has second party
-    if not grantee and grantor:
-        # Try to split combined names
-        grantee = ""
-
-    # Build clerk URL from DT_RowId
     clerk_url = ""
     if row_id:
         doc_id = row_id.replace("doc_", "").split("_")[0]
         clerk_url = f"{LANDMARK_BASE}/document/index?theme=.blue&id={doc_id}"
 
-    # Match doc type
     matched_type = None
     for t in TARGET_TYPES:
-        if t == raw_type or raw_type == t or raw_type.startswith(t + " "):
+        if t == raw_type or raw_type.startswith(t + " ") or raw_type == t:
             matched_type = t
             break
     if not matched_type:
@@ -503,8 +487,9 @@ def main():
     if dbf_path and dbf_path.exists():
         _parcel_index = build_parcel_index(dbf_path)
 
-    session = make_session()
-    records = search_by_date(session, date_from, date_to)
+    session, token = make_session()
+    log.info(f"Token obtained: {bool(token)}")
+    records = search_by_date(session, token, date_from, date_to)
     log.info(f"Total matching records: {len(records)}")
 
     for rec in records:
