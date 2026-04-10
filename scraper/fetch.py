@@ -374,11 +374,16 @@ def compute_flags_and_score(rec: dict, all_records: list[dict]) -> tuple[list[st
 
 
 def enrich_record(rec: dict) -> dict:
-    parcel = lookup_parcel(rec.get("owner", ""))
-    if parcel:
-        for k, v in parcel.items():
-            if v:
-                rec[k] = v
+    # Try grantee first (property owner being sued/liened), then grantor
+    for name in [rec.get("grantee",""), rec.get("owner","")]:
+        if not name:
+            continue
+        parcel = lookup_parcel(name)
+        if parcel and parcel.get("prop_address"):
+            for k, v in parcel.items():
+                if v:
+                    rec[k] = v
+            return rec
     return rec
 
 
