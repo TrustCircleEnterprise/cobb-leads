@@ -20,5 +20,6 @@ jobs:
         with:
           name: github-pages
           path: dashboard/
-      - uses: actions/deploy-pages@v4
-        id: deployment
+          overwrite: true
+      - id: deployment
+        uses: actions/deploy-pages@v4
