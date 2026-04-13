@@ -231,7 +231,7 @@ function setArea(a){areaQuality=a;['bad','avg','great'].forEach(x=>document.getE
 function setMarket(m){marketCond=m;['hot','neutral','cold'].forEach(x=>document.getElementById('mkt-'+x).classList.toggle('active',x===m))}
 function getLandPct(){const base=areaQuality==='bad'?0.10:areaQuality==='great'?0.20:0.15;const adj=marketCond==='hot'?0.05:marketCond==='cold'?-0.05:0;return base+adj}
 function calcMAO(arv){
-  if(propType==='land'){const pct=getLandPct();return{mao:arv*pct,formula:'ARV x '+(pct*100).toFixed(0)+'% (land)',assignFee:Math.max(2000,Math.min(5000,arv*pct*0.1))}}
+  if(propType==='land'){return{mao:arv*0.15,formula:'ARV x 15%',assignFee:3000}}
   const adj=marketCond==='hot'?0.05:marketCond==='cold'?-0.05:0;const pct=0.75+adj;const mao=(arv*pct)-15000;
   return{mao,formula:'(ARV x '+(pct*100).toFixed(0)+'%) - $15,000',assignFee:Math.max(5000,mao*0.1)}
 }
