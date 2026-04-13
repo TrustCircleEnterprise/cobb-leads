@@ -129,30 +129,22 @@ def lookup_parcel(owner):
     key = _norm(owner)
     if not key:
         return None
-
-    # 1. Exact match on original
     result = _parcel_index.get(key)
     if result:
         return result
-
-    # 2. Exact match on all name variants
     for variant in _name_variants(owner):
         result = _parcel_index.get(variant)
         if result:
             return result
-
-    # 3. Fast fuzzy — try buckets for ALL first words of all variants
     if FUZZY_OK:
         first_words = set()
         for variant in _name_variants(owner):
             fw = _first_word(variant)
             if fw:
                 first_words.add(fw)
-
         candidates = []
         for fw in first_words:
             candidates.extend(_parcel_bucket.get(fw, []))
-
         best_score = 0
         best_match = None
         for candidate in candidates:
@@ -162,7 +154,6 @@ def lookup_parcel(owner):
                 best_match = candidate
         if best_match and best_score >= FUZZY_THRESHOLD:
             return _parcel_index.get(best_match)
-
     return None
 
 def download_parcel_dbf():
@@ -238,7 +229,6 @@ def build_parcel_index(dbf_path):
     else:
         log.warning("rapidfuzz not installed — exact matching only")
     return idx
-
 
 def fetch_file(url):
     s = requests.Session()
@@ -346,10 +336,11 @@ WEEK_AGO = (datetime.now() - timedelta(days=7)).strftime("%Y-%m-%d")
 def compute_flags_and_score(rec, all_records):
     flags = []
     score = 30
-    dt    = rec.get("doc_type", "")
-    cat   = rec.get("cat", "")
-    owner = rec.get("owner", "")
-    filed = rec.get("filed", "")
+    dt      = rec.get("doc_type", "")
+    cat     = rec.get("cat", "")
+    owner   = rec.get("owner", "")
+    grantee = rec.get("grantee", "")
+    filed   = rec.get("filed", "")
     if dt == "LP":              flags.append("Lis pendens")
     if dt in ("NF","FC"):      flags.append("Pre-foreclosure")
     if cat == "judgment":       flags.append("Judgment lien")
@@ -357,7 +348,8 @@ def compute_flags_and_score(rec, all_records):
     if dt in ("ML","CL"):      flags.append("Mechanic lien")
     if dt == "HL":              flags.append("HOA lien")
     if cat == "probate":        flags.append("Probate / estate")
-    if owner and re.search(r"\b(LLC|INC|CORP|LTD|TRUST|ESTATE)\b", owner.upper()):
+    # Only flag LLC if the PROPERTY OWNER (grantee) is an LLC, not the plaintiff
+    if grantee and re.search(r"\b(LLC|INC|CORP|LTD|TRUST|ESTATE)\b", grantee.upper()):
         flags.append("LLC / corp owner")
     if filed >= WEEK_AGO:       flags.append("New this week")
     score += len(flags) * 10
@@ -376,13 +368,11 @@ def enrich_record(rec):
     for name in [rec.get("grantee",""), rec.get("owner","")]:
         if not name:
             continue
-        # Skip government entities and corporations
         if re.search(r"\b(LLC|INC|CORP|LTD|TRUST|STATE OF|COUNTY|CITY OF|FEDERAL|USA)\b", name.upper()):
             continue
         parcel = lookup_parcel(name)
         if parcel and parcel.get("prop_address"):
             addr = parcel["prop_address"].strip()
-            # Skip bad addresses (vacant lots stored as 0 STREET)
             if addr.startswith("0 ") or addr == "0":
                 continue
             for k, v in parcel.items():
