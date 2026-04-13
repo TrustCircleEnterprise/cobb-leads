@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Property Underwriter — TrustCircle Enterprise</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Barlow+Condensed:wght@300;500;700;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0a14;--bg2:#13101e;--bg3:#1a1628;
+  --border:#2a2040;--border2:#3a2f58;
+  --text:#e0d8f0;--muted:#6a5f85;--dim:#3a2f58;
+  --accent:#c9a227;--accent2:#f0c84a;
+  --purple:#7c3aed;--purple2:#9d5cf5;--purple-light:#e8d8ff;
+  --red:#e03030;--orange:#d06020;--green:#2a9d60;
+  --blue:#3070c8;--teal:#20909a;
+  --mono:'Space Mono',monospace;
+  --cond:'Barlow Condensed',sans-serif;
+  --body:'Barlow',sans-serif;
+  --radius:4px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:14px;line-height:1.5;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");background-size:256px;pointer-events:none;z-index:9999;opacity:.5}
+body::after{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at top left,rgba(124,58,237,.08) 0%,transparent 60%);pointer-events:none;z-index:0}
+
+#topbar{background:rgba(13,10,20,.96);border-bottom:1px solid var(--border2);display:flex;align-items:center;gap:20px;padding:0 32px;height:60px;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
+.logo-wrap{display:flex;align-items:center;gap:10px}
+.logo-icon{width:32px;height:32px;background:linear-gradient(135deg,var(--purple),var(--purple2));border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--cond);font-weight:900;font-size:16px;color:#fff}
+.logo-text{font-family:var(--cond);font-weight:900;font-size:17px;letter-spacing:.08em;text-transform:uppercase;line-height:1}
+.logo-text .top{color:var(--accent)}
+.logo-text .bot{color:var(--text);font-weight:300;font-size:13px;letter-spacing:.12em}
+#topbar .sep{width:1px;height:28px;background:var(--border2)}
+#topbar .nav-link{font-family:var(--mono);font-size:11px;color:var(--muted);text-decoration:none;transition:color .15s;padding:4px 10px;border:1px solid transparent;border-radius:var(--radius)}
+#topbar .nav-link:hover{color:var(--accent);border-color:var(--border2)}
+
+.container{max-width:900px;margin:0 auto;padding:40px 24px;position:relative;z-index:1}
+.page-title{font-family:var(--cond);font-weight:900;font-size:clamp(32px,5vw,56px);line-height:1;text-transform:uppercase;color:var(--text);margin-bottom:8px}
+.page-title span{color:var(--accent)}
+.page-sub{font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:40px}
+
+.input-card{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius);padding:28px;margin-bottom:24px;box-shadow:0 4px 24px rgba(124,58,237,.08)}
+.input-card h3{font-family:var(--cond);font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
+.form-grid{display:grid;grid-template-columns:2fr 1fr 80px 100px;gap:12px;margin-bottom:16px}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-group label{font-family:var(--mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.form-group input,.form-group select{background:var(--bg3);border:1px solid var(--border2);color:var(--text);font-family:var(--mono);font-size:12px;padding:8px 12px;border-radius:var(--radius);outline:none;transition:border-color .15s;width:100%}
+.form-group input:focus,.form-group select:focus{border-color:var(--accent)}
+.form-group select option{background:var(--bg3)}
+
+.section-label{font-family:var(--mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.prop-type-row{display:flex;gap:12px;margin-bottom:16px}
+.type-btn{flex:1;padding:10px;border:1px solid var(--border2);background:var(--bg3);color:var(--muted);font-family:var(--cond);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;border-radius:var(--radius);cursor:pointer;transition:all .15s;text-align:center}
+.type-btn.active{background:var(--purple);color:#fff;border-color:var(--purple)}
+.type-btn:hover:not(.active){border-color:var(--dim);color:var(--text)}
+
+.land-options{display:none;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius);padding:16px;margin-bottom:16px}
+.land-options.show{display:block}
+.land-options h4{font-family:var(--mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
+.area-btns,.market-row{display:flex;gap:8px}
+.area-btn,.market-btn{flex:1;padding:8px;border:1px solid var(--border2);background:var(--bg);color:var(--muted);font-family:var(--mono);font-size:11px;border-radius:var(--radius);cursor:pointer;transition:all .15s;text-align:center}
+.area-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(201,162,39,.1)}
+.market-row{margin-bottom:20px}
+.market-btn.active.hot{border-color:var(--red);color:var(--red);background:rgba(224,48,48,.1)}
+.market-btn.active.neutral{border-color:var(--accent);color:var(--accent);background:rgba(201,162,39,.1)}
+.market-btn.active.cold{border-color:var(--blue);color:var(--blue);background:rgba(48,112,200,.1)}
+
+.analyze-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--purple),var(--purple2));color:#fff;font-family:var(--cond);font-weight:900;font-size:16px;letter-spacing:.1em;text-transform:uppercase;border:none;border-radius:var(--radius);cursor:pointer;transition:opacity .15s;box-shadow:0 4px 16px rgba(124,58,237,.3)}
+.analyze-btn:hover{opacity:.88}
+.analyze-btn:disabled{opacity:.5;cursor:not-allowed}
+
+.results-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.result-card{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius);padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.result-card.highlight{border-color:var(--accent);background:rgba(201,162,39,.06)}
+.result-card.offer{border-color:var(--purple);background:rgba(124,58,237,.08)}
+.result-card h4{font-family:var(--mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.result-card .big-num{font-family:var(--cond);font-weight:900;font-size:40px;line-height:1;color:var(--accent)}
+.result-card.offer .big-num{color:var(--purple2)}
+.result-card .sub{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:6px}
+
+.detail-card{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius);padding:20px;margin-bottom:16px}
+.detail-card h4{font-family:var(--cond);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;border-bottom:1px solid var(--border);padding-bottom:8px}
+.detail-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(42,32,64,.5);font-size:12.5px}
+.detail-row:last-child{border-bottom:none}
+.detail-key{color:var(--muted);font-family:var(--mono);font-size:10px}
+.detail-val{color:var(--text);font-weight:600;text-align:right}
+
+.comp-list{display:flex;flex-direction:column;gap:8px}
+.comp-item{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:12px}
+.comp-addr{font-size:12.5px;color:var(--text);margin-bottom:4px}
+.comp-meta{display:flex;gap:16px;flex-wrap:wrap}
+.comp-tag{font-family:var(--mono);font-size:10px;color:var(--muted)}
+.comp-tag span{color:var(--accent2)}
+
+.ext-links{display:flex;gap:12px;flex-wrap:wrap}
+.ext-link{flex:1;min-width:140px;padding:10px 16px;text-align:center;border:1px solid var(--border2);border-radius:var(--radius);color:var(--accent);font-family:var(--mono);font-size:11px;text-decoration:none;transition:all .15s}
+.ext-link:hover{border-color:var(--accent);background:rgba(201,162,39,.08)}
+
+.history-card{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius);padding:20px;margin-bottom:16px}
+.history-card h4{font-family:var(--cond);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;border-bottom:1px solid var(--border);padding-bottom:8px}
+.history-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(42,32,64,.4);font-size:12px}
+.history-item:last-child{border-bottom:none}
+.history-mao{font-family:var(--mono);color:var(--accent);font-size:13px;font-weight:700}
+.history-btn{font-family:var(--mono);font-size:10px;color:var(--muted);cursor:pointer;background:none;border:none;padding:2px 6px}
+.history-btn:hover{color:var(--accent)}
+
+.error-msg{background:rgba(224,48,48,.1);border:1px solid rgba(224,48,48,.3);border-radius:var(--radius);padding:14px;color:#ff6060;font-family:var(--mono);font-size:12px;margin-bottom:16px}
+.loading-state{display:flex;align-items:center;gap:12px;padding:40px;justify-content:center;font-family:var(--mono);font-size:13px;color:var(--muted)}
+.spinner{width:20px;height:20px;border-radius:50%;border:2px solid var(--border2);border-top-color:var(--accent);animation:spin .7s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:600px){.form-grid{grid-template-columns:1fr 1fr}.results-grid{grid-template-columns:1fr}.container{padding:24px 16px}}
+</style>
+</head>
+<body>
+<nav id="topbar">
+  <div class="logo-wrap">
+    <div class="logo-icon">TC</div>
+    <div class="logo-text">
+      <div class="top">TrustCircle</div>
+      <div class="bot">Enterprise</div>
+    </div>
+  </div>
+  <div class="sep"></div>
+  <a class="nav-link" href="https://trustcircleenterprise.github.io/hillsborough-leads/">← Hillsborough Leads</a>
+</nav>
+
+<div class="container">
+  <div class="page-title">Property <span>Underwriter</span></div>
+  <div class="page-sub">Enter any address to instantly calculate ARV, MAO, and your offer price</div>
+
+  <div class="input-card">
+    <h3>Property Details</h3>
+    <div class="form-grid">
+      <div class="form-group"><label>Street Address</label><input type="text" id="inp-address" placeholder="123 Main St"/></div>
+      <div class="form-group"><label>City</label><input type="text" id="inp-city" placeholder="Tampa"/></div>
+      <div class="form-group"><label>State</label>
+        <select id="inp-state">
+          <option value="FL" selected>FL</option><option value="GA">GA</option><option value="TX">TX</option>
+          <option value="NC">NC</option><option value="SC">SC</option><option value="AL">AL</option>
+          <option value="TN">TN</option><option value="OH">OH</option><option value="PA">PA</option><option value="CA">CA</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Zip</label><input type="text" id="inp-zip" placeholder="33601" maxlength="5"/></div>
+    </div>
+
+    <div class="section-label">Property Type</div>
+    <div class="prop-type-row">
+      <div class="type-btn active" id="btn-house" onclick="setType('house')">🏠 House</div>
+      <div class="type-btn" id="btn-land" onclick="setType('land')">🌿 Land / Lot</div>
+    </div>
+
+    <div class="land-options" id="land-options">
+      <h4>Area Quality</h4>
+      <div class="area-btns">
+        <div class="area-btn" id="area-bad" onclick="setArea('bad')">Bad (10%)</div>
+        <div class="area-btn active" id="area-avg" onclick="setArea('avg')">Average (15%)</div>
+        <div class="area-btn" id="area-great" onclick="setArea('great')">Great (20%)</div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top:16px">Market Condition</div>
+    <div class="market-row">
+      <div class="market-btn hot" id="mkt-hot" onclick="setMarket('hot')">🔥 Hot (+5%)</div>
+      <div class="market-btn neutral active" id="mkt-neutral" onclick="setMarket('neutral')">➡ Neutral</div>
+      <div class="market-btn cold" id="mkt-cold" onclick="setMarket('cold')">❄ Cold (-5%)</div>
+    </div>
+
+    <button class="analyze-btn" id="analyze-btn" onclick="runUnderwrite()">🔍 Analyze Property</button>
+  </div>
+
+  <div class="history-card" id="history-card" style="display:none">
+    <h4>Recent Analyses</h4>
+    <div id="history-list"></div>
+  </div>
+
+  <div id="results" style="display:none">
+    <div id="error-area"></div>
+    <div id="loading-area"></div>
+    <div id="results-content" style="display:none">
+      <div class="results-grid">
+        <div class="result-card highlight">
+          <h4>After Repair Value (ARV)</h4>
+          <div class="big-num" id="r-arv">—</div>
+          <div class="sub" id="r-arv-source">—</div>
+        </div>
+        <div class="result-card highlight">
+          <h4>Max Allowable Offer (MAO)</h4>
+          <div class="big-num" id="r-mao">—</div>
+          <div class="sub" id="r-formula">—</div>
+        </div>
+        <div class="result-card offer" style="grid-column:1/-1">
+          <h4>Your Offer Price (after assignment fee)</h4>
+          <div class="big-num" id="r-offer" style="font-size:52px">—</div>
+          <div class="sub" id="r-assign">—</div>
+        </div>
+      </div>
+      <div class="detail-card">
+        <h4>Breakdown</h4>
+        <div class="detail-row"><span class="detail-key">Property Type</span><span class="detail-val" id="r-type">—</span></div>
+        <div class="detail-row"><span class="detail-key">Rentcast Estimate</span><span class="detail-val" id="r-estimate">—</span></div>
+        <div class="detail-row"><span class="detail-key">Avg Comp Value</span><span class="detail-val" id="r-avg-comp">—</span></div>
+        <div class="detail-row"><span class="detail-key">ARV Used</span><span class="detail-val" id="r-arv2">—</span></div>
+        <div class="detail-row"><span class="detail-key">MAO Formula</span><span class="detail-val" id="r-formula2">—</span></div>
+        <div class="detail-row"><span class="detail-key">Assignment Fee</span><span class="detail-val" id="r-assign2">—</span></div>
+        <div class="detail-row"><span class="detail-key">Market Adjustment</span><span class="detail-val" id="r-market">—</span></div>
+        <div class="detail-row"><span class="detail-key">Comps Found</span><span class="detail-val" id="r-comp-count">—</span></div>
+      </div>
+      <div class="detail-card">
+        <h4>Comparable Sales</h4>
+        <div class="comp-list" id="comp-list"></div>
+      </div>
+      <div class="detail-card">
+        <h4>External Resources</h4>
+        <div class="ext-links" id="ext-links"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const RENTCAST_KEY='8838326b3d474641a8d8f47251144f68';
+let propType='house',areaQuality='avg',marketCond='neutral';
+let history=[];
+try{history=JSON.parse(localStorage.getItem('tce_uw_history')||'[]')}catch(e){}
+function fmt$(n){if(!n&&n!==0)return'—';return Number(n).toLocaleString('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0})}
+function setType(t){propType=t;document.getElementById('btn-house').classList.toggle('active',t==='house');document.getElementById('btn-land').classList.toggle('active',t==='land');document.getElementById('land-options').classList.toggle('show',t==='land')}
+function setArea(a){areaQuality=a;['bad','avg','great'].forEach(x=>document.getElementById('area-'+x).classList.toggle('active',x===a))}
+function setMarket(m){marketCond=m;['hot','neutral','cold'].forEach(x=>document.getElementById('mkt-'+x).classList.toggle('active',x===m))}
+function getLandPct(){const base=areaQuality==='bad'?0.10:areaQuality==='great'?0.20:0.15;const adj=marketCond==='hot'?0.05:marketCond==='cold'?-0.05:0;return base+adj}
+function calcMAO(arv){
+  if(propType==='land'){const pct=getLandPct();return{mao:arv*pct,formula:'ARV x '+(pct*100).toFixed(0)+'% (land)',assignFee:Math.max(2000,Math.min(5000,arv*pct*0.1))}}
+  const adj=marketCond==='hot'?0.05:marketCond==='cold'?-0.05:0;const pct=0.75+adj;const mao=(arv*pct)-15000;
+  return{mao,formula:'(ARV x '+(pct*100).toFixed(0)+'%) - $15,000',assignFee:Math.max(5000,mao*0.1)}
+}
+function saveHistory(address,city,state,zip,mao,offer){
+  history.unshift({address,city,state,zip,mao,offer,date:new Date().toLocaleDateString()});
+  history=history.slice(0,10);
+  try{localStorage.setItem('tce_uw_history',JSON.stringify(history))}catch(e){}
+  renderHistory();
+}
+function renderHistory(){
+  if(!history.length)return;
+  document.getElementById('history-card').style.display='block';
+  document.getElementById('history-list').innerHTML=history.map((h,i)=>
+    '<div class="history-item"><div><div style="color:var(--text)">'+h.address+', '+h.city+' <span style="color:var(--muted);font-size:11px">'+h.date+'</span></div><div style="font-family:var(--mono);font-size:10px;color:var(--muted)">Offer: '+fmt$(h.offer)+'</div></div><div style="display:flex;align-items:center;gap:10px"><div class="history-mao">'+fmt$(h.mao)+'</div><button class="history-btn" onclick="loadHistory('+i+')">Load →</button></div></div>'
+  ).join('');
+}
+function loadHistory(i){const h=history[i];document.getElementById('inp-address').value=h.address;document.getElementById('inp-city').value=h.city;document.getElementById('inp-state').value=h.state;document.getElementById('inp-zip').value=h.zip;window.scrollTo({top:0,behavior:'smooth'})}
+async function runUnderwrite(){
+  const address=document.getElementById('inp-address').value.trim();
+  const city=document.getElementById('inp-city').value.trim();
+  const state=document.getElementById('inp-state').value;
+  const zip=document.getElementById('inp-zip').value.trim();
+  if(!address||!city||!zip){document.getElementById('error-area').innerHTML='<div class="error-msg">Please fill in address, city, and zip code.</div>';return}
+  document.getElementById('error-area').innerHTML='';
+  document.getElementById('results').style.display='block';
+  document.getElementById('results-content').style.display='none';
+  document.getElementById('loading-area').innerHTML='<div class="loading-state"><div class="spinner"></div>Fetching comps from Rentcast...</div>';
+  const btn=document.getElementById('analyze-btn');btn.disabled=true;btn.textContent='Analyzing...';
+  try{
+    const url='https://api.rentcast.io/v1/avm/value?address='+encodeURIComponent(address)+'&city='+encodeURIComponent(city)+'&state='+encodeURIComponent(state)+'&zipCode='+encodeURIComponent(zip)+'&propertyType='+(propType==='land'?'Land':'Single+Family')+'&compCount=6';
+    const res=await fetch(url,{headers:{'X-Api-Key':RENTCAST_KEY,'accept':'application/json'}});
+    const d=res.ok?await res.json():null;
+    const priceEst=d?.price||d?.value||0;
+    const comps=d?.comparables||[];
+    const avgComp=comps.length>0?comps.reduce((s,c)=>s+(c.price||c.salePrice||0),0)/comps.length:0;
+    const arv=avgComp>0?avgComp:priceEst;
+    if(!arv){document.getElementById('loading-area').innerHTML='';document.getElementById('error-area').innerHTML='<div class="error-msg">Could not find property data. Try checking the address on Zillow manually.</div>';btn.disabled=false;btn.textContent='🔍 Analyze Property';return}
+    const{mao,formula,assignFee}=calcMAO(arv);
+    const offer=Math.max(0,mao-assignFee);
+    const marketLabel=marketCond==='hot'?'Hot Market (+5%)':marketCond==='cold'?'Cold Market (-5%)':'Neutral';
+    const arvSource=avgComp>0?'Based on '+comps.length+' comparable sales':'Based on Rentcast estimate (no comps found)';
+    const fullAddr=address+', '+city+', '+state+' '+zip;
+    document.getElementById('r-arv').textContent=fmt$(arv);
+    document.getElementById('r-arv-source').textContent=arvSource;
+    document.getElementById('r-mao').textContent=fmt$(Math.max(0,mao));
+    document.getElementById('r-formula').textContent=formula;
+    document.getElementById('r-offer').textContent=fmt$(offer);
+    document.getElementById('r-assign').textContent='Assignment fee: '+fmt$(assignFee);
+    document.getElementById('r-type').textContent=propType==='land'?'Land / Lot':'House';
+    document.getElementById('r-estimate').textContent=priceEst?fmt$(priceEst):'N/A';
+    document.getElementById('r-avg-comp').textContent=avgComp>0?fmt$(avgComp):'No comps found';
+    document.getElementById('r-arv2').textContent=fmt$(arv);
+    document.getElementById('r-formula2').textContent=formula;
+    document.getElementById('r-assign2').textContent=fmt$(assignFee);
+    document.getElementById('r-market').textContent=marketLabel;
+    document.getElementById('r-comp-count').textContent=comps.length+' comps found';
+    document.getElementById('comp-list').innerHTML=comps.length>0?comps.slice(0,5).map(c=>'<div class="comp-item"><div class="comp-addr">'+(c.formattedAddress||c.address||'—')+'</div><div class="comp-meta"><span class="comp-tag">Price: <span>'+fmt$(c.price||c.salePrice||0)+'</span></span><span class="comp-tag">Sqft: <span>'+(c.squareFootage||'?')+'</span></span><span class="comp-tag">Bed/Bath: <span>'+(c.bedrooms||'?')+'/'+(c.bathrooms||'?')+'</span></span><span class="comp-tag">Days ago: <span>'+(c.daysOld||'?')+'</span></span></div></div>').join(''):'<div style="color:var(--muted);font-family:var(--mono);font-size:11px;text-align:center;padding:16px">No comparable sales found — verify manually on Zillow.</div>';
+    document.getElementById('ext-links').innerHTML=
+      '<a class="ext-link" href="https://www.zillow.com/homes/'+encodeURIComponent(fullAddr)+'_rb/" target="_blank">🏠 Zillow</a>'+
+      '<a class="ext-link" href="https://www.redfin.com/search#location='+encodeURIComponent(fullAddr)+'" target="_blank">📊 Redfin</a>'+
+      '<a class="ext-link" href="https://msc.fema.gov/portal/search" target="_blank">🌊 FEMA Flood Map</a>'+
+      '<a class="ext-link" href="https://www.google.com/maps/search/'+encodeURIComponent(fullAddr)+'" target="_blank">📍 Google Maps</a>';
+    saveHistory(address,city,state,zip,Math.max(0,mao),offer);
+    document.getElementById('loading-area').innerHTML='';
+    document.getElementById('results-content').style.display='block';
+    document.getElementById('results').scrollIntoView({behavior:'smooth'});
+  }catch(err){document.getElementById('loading-area').innerHTML='';document.getElementById('error-area').innerHTML='<div class="error-msg">Error: '+err.message+'</div>'}
+  btn.disabled=false;btn.textContent='🔍 Analyze Property';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Enter')runUnderwrite()});
+renderHistory();
+</script>
+</body>
+</html>
