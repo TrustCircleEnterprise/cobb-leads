@@ -1,0 +1,674 @@
+/Users/itsmekish/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+[2026-04-14 07:03] Running post-scrape automation...
+Xleads CSV: 664 records -> /Users/itsmekish/cobb-leads/data/xleads_import.csv
+Pushing to GHL workflow...
+Contact failed for HARRIS WILL JR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"4a4f5e50-4366-4043-8a41-8e77bada3dee"}
+Contact failed for HARRIS WILL JR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"99181f88-c1f0-4a0b-89ed-6a3013322bb0"}
+Contact failed for RICHARDSON WILLIAM ERNEST: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9966db4a-b888-4768-bcab-08fd7cc5ce04"}
+Contact failed for POTTER MICHAEL JAMES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"57cc8e32-b9a1-46a7-849d-a43d65c73fca"}
+Contact failed for LACAYO LEIVA EVELYN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"d83f3ede-306c-47a6-9767-6742c857bbb4"}
+Contact failed for WAX ROBERT TYRONE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"e67b42ac-b45e-423b-b8aa-a31b204715fa"}
+Contact failed for HODGE JOSEPH ANDREW: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"1c5855d9-7e18-403e-9cbf-e05716d68a32"}
+Contact failed for JONES CHRISTOPHER BERNARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"92eeb398-59f0-4895-b27c-1a49af5a2249"}
+Contact failed for POTTER MICHAEL JAMES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9b864be2-461c-49e3-a38e-bdce0a47cf38"}
+Contact failed for JACKSON ANDREA CHRISTINE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"72df049b-e030-40fb-9618-b4cd2ba34032"}
+Contact failed for NASH ERIC CHRISTOPHER: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"edd71af6-a4b7-4e82-b145-c1d1a9bac23e"}
+Contact failed for SHANNON SPENCER: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"00a5f31e-a0ae-4655-97a8-ae7ac2ab4e3f"}
+Contact failed for SEWELL KIMBERLY ANN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"e9a1c21f-ced1-4f70-b7fa-dd91ab0172b1"}
+Contact failed for GRAY STEPHANIE LYNN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"a155ce8e-643e-4d99-93b2-335e4499cff1"}
+Contact failed for KALE BRITTNI NICOLE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"0130d2a3-2f80-4c67-9a8f-377a3741f3f4"}
+Contact failed for SAYLES MICHAEL ANTHONY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"630a3b6e-bed1-4fdc-914c-1dddfcd5cce9"}
+Contact failed for NUNEZ GARCIA MARIO JOSE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"4f4b45bc-25e3-460c-b02b-f7965bfaf4e6"}
+Contact failed for DAVIS JAMES DALTON: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"87dc76a9-7456-4306-aaa2-dbe64a85f416"}
+Contact failed for GONZALEZ VANESSA AMERIE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9a4abd72-943e-473b-97cd-f6720d541c06"}
+Contact failed for SANTIAGO ROBERTO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"2d557eae-7772-42f0-ac81-e591c8d97f57"}
+Contact failed for MONTERO CRUZ OSMAY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"00a16069-45f7-4fa9-b3d5-dd59eb945aa4"}
+Contact failed for CANFUX NADIME MARIA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"1d0d8f80-d2e0-460e-b5f4-3a3e8443c922"}
+Contact failed for RYAN MICHAEL FRANCIS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"8f8f57ea-33e9-4fc2-9f1c-340744c16c0b"}
+Contact failed for DELEON ELIAS ALONSO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"285b3e97-8c5d-4141-9b7d-694242570851"}
+Contact failed for REED CHRISTOPHER PATRICK: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"b73fd0a2-da83-4d2a-b057-06c46c847209"}
+Contact failed for HERNANDEZ LOPEZ JUAN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"fcd92524-f3ea-4109-b727-8040e9514478"}
+Contact failed for ORTIZ MIGUEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"52ed2c98-032c-4ff2-8e69-ae3e4eb5576d"}
+Contact failed for OWEN JANE ANNE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"60509860-ba63-415b-b963-e548cf354ea2"}
+Contact failed for ALEXANDRE MATTHEW MOISE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"b3f48247-d047-4e69-aecf-a76384b0ea33"}
+Contact failed for SANTANA LOPEZ HECTOR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"4c937231-0096-47c3-8d5d-af28d15f38af"}
+Contact failed for PAGAN JOSEPH L: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"7bd378fb-3d04-40c7-9f53-1bfb3129c3df"}
+Contact failed for BREIT MICHAEL EDWARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"51615a9e-5b81-4953-803a-72fdab1367a8"}
+Contact failed for ALVAREZ RICHARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"92b452ce-fcb4-4898-9d55-f2f2384a0469"}
+Contact failed for BROWN CARLTON: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"82b2ba09-d219-4d36-b2c9-8956c73b022f"}
+Contact failed for MONCRIEF ROBERT JOSEPH: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"8c4b0598-137e-4747-8491-b2bd8602e5a4"}
+Contact failed for LEON MICHAEL JOHNNY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"569b4e0b-1ecb-4abc-b561-7e7594c613e1"}
+Contact failed for KLIM ALEXANDER MARTIN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"b7e3c0b1-157d-4bca-aef4-d845a2afadaf"}
+Contact failed for HERNANDEZ JOSE MARCO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"b4c0b677-9a12-4cf7-bbe9-fbe19709d48c"}
+Contact failed for ROGERS ANTHONY MARK: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"6ceeb277-e9ed-4ca2-a73a-84451c1de40c"}
+Contact failed for LAWRENCE SIERRA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"a583c7a6-3268-4aaf-b816-0396b5aab1b8"}
+Contact failed for CHAVEZ FRANCISCO MENDOZA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"c64dde69-aff1-48a0-a8af-55e59d439810"}
+Contact failed for CHAVEZ MENDOZA FRANCISCO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"800f9289-0db3-450e-9e3b-a55fe0b76960"}
+Contact failed for CHAVEZ FRANCISCO MENDOZA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"3aeaae1b-e22f-4c05-8936-cb7145a305ef"}
+Contact failed for ALVAREZ RICHARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"a99665ba-dba8-4cb5-8150-b5bac2c85042"}
+Contact failed for RYAN MICHAEL FRANCIS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"7ddf437f-d67d-4051-9cbf-6aef4229eda7"}
+Contact failed for OWEN JANE ANNE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"0f68b1d3-7184-45fc-9ae1-ca9b91e2dab2"}
+Contact failed for QUANT JOSE ANTONIO JR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"c53df9f4-e821-44de-9530-7e8b20abb9fa"}
+Contact failed for AUSTIN GEORGIA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"18c33791-8743-46d7-a3f6-fe7bc17d274f"}
+Contact failed for ALMENDAREZ LORENZO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"82189e18-24d1-4f9c-a3dc-77adccbaa7f8"}
+Contact failed for HARVEY MICHAEL DAVID: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"f8034301-55c7-4f95-81c8-be09d28810ab"}
+Contact failed for SPAIN CHRISTOPHER JOHN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"bcfea040-655b-4473-9cf9-6beb2f4619ca"}
+Contact failed for DIXON CYNTHIA RUTH: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"ec60d920-c3ab-9772-8c1f-7ad0316131a8"}
+Contact failed for THERIAC BRIANA NICOLE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"6262ba87-1031-4a99-aa8b-fd518c2e2ade"}
+Contact failed for THOMPSON CHRISTOPHER TYRELL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"0d61ce67-c9d2-4f00-9ea7-ecd9ad358d4f"}
+Contact failed for RUSSELL JESSICA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"ca40eb6b-039a-440b-bd45-23baf2645682"}
+Contact failed for PINA VICTOR HUGO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"945b63a9-1479-4a8c-8e64-bf6f09159d4c"}
+Contact failed for MARTINEZ JOHN MICHAEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"09010ce4-e9ff-4a8e-9b00-384eef6ecb18"}
+Contact failed for SUPREME ROYALTY TRANSPORT: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"75e2ad3a-2f71-4124-a92a-b27b9e31486a"}
+Contact failed for LANDMANN EMILY N: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"f45114c3-b1b4-4de4-b668-1b633e2535c4"}
+Contact failed for MORGAN BRIAN EDWARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"a1f33a36-367b-4094-9bac-0b83b069fb7c"}
+Contact failed for MORGAN BRIAN EDWARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"d0e5226d-20e2-4b96-9431-80fcffe75714"}
+Contact failed for HERNANDEZ EDITH: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"a5bf7cb6-da04-404e-b758-da7727ab785c"}
+Contact failed for ZENNER DAVID: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"633cf87f-c10f-4730-9583-eeff021d837d"}
+Contact failed for THOMPSON ROBERT LEE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"4bc5f676-71b7-4639-a5cb-90056e5e3870"}
+Contact failed for THOMPSON ROBERT LEE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"2fcee763-5d42-4308-b8a2-9a2e718784b6"}
+Contact failed for THOMPSON ROBERT LEE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"0a2ec570-5806-404d-aa85-62adb5e46132"}
+Contact failed for MEZA MAYRA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"c87e2f34-a230-4386-91c8-b6fbd2d5d5cb"}
+Contact failed for BERRYMAN ROBERT: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"f4f43c28-4fee-40e0-bc8f-f78ceefb59e5"}
+Contact failed for THOMPSON ROBERT LEE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"72028fb7-fd5e-40b8-a87e-345f4431c564"}
+Contact failed for SANTANA LOPEZ HECTOR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"eb767aa1-492b-4da6-bbb8-c077a2c20473"}
+Contact failed for ALEXANDRE MATTHEW MOISE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"97691c70-9db2-44ef-ae55-b048080a8816"}
+Contact failed for OWEN JANE ANNE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"19e3c906-3cf5-498f-b5ad-57693e9c54b6"}
+Contact failed for BREIT MICHAEL EDWARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"90262bb3-f2b5-4b8d-a9c0-531f34e97b6f"}
+Contact failed for ALVAREZ RICHARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"ae343f01-a3cd-421a-be43-76cda1680da0"}
+Contact failed for PAGAN JOSEPH L: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"7895c891-e979-4643-a0ce-9d9613cd8c07"}
+Contact failed for BROWN CARLTON: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"4ae004da-61c9-4c31-818e-76e7f4059e07"}
+Contact failed for ORTIZ MIGUEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"c074f21b-0531-406a-b712-43c2524a6201"}
+Contact failed for MONCRIEF ROBERT JOSEPH: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"f6dd8579-2948-4518-bc58-8220b4ed9183"}
+Contact failed for VO TAI: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"4fd2eb22-a9fd-44fc-b6ef-10139700b9fc"}
+Contact failed for LEON MICHAEL JOHNNY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"cbd1ef79-1d81-4a52-9f6e-5133f2998fa2"}
+Contact failed for KLIM ALEXANDER MARTIN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"0f50d115-efdd-4c77-934b-13eddd611cd9"}
+Contact failed for HERNANDEZ JOSE MARCO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"3c5fd8be-a119-4950-9893-6b56100f0afc"}
+Contact failed for ROGERS ANTHONY MARK: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"8809b718-8131-444c-b5ce-279c5d8fd530"}
+Contact failed for HERNANDEZ LOPEZ JUAN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"80b80f5c-1111-4eaf-ab32-77b5fb39da8f"}
+Contact failed for LAWRENCE SIERRA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"18983083-dcfa-40bc-a423-225f582214ce"}
+Contact failed for REED CHRISTOPHER PATRICK: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"f9f29f8f-9b7d-4108-ae4a-39e936c30616"}
+Contact failed for CHAVEZ FRANCISCO MENDOZA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"ed54e8bf-1282-4754-9a3d-a1e61e029b25"}
+Contact failed for CHAVEZ MENDOZA FRANCISCO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"2c913fbb-96f0-4d7f-9696-bde898d2dd7f"}
+Contact failed for CHAVEZ FRANCISCO MENDOZA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"d5f86311-515b-4ee8-975b-add09239f0de"}
+Contact failed for ALVAREZ RICHARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"d09cf0a5-fa9e-4a38-9937-b0eb50295e12"}
+Contact failed for RYAN MICHAEL FRANCIS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"89cb5d41-0b11-4fbd-88d6-8759fea4dee7"}
+Contact failed for OWEN JANE ANNE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"807b3c16-eba8-450d-8561-5f94ebfe792d"}
+Contact failed for QUANT JOSE ANTONIO JR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"b4b7df50-71ae-4be3-9979-20da25cd2db5"}
+Contact failed for HARRIS WILL JR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"8998a5e5-b4a3-425f-96bc-4d5128102fd7"}
+Contact failed for HARRIS WILL JR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"7db818e8-af61-4f77-a109-d2d8e5d7ab82"}
+Contact failed for RICHARDSON WILLIAM ERNEST: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"5428cefb-7ceb-41f1-9760-c380f13b3643"}
+Contact failed for POTTER MICHAEL JAMES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"f8736125-717e-4a71-aa51-fe85b9af5e93"}
+Contact failed for POTTER MICHAEL JAMES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"d8bc7bd1-ef15-4a79-ad7e-6c0a7c9f2b29"}
+Contact failed for RYAN MICHAEL FRANCIS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"c48c2183-8512-471b-b790-7fdc2f8bb384"}
+Contact failed for AUSTIN GEORGIA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"5a25bbb6-ee62-4055-be0e-dc6c18d11191"}
+Contact failed for ALMENDAREZ LORENZO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"955e3938-0fd7-4040-9c1c-a87e3557ef55"}
+Contact failed for CANFUX NADIME MARIA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"343afcd6-df5e-4428-873b-580d6e95d093"}
+Contact failed for GONZALEZ VANESSA AMERIE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"ed7f297e-b3b0-4471-b9b5-8310329619fc"}
+Contact failed for HARVEY MICHAEL DAVID: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"492edb62-ed87-40a5-8e4b-ff7eb8d029cb"}
+Contact failed for SANTIAGO ROBERTO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"bfd01a81-b862-42c7-b16e-208a02d82c31"}
+Contact failed for SPAIN CHRISTOPHER JOHN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"7901dd50-6726-4333-ad60-3f3361f928ac"}
+Contact failed for ARNOLD EDWARD MICHAEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"485291f5-5c2b-4439-80dc-6daddd4a9d31"}
+Contact failed for THOMPSON CHRISTOPHER TYRELL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"cfe100c8-34d4-4379-ab4b-a1953fa1de27"}
+Contact failed for THERIAC BRIANA NICOLE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"753b7098-c2d8-4dbc-a548-a27d34db1713"}
+Contact failed for MONTERO CRUZ OSMAY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"a3137ab9-9e22-4fe7-b028-e6bca876994e"}
+Contact failed for PINA VICTOR HUGO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"6d57aebb-e2d5-4728-9a6e-f133c4dd6483"}
+Contact failed for RUSSELL JESSICA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"2574d2d6-b85b-472f-b07d-e5d512b8ee22"}
+Contact failed for MARTINEZ JOHN MICHAEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"b2648386-49cf-4c34-980c-1f6173171437"}
+Contact failed for MORGAN BRIAN EDWARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"e2d5cdd0-5972-4fcc-a264-40cc53107be7"}
+Contact failed for LOPEZ JERRY LEE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"386a0d96-353f-498a-8868-476640e8ee1c"}
+Contact failed for HERNANDEZ EDITH: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"d0d340a4-66a3-4945-a1d0-6e68cfb1a18c"}
+Contact failed for LOPEZ JERRY LEE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"3b09615f-6387-4f37-b2b9-7e8e99bbd3e0"}
+Contact failed for WILSON MICHAEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"3fd51784-e4d0-49c8-bde0-2ee6b1532f26"}
+Contact failed for THOMPSON ROBERT LEE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"f4e37372-2e05-4ac0-a84f-20403adf3f94"}
+Contact failed for BERRYMAN ROBERT: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"c82eb3be-d1e4-4a9e-8887-befb8e9770e1"}
+Contact failed for RIVERA JOSE ANTONIO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9aa05cfe-bf95-4ea6-ba01-755d9a26a249"}
+Contact failed for DIXON CYNTHIA RUTH: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9efd33a0-cd10-4b2d-9895-6a6b579e7b77"}
+Contact failed for DELGADO CHRISTIAN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"6f789e61-32b4-43d5-85d5-b29e1d8ef15c"}
+Contact failed for ARNOLD EDWARD MICHAEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"6b526d9a-ed84-445f-b439-4888bbe8134e"}
+Contact failed for LOPEZ JERRY LEE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"f2942cd8-de45-406d-8e6d-6167d796d7ba"}
+Contact failed for LOPEZ JERRY LEE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"6345b8a0-cdfb-404a-a646-10dce7b9cb7c"}
+Contact failed for RIVERA JOSE ANTONIO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"ff42282f-d0d5-4d72-bea8-d1452355dcc6"}
+Contact failed for DELGADO CHRISTIAN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"00ad5d87-e257-444e-bd70-96797d3367a0"}
+Contact failed for OWENS CARL SONNY JR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"7212a6ff-9958-4526-adf1-754e0b685d0a"}
+Contact failed for MULKEY DAVID ANTHONY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"165fdc7a-67f1-4141-be81-3e5ae775c13c"}
+Contact failed for MARTIN RONALD ANTHONY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"f5064b52-1aee-4154-b56e-2968b67b73d6"}
+Contact failed for OWENS CARL SONNY JR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"11b83be3-5ca3-4459-ab4b-2ca32199438e"}
+Contact failed for MULKEY DAVID ANTHONY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"d6ba43ac-8b97-4a8b-b00f-b722f5c634c2"}
+Contact failed for MUKES CHRISTOPHER DONTAYE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"e016b230-4aee-4ce5-9a95-0840d627420e"}
+Contact failed for PODSCHELNE RICHARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"b4c1c07e-c0ee-4fdb-84dc-9725f59b3026"}
+Contact failed for GALLUCCI JOSEPH J: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"6d1a4e51-6ee0-4feb-bc57-adfc6d0c7c89"}
+Contact failed for QUIALA JANUARIA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"c2671091-82e0-41a4-b179-fff9e415dc40"}
+Contact failed for THOMPSON ROBERT LEE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"1186c509-c808-43ee-8bc9-12356b302e3f"}
+Contact failed for FERNANDEZ ANGIE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"1ad4e336-3374-45cc-8604-7580401720e5"}
+Contact failed for TILLMAN THOMAS LAMAR JR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"6205f8c5-3b1e-4683-8dbd-64b7f8b8a87d"}
+Contact failed for PEACOCK ASHLEY NICOLE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"33d7a026-95c2-4edc-b735-5504e1cee61b"}
+Contact failed for SMITH VINCENT G: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"c34a2262-94a5-42ab-8628-491bbcb5c9c3"}
+Contact failed for SMILEY HENRY JR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"53ee2f6e-1fec-4ee9-9dfe-0978d0988720"}
+Contact failed for SMITH VINCENT G: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"6047304a-94a8-47d0-ba3c-6cd3f465a483"}
+Contact failed for NELSEN GREGORY JAMES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"7f8b064d-a77b-4ba7-aaf4-d808329b2129"}
+Contact failed for MARTIN RONALD ANTHONY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"8cfbe67d-18d2-4537-89d6-29460250dbb2"}
+Contact failed for MUKES CHRISTOPHER DONTAYE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9636dfec-fd22-40a9-9b7b-7d98f0c65221"}
+Contact failed for TILLMAN THOMAS L: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"3bbee7ef-7d22-4cd4-b2eb-addb2bf0f727"}
+Contact failed for SMITH VINCENT G: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"ea8cbf1b-395b-4720-a8a1-d0b49a2ab359"}
+Contact failed for SMILEY HENRY JR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"40ee8fd6-c5fd-4dfb-a11c-9b2598658ab5"}
+Contact failed for SMITH VINCENT G: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"b1e0afbb-78de-4a7a-bd98-d9a9ba9b0065"}
+Contact failed for NELSEN GREGORY JAMES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"fa20ee84-8448-44b4-b6a8-dc20232701f9"}
+Contact failed for PRESTON LAURA MARIE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"37c32485-884b-45c4-b84a-f4b909dfb00b"}
+Contact failed for GARCIA HECTOR L: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"cc053428-7c37-44d5-b901-e659d6811364"}
+Contact failed for GREIG MARK: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"5e62a72f-c7cf-45de-9d7f-93a982b3bf3b"}
+Contact failed for FOSA RODRIGUEZ JORGE MICHAEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"78a972e7-8efb-4085-b1be-792b357326b8"}
+Contact failed for HERNANDEZ ALBELO HOWARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"41c0b9ff-b422-4484-937d-2013cc066192"}
+Contact failed for BURKHOLDER BRANDON THOMAS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"46f66149-ccda-45c2-b18f-91f332d92872"}
+Contact failed for PEREZ MARTINEZ ARMANDO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"a3c12ee4-a963-4d7b-ae51-924c0663d9a4"}
+Contact failed for EUGENE DAVID: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"c3802079-ecee-4ddf-87ba-d1e6c73d0042"}
+Contact failed for MURRAY SEAN PATRICK: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"3a0c3202-aedd-4497-8dd6-fce31512fff8"}
+Contact failed for MARTINEZ JOSE PEDRO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"c3d1dadc-dbd6-4021-a5a0-b448a4a8f6f3"}
+Contact failed for MORENO SCOTT CHRISTOPHER: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"c3fb3e31-ed8a-494c-ad71-2e122ba5d7da"}
+Contact failed for MCDONALD LUKE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"a9c92c9a-724b-4f9b-b530-7374dc8b9ab3"}
+Contact failed for MALDONADO MANUEL ANTHONY ROSAS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"1661667e-314f-4800-9425-25a4c8850161"}
+Contact failed for BLAIR REED LOVINGGOOD LEWIS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"3a6db994-c845-4d34-a158-25913d80a10b"}
+Contact failed for HART NATHANIEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"cccd1481-2fcb-49e5-aeda-f62fae94657e"}
+Contact failed for JIMMENEZ JENNIFER: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9efea507-9eb7-4d4c-8023-dcac4ce360b6"}
+Contact failed for DAVIS JORDAN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"781ba5dc-2554-4950-8350-aec8a0ff65d5"}
+Contact failed for SUTHERLAND CYNTHIA M: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"47c6460a-1020-4e8a-8aae-0a7be0c8a58b"}
+Contact failed for ONISH RUSSELL JAY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"700d8cb2-7f53-4588-ad0d-2abf10326114"}
+Contact failed for ROBINSON VANESSA LOUISE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"a7b1af5f-0d64-4d6a-a00e-54065f3334d5"}
+Contact failed for JAMES DERRICK: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"e96b9291-a451-454d-8edb-501c22af9c1f"}
+Contact failed for GARCIA HECTOR L: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"4c466316-ec00-4060-9cef-0b97a3cacba0"}
+Contact failed for GREIG MARK: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"38d933bb-2cc4-44b4-992b-22fefd432576"}
+Contact failed for BROOKS RODNEY E: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"91a8a66e-a8da-4498-86b9-430076bd815a"}
+Contact failed for FOSA RODRIGUEZ JORGE MICHAEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"10054971-1371-4857-a437-93b453fc194f"}
+Contact failed for HERNANDEZ ALBELO HOWARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"713e7146-5053-4f99-831f-570fb926b01f"}
+Contact failed for BURKHOLDER BRANDON THOMAS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9ee626be-ad14-486c-b002-d0bafcb760e1"}
+Contact failed for PEREZ MARTINEZ ARMANDO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"72734978-7043-4f47-8f0d-dec3f046528c"}
+Contact failed for EUGENE DAVID: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"c6b4e0e9-0808-4d1c-a0a8-1839d77ff593"}
+Contact failed for MURRAY SEAN PATRICK: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"49033d5f-6ab2-44d2-9cdb-a6a9a44aac2a"}
+Contact failed for MARTINEZ JOSE PEDRO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"0c6876d0-d34a-46a3-ab63-e5e48c6a96da"}
+Contact failed for MORENO SCOTT CHRISTOPHER: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9eca19e9-999d-4637-97bd-d08824026dd1"}
+Contact failed for MCDONALD LUKE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"a7a22750-9316-48bb-aa52-e03789aed581"}
+Contact failed for MALDONADO MANUEL ANTHONY ROSAS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"ac1ec097-def7-4960-96fd-3baeac64e67b"}
+Contact failed for PRESTON LAURA MARIE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"0dc290fc-3eea-4738-a9ec-cf3c3f953112"}
+Contact failed for BLAIR REED LOVINGGOOD LEWIS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"7d81bfe9-00cf-4048-8c49-cef34a70c50a"}
+Contact failed for ROBINSON VANESSA LOUISE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9ab021ea-a20e-4f5c-90f4-b36c6e3993f5"}
+Contact failed for DAVIS JORDAN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"286d1ae4-0175-4b74-bbff-7922e945485a"}
+Contact failed for MUKES CHRISTOPHER DONTAYE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"b72f5ed1-04df-419d-8ba5-8a09b6bf83c8"}
+Contact failed for FIGUEROA MARCO EDUARDO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"aa3a9b05-7c9c-4cae-a5d1-5f29907f5199"}
+Contact failed for LIRA ENRIQUE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"41fa05ae-83c4-4d2a-b1ae-79689365e451"}
+Contact failed for HOLLIDAY RONALD S: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"91eccacf-aa6c-45fa-9982-85340640f467"}
+Contact failed for OTERO ALEXANDER: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9f22f5c2-7952-4f5d-97ed-1c1be324b1d3"}
+Contact failed for OTERO ALEXANDER: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"4b513b37-18ff-4f58-8fd4-bb150acd7fd2"}
+Contact failed for OTERO ALEXANDER: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"cdd75f6b-3b01-46df-b67a-8c822ceb2b97"}
+Contact failed for OTERO ALEXANDER: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"430e479e-6941-42bf-b3cd-d3b017ace75f"}
+Contact failed for MULKEY DAVID ANTHONY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"3ab35607-0822-45b5-af85-4f521674c5c2"}
+Contact failed for PANTOJA FERNANDO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"ea0c9ca6-5f5e-4457-9ff8-e40bbb470862"}
+Contact failed for LAWRENCE WILLIE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"29395e72-caff-46c4-b364-c9222e27c6f4"}
+Contact failed for PANTOJA FERNANDO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"cadca1a8-574a-4a82-8934-4ca70214112b"}
+Contact failed for GUTIERREZ TERESA ANN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"7f48e410-9830-4aa9-ae99-21d2923687f6"}
+Contact failed for SAAVEDRA JOSE ANGEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"d0e1c451-64f2-44ce-a721-b2fa9bdb26f9"}
+Contact failed for LAWRENCE WILLIE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"237554a3-287b-4180-ae70-6f3ddb2b05ad"}
+Contact failed for OJESHINA STEPHEN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"a729bced-f4a3-4d01-a274-331bb4da75de"}
+Contact failed for LIRA ENRIQUE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"404e7438-3772-445f-8f49-6e0d039046d8"}
+Contact failed for MUKES CHRISTOPHER DONTAYE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"34b98698-4e32-48a8-9ec8-6982f02d6243"}
+Contact failed for OTERO ALEXANDER: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"adad1556-bf65-46e0-bcfa-959f404fb19d"}
+Contact failed for OTERO ALEXANDER: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"8c57add1-623e-42f8-a1ea-dd4b255fb8a9"}
+Contact failed for OTERO ALEXANDER: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"3819a5b6-e9fb-4ff4-843a-a3b973791ac9"}
+Contact failed for GUTIERREZ TERESA ANN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9845e2e2-a1d7-40d4-80bd-de21baf0f60b"}
+Contact failed for MULKEY DAVID ANTHONY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"a0717733-1f7c-4fbe-b7d1-f074422f01a4"}
+Contact failed for PANTOJA FERNANDO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"cf394dd7-caef-43bd-b2b0-90721794eb74"}
+Contact failed for PANTOJA FERNANDO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"fe3e3866-e42f-4754-a961-1005b94d757c"}
+Contact failed for FIGUEROA MARCO EDUARDO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"45d235bf-7c60-4392-8629-6662c8dfce81"}
+Contact failed for ALICEA RAFAEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"b48c2d40-f54e-4667-b22c-079fc33d4d12"}
+Contact failed for SIMMONS CURTIS JEROME: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"c4111996-7c60-4c49-8c5a-0d2120d51f33"}
+Contact failed for PRESCOTT CHRISTOPHER CODY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"afa2f593-a17c-4dec-b17e-db800e083ad3"}
+Contact failed for JONES WILLIAM RAY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"e27f7855-bb5e-431a-be0e-24bb28d6f6b3"}
+Contact failed for SIMMONS CURTIS JEROME: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"d89db5f1-4f7f-45e1-a8db-0ac041c72f6e"}
+Contact failed for PRESCOTT CHRISTOPHER CODY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"2b27881d-9fbb-4a2d-a9d9-d1843ac528db"}
+Contact failed for DEESE JAMES ALLEN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"7d83bf07-d780-4d28-a458-31b594acfc03"}
+Contact failed for WATSON CHAD EDWARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"af52d3d3-1f68-4dee-8786-dcabbbf0861e"}
+Contact failed for ROSARIO MICHAEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9c9e24ee-dcf3-4a74-81d6-89b71fbbd4a1"}
+Contact failed for SHERMAN ANTONIO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"1c2bd599-5169-4c66-b5fe-b46435255029"}
+Contact failed for STERLING IRENE R: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"7b9481f4-ab50-4bb3-a9cd-6d95e1a833da"}
+Contact failed for JONES WILLIAM RAY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"7a29ef8a-c8c6-4dba-88b6-317d8798639b"}
+Contact failed for DEESE JAMES ALLEN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9427632e-e7ff-48d9-a0f9-806cda432d5a"}
+Contact failed for WATSON CHAD EDWARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"763324cb-8d87-4471-a59f-dea58fcfa216"}
+Contact failed for ROSARIO MICHAEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"b7936912-575a-48f5-b507-b15850832907"}
+Contact failed for SHERMAN ANTONIO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"3dde63a8-c60e-4b2b-b0d9-766e6b845fb5"}
+Contact failed for CLARK ANDREW PAUL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"83a79687-4cb2-43c7-a142-6a36c3b834f7"}
+Contact failed for JOHNSTON EDWARD DAVID: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"65a4ba30-8afd-4180-b034-34398e58a085"}
+Contact failed for HERNANDEZ FREDERICK: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"ceef3ad1-c265-4ecd-ad67-c41d76c1155a"}
+Contact failed for PETIT LEE MICHAEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"8847e1e9-f6ef-45a8-8930-de5637852744"}
+Contact failed for MEJIA GONZALEZ CARLOS ANDRES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"2911ac0e-b31c-41b9-9c94-9d6f3e546c1b"}
+Contact failed for COLON ALDO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"4f2b4794-0e6d-42f5-8833-bda9929d30b7"}
+Contact failed for XAVIER GUTIEREZ ALBERTO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"8d5776fd-f691-41e4-bd1b-258891020b99"}
+Contact failed for PINO CHRISTOPHER JOHN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"33f741d1-172f-4cbc-93c2-90277cb06c02"}
+Contact failed for BERGER WILLIAM JAMES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"83bd3c8e-7db8-43a0-bab4-d8f5cb11f252"}
+Contact failed for LEWIS SAMUEL JR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"c7cc95f1-5bd5-4eb7-bc2d-a01a499b270e"}
+Contact failed for BLAS MICHAEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"95cac250-7998-452b-b8f9-990e7ecdebbf"}
+Contact failed for BERMUDEZ JOSHUA WILLIAM: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"61cc377e-b88d-4f94-b7e7-5decbc40c512"}
+Contact failed for PAYNE BRENDA JOYCE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"5fd7ac5a-6078-4dca-8c60-6b8188f74223"}
+Contact failed for PAYNE BRENDA JOYCE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"0c01d98c-1da1-46a8-be8b-04cd0b9f75d8"}
+Contact failed for DE ANDRADE HOWARD EDUARDO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"29887f28-51b2-4b58-ae4e-b335e8179d69"}
+Contact failed for MILLER LAUREN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"8afc1f14-1cb0-4859-96d3-b2f34479161f"}
+Contact failed for LYNCH RICHARDO ANTONIO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"98666923-8a27-4ada-a039-c52c4dc3e331"}
+Contact failed for MULROY ROBERT WILLIAM: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"8b28e21e-d03c-4a35-9621-48438141cc9f"}
+Contact failed for HERNANDEZ FREDERICK: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"362c7dcc-d2a7-476d-a4f6-f4e5ef20220d"}
+Contact failed for CHITTENDEN JAMES M: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"83117006-37ef-4e62-a719-832d84130e50"}
+Contact failed for PETIT LEE MICHAEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"c0f91583-3705-4ffc-a7ba-a8b74c9b8956"}
+Contact failed for MEJIA GONZALEZ CARLOS ANDRES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"869cf243-75aa-4a34-a8d5-9a0303cf2c3b"}
+Contact failed for COLON ALDO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"7e654cfb-2717-41ae-91c4-14296e26ebbc"}
+Contact failed for JOHNSTON EDWARD DAVID: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"901a15fc-63a0-400f-9873-ebf5bc47a5c6"}
+Contact failed for PINO CHRISTOPHER JOHN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"f5875e08-7cfe-4018-a5bb-90f715ebd2cd"}
+Contact failed for CLARK ANDREW PAUL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"b4735310-6908-4bf0-8db4-839af9d39227"}
+Contact failed for BERGER WILLIAM JAMES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"140bcdd1-d6c3-4db5-a437-aacea2675407"}
+Contact failed for LEWIS SAMUEL JR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"98972801-9997-4e61-88fe-0adde551e760"}
+Contact failed for BLAS MICHAEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"90531fee-655e-4a49-a407-292e7f9abfa6"}
+Contact failed for BERMUDEZ JOSHUA WILLIAM: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"bfd60154-c069-4343-b377-bd316c15e5e3"}
+Contact failed for PAYNE BRENDA JOYCE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"3e7e5660-16b1-4107-bddf-abda2a589695"}
+Contact failed for PAYNE BRENDA JOYCE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"a85cd996-3431-409e-8cca-2fef9a35adc0"}
+Contact failed for GARCIA D'CARLO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"2451f461-247c-4698-b325-3acf6941b345"}
+Contact failed for WHEELER LARRY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"eb30bf5a-8bc2-4014-9efc-12001559d132"}
+Contact failed for QUINTANILLA YANETSY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"cddf8d9f-3d9b-96ca-98fd-ceeaff908804"}
+Contact failed for CADE CHRISTOPHER DANIEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"33aa00f8-9a21-4b39-819f-fb4e182fa978"}
+Contact failed for RICHARDSON SHAQUILLE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"802d3fbe-e9cf-4940-b16a-fe2fef3d9ff0"}
+Contact failed for JIMENEZ ROBERT: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"4d667cee-a3e7-4b0d-a1a6-c41855a4dea1"}
+Contact failed for SARCHI MERA FERNANDO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"84baa9b5-6c90-403c-ade1-cc085ce977b1"}
+Contact failed for PINO CHRISTOPHER JOHN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"05d820a5-f7a2-4edf-bd20-bc5ba1181ce7"}
+Contact failed for RICHARDSON SHAQUILLE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"7f1f9153-ed44-4bc9-a663-618696c49b47"}
+Contact failed for JIMENEZ ROBERT: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9ce20514-4684-487d-88a0-5c09ceac76dd"}
+Contact failed for RIVERA LUIS ENRIQUE JR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"1df7f65a-3388-437f-ab82-3256e1857206"}
+Contact failed for HILLER BARBARA J: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"ba39d615-5c19-4d15-8924-96ea97dc9f09"}
+Contact failed for CUYLER THADDUS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"95d58838-edcd-4d28-a650-0b93f398e318"}
+Contact failed for WILLIAMS AUBREY DEVON: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"2930b11f-b05c-4288-a902-6998d364181f"}
+Contact failed for SHEPPERD DIMONIQUE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"8bf44115-b1d9-4874-ac4d-975caf50c479"}
+Contact failed for TAYLOR LEPINE SANDRA KAY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"3bbf7b4a-d6f6-400f-b7c3-e0f91c4763a3"}
+Contact failed for ROBLES ROUSSELL FERNANDO A: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"364abe8b-ba66-448d-9c0d-62826cc9f624"}
+Contact failed for HARRIS ANTHONY DERFO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"567227ef-2c3d-4691-a20f-94bd3e8093c4"}
+Contact failed for KELSEY STEPHANIE M: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"6878281f-4957-4956-811a-f9265e659b1f"}
+Contact failed for LOPEZ JERRY LEE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"1bba32e9-e368-43fc-80aa-fbc8e2ce9086"}
+Contact failed for WILLIAMS KESHAWN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"26ef1af0-852b-4e94-998c-bf4267339690"}
+Contact failed for GAYNOR ASHLEY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"079f4926-44e5-4b5d-a400-09d0f7619b96"}
+Contact failed for PINIELLA JAY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"7b749a35-86e2-4d11-b0ea-33ab47904db5"}
+Contact failed for BREWINGTON ESU SHAWN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"00570167-a13a-413d-ac00-a770b85453be"}
+Contact failed for HENDERSON AHMED: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"71c70a31-48c3-418a-b290-8e91d6b581f5"}
+Contact failed for SCOTT LOGAN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"63361ee8-2fad-404d-9925-79d3b3bc5f9b"}
+Contact failed for SANCLEMENTE MICHELLE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"3229c032-c956-4ae9-b973-ff2625e17b5c"}
+Contact failed for BERRENS JOSEPH: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"8f51d2a5-5c39-4f98-a6f1-531fcb5fa94a"}
+Contact failed for EDGE SHAWN P: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9d37ce44-a91e-4a11-981d-7073350a016a"}
+Contact failed for ORTIZ JOSE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"ef87e890-f082-431a-8679-20e940ef9801"}
+Contact failed for WOODARD RICHARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"ac7d4978-2e86-4e41-9430-7f7c80d3765b"}
+Contact failed for BUTLER TONI M: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9fb913ea-7d42-4fab-ba7f-2f2ceebef81f"}
+Contact failed for ANDERSON AALIYAH D: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"bf8574d9-09c8-4b3b-a40c-2c228fe5cc2e"}
+Contact failed for SULLIVAN PATRICIA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"44e679c2-7d6a-4b9d-b1c9-89b9245e2818"}
+Contact failed for BAYLESS MICHAEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"443adc9b-43da-4d95-827a-6d14d0851047"}
+Contact failed for COLEMAN LINDA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"a4a914f4-85f4-40ee-8f0c-26878ceab874"}
+Contact failed for WILLIAMS KATOREYA C: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"44a30b0a-5f49-40f7-8fdf-a89afccc21d4"}
+Contact failed for TRISTA CABRERAS JORGE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"5ddcd930-c368-4920-aee4-6dcdc787184c"}
+Contact failed for DIAZ FLOR DE LOURDES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"b8d506bd-8658-4d09-b8dc-5ceeed026389"}
+Contact failed for DUNN CEDRIC: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"d8b8c7b2-04f9-4b32-bcf5-9ebbe4f2cc2c"}
+Contact failed for HOBLEY LORNE D: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"f7388ab3-ad06-4ffb-8b50-91e14e442cb2"}
+Contact failed for STJOHN JAMES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"b8cc4374-748f-4d5a-8f74-7759db79c55c"}
+Contact failed for WAGGENER CYNTHIA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"5ec7be83-f3c9-4d8f-9dae-8c880e234659"}
+Contact failed for GREEN JEFFREY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"2ac7d520-50d6-427f-be99-2fd85ec9e319"}
+Contact failed for ANDERSON DEBORAH: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"5f4d3d98-eb29-48d7-9459-2c84d80ae21f"}
+Contact failed for SALVIA ALEXANDER: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"d13bb7ee-7280-419c-95a0-474e5ec4aa17"}
+Contact failed for JACOBS CHRISTOPHER: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"7d61a34b-2d70-4ea8-baa2-7401cbe68cda"}
+Contact failed for GIBSON MARCO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"041d9daf-2008-49fc-af8a-e27785547e55"}
+Contact failed for MANNINGS ADRIENNE L: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"5f89dc7c-1f97-4f3b-a8da-9c30f1ee3873"}
+Contact failed for MESILAS DAPHANE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"f97f6eec-b10b-4c98-8530-e6d8eac29dc2"}
+Contact failed for ZARZUELA JULIEN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"d175e56f-9631-4b5d-8584-6325e3d50b40"}
+Contact failed for RIVERA MIGUEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"1df1c661-4ae0-49d8-9f0a-c5e32fc7118c"}
+Contact failed for JONES FLOYD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"5df23760-6d2c-49ca-9adf-ff4478f9cf76"}
+Contact failed for JOHNSEN CRYSTAL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"61a76b87-9608-45a3-9fcd-976c28fbf63b"}
+Contact failed for THERRIEN LURVIN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"256086af-f9d5-4cd5-a07a-77cedc7d24f9"}
+Contact failed for RIVERA KATE ELIZABETH: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"e2847f82-ea13-41ab-9d80-5eeb8474addd"}
+Contact failed for RODRIGUEZ ROBERTO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"2a24b1b5-b5b3-42a1-83ea-7020e8998a89"}
+Contact failed for VU THAO KIM: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"677dd190-d40e-4870-8c8a-6e91f24e8353"}
+Contact failed for BURNS EDWARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"86acd6f3-7c87-473c-95ab-196f9f6fd03b"}
+Contact failed for BRYANT KENNETH FRANKLIN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"25e3d657-c996-41fa-a527-d866006402b9"}
+Contact failed for HANNESSON CHARLES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"39391971-c80c-4b7c-8f16-a8ee05fc8e3e"}
+Contact failed for ROSARIO JULIO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"bcc8c0a9-61a3-4cd7-baea-77f4f8317b1f"}
+Contact failed for FRANCIS MARY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"e1f4b267-eba7-94bc-aa42-19cabaffb24d"}
+Contact failed for GARCIA YAIMY DARIAS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"bb49689f-4858-45a8-9666-a9b6a214c623"}
+Contact failed for BRADLEY KOSHEKA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"f793131c-8977-43f5-9bfa-4a2f9204c354"}
+Contact failed for UNKNOWN TENANT NO. 1: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"e6e5514b-314d-4189-bd78-4f5761e8edf7"}
+Contact failed for SLATON LAWRENCE C: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"fc5bbd5b-774c-4f6e-9c50-454a552fbb87"}
+Contact failed for BRIGHTWELL CODY A: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"275cda28-5fc2-4e70-8eb2-95e98e8d1234"}
+Contact failed for GOMEZ III JOSE OMAR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"0e5e1662-0bf6-419a-8432-2edbeea093de"}
+Contact failed for HART NATHANIEL II: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"023fe9f8-6f2e-4eb2-920e-68972792f6f3"}
+Contact failed for NEWSOME JOHNNY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"b9616b89-8625-4a0b-ab90-e1562a09a320"}
+Contact failed for WILSON CHARLOTTE J: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"728d6ccd-c47c-48e2-a24a-f3e8de1be2ac"}
+Contact failed for HAYNES CARL E: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"c369ebd7-8bdb-4191-bcbf-c1e546f77e5c"}
+Contact failed for WARMACK CHRISTINA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"722455f9-9170-4dd9-8d0b-9b15af5758eb"}
+Contact failed for GONZALEZ REYES J: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"d6225a90-105a-4f29-ad20-63240606ee01"}
+Contact failed for ATARI HUSEIN A: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"37677e03-4df2-49fb-8a92-b9094abdd187"}
+Contact failed for GARRETT JAIME J: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"c9fecc1e-a313-4d01-9ee2-bd395522b652"}
+Contact failed for SALAZAR MARIO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9ed87854-71ac-44a5-81f3-b87142d05401"}
+Contact failed for JONES LONNIE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"ff42d2e1-d8c8-465b-a5f1-f3f3a9324748"}
+Contact failed for ANDERSON JENKINS ERIKA F: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"a6a4463c-5716-44f5-89a3-351852b1d49e"}
+Contact failed for WIRTH ALAN A: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"09dae90c-8249-4ff1-9e4d-ddea04f410a0"}
+Contact failed for RUSSI ALEXIS J: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"3e32a6f3-d253-4cab-b250-0a8c0b03a09b"}
+Contact failed for SHEA MAUREEN HELEN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"62356595-1d76-405a-8f1f-c6ae37f31558"}
+Contact failed for ORTEGA ANGELO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"7779255c-6607-4b53-99f3-ed8425f13e34"}
+Contact failed for OLESEN JEANNETTE A: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"5c37124d-c7b7-4af7-ab16-0f4399c19045"}
+Contact failed for MILLERWALKER COLLEEN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"80552177-1b0c-4e98-afb4-0d89b86e562c"}
+Contact failed for WATERS ARIEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"c678f153-99d6-457f-b76f-5f4fd577ccea"}
+Contact failed for GAMBLE YALEIMIE PAGAN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"7c6bfaeb-66b3-4a71-951f-ecc2c7a35d22"}
+Contact failed for GARRETT JAIME J: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"f693f832-b399-44a2-ba51-c137f1e5d2f6"}
+Contact failed for RUIZ HERNANDEZ JOSE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"c1630a61-1fdd-4e3c-abbd-4f58282dc9e5"}
+Contact failed for HERNANDEZ HECTOR M: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"d6fb0bce-378b-4a68-8c64-31d8dffc87bf"}
+Contact failed for WIRTH ALAN A: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"c78c8d5e-e02d-44c4-8220-0a6dbfd18480"}
+Contact failed for CARTER ERIKA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"203538b1-c4c6-4969-a2ad-53997c4c3e41"}
+Contact failed for ALMICAR YVROSE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"8a998d33-3356-4108-aaac-5131f5b4e889"}
+Contact failed for CABRERA GARY JOSUE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"e4f0b7bf-5135-403b-aff9-1a3d5b7a88e1"}
+Contact failed for WALKER SHAQUAN DEVANTE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"e3080e1e-9e6b-44e3-8f52-8ba9edb9a0c7"}
+Contact failed for SMITH TERRY G: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"409ae1b1-ad90-4d76-9b3a-0dcaa65545bb"}
+Contact failed for JONES CHARIA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"26acdbed-3122-48a9-a457-46086168b389"}
+Contact failed for MINGO TIMOTHY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"c8e9519c-bd8b-42d2-a17e-0f2cb452ce7c"}
+Contact failed for VERDONE GIOVANNA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"15a58184-e5fb-48e8-b782-62f2e67b3a87"}
+Contact failed for BRATHWAITE NICOLE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"d84adbbd-23e4-4157-b0c3-5aa5c9195bb3"}
+Contact failed for REED CADEDRA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"1ab2377e-d796-415a-aa93-ca61d5b2e26c"}
+Contact failed for PADRON MARY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"af0d37eb-bdda-40a9-a99c-757abbf43b19"}
+Contact failed for OLIVAS JOSE M: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"3f46841c-5da1-41e5-898f-1990b752a3a8"}
+Contact failed for WILSON CHEMERE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"8e71a3c0-d210-436b-bc00-24b202c32b05"}
+Contact failed for HEARD CURTIS JR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"f48aa7e1-1074-4815-9894-94f38e0bdb49"}
+Contact failed for HANNI CHRISTOPHER: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9b221d5d-db38-429a-a081-9d213aa68cbb"}
+Contact failed for MILLER MICHAEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"5e49f2b5-9ea0-4fa5-9c78-f2bdcbd616fc"}
+Contact failed for AVILA VIRGEN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"26c1784c-ce3b-4689-b016-a591932b2668"}
+Contact failed for PROANO JASMINE DEL ROCIO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"2eb68a90-f78d-4128-aeed-0114aaa9167f"}
+Contact failed for LOPEZ ERNESTO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"5fd1a4f5-4b85-453a-bd9f-f66bb830c5b8"}
+Contact failed for BEASLEY SAMESHIA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"07bfdbf6-15fb-489c-9c49-a3280f0c7bbe"}
+Contact failed for SEALS ALEXANDRA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"84863b9a-a460-45c5-9ff4-ad16a1b2375f"}
+Contact failed for MARCHESE DANIELLE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"521d1484-641d-46df-8ab4-b9d32ad49156"}
+Contact failed for PEREZ RUDELIZ RODRIGUEZ: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"2785b134-b4d9-44fa-9f63-5a139af22a41"}
+Contact failed for MAGRUDER MICHAEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"f0bfff1f-043b-4ab8-8ba3-087f833c0eb9"}
+Contact failed for ESQUILIN EMILIA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"13ec46e3-2063-4947-a9ab-99d2a77a52d1"}
+Contact failed for ANTOWIN C: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9bcbb2dd-6c44-4dc0-93f4-e9207fc8a8d7"}
+Contact failed for BASNUEVA INES INDARA GONGORA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"20f31c65-4a28-476c-a181-7de8f5237661"}
+Contact failed for BELL ROBERT W JR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"7c6e9407-a6cc-4384-905c-539ce07e15e9"}
+Contact failed for RODRIGUEZ TIFFANY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"7fe91361-7a47-4afe-b54c-bb4defbf8671"}
+Contact failed for REGOLI ROSE ANN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9a34a57b-3180-4b96-8d44-59f46dfb08dd"}
+Contact failed for AMARGOS NICHOLAS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"6569e876-793a-4abf-95f3-3fd97f6e8907"}
+Contact failed for THOMAS RONALD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"3d2f12dc-94cb-4b51-9e48-6b016735f5ef"}
+Contact failed for CASTILLO HENRY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"e8830cf6-d469-4694-b28f-8a6a7599d30a"}
+Contact failed for UCLES ANDREA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"ce90ac96-3f71-450f-967a-58ada8d03637"}
+Contact failed for MARTINEZ JORGE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"1b7bcc76-9fa1-42c3-b009-d44efd3da641"}
+Contact failed for FLORES MICAELA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"0bcb1cb0-25c5-47c5-929b-e76a86471001"}
+Contact failed for QUINOA TERESA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"a2ec0386-a337-4595-ba6e-5c355600229b"}
+Contact failed for TRIEU TRUNG: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"0e5cf6bd-df28-4f24-9d36-dc4d0c726258"}
+Contact failed for AQUINO MARIA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"bde51ded-92b6-4503-af20-409b8690271d"}
+Contact failed for LOPEZ ALEXANDER: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"0a12f7bd-02f2-43dd-b026-76f2e6d684df"}
+Contact failed for CRESPO LISET: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9634e6a4-381c-415c-a0ce-7839f00e1c06"}
+Contact failed for HARRIS ENDIA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"bc1f5cdf-dbbd-49df-860e-07d0e1a5b362"}
+Contact failed for PINIELLA JAY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"571b50ed-4e8d-43d0-91d5-8576bc47e613"}
+Contact failed for TAMAYO ROGELIO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"b940bb50-9623-418f-ac81-982314590f51"}
+Contact failed for LEVY JASON: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"27d6d5d9-c9c9-48f2-b727-b175cd083263"}
+Contact failed for BROWN BENJAMIN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"fe616c48-98a1-4d48-b388-7972c860f13c"}
+Contact failed for DAVIDSON NICOLE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"4ca21c94-ffd5-40f1-b2ee-cc0926fe550a"}
+Contact failed for BRANTLEY LAURA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"f08ca9a1-fa68-4fd1-9c32-2113129e63ad"}
+Contact failed for GILMORE MIKEANNA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"949f8b77-afe8-4146-b70e-d255f7714b15"}
+Contact failed for SLATER KIWAUN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"55e20b55-d049-4e59-bb12-fd151d8a8d37"}
+Contact failed for HARRIS WILLIAM N JR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"863dad4a-26f4-4887-93c2-53d53b4e20f2"}
+Contact failed for STURKS SHANNON D: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"ce31f15d-a03b-4549-9282-bbab17446c2b"}
+Contact failed for LANDON DIXIE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"2bd0f40a-94cf-4caa-9820-bf935be0daf5"}
+Contact failed for JOHNSON JAMES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"a30acb92-89c8-4a32-a4bb-8f134a93593a"}
+Contact failed for MCGUIRE STARR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"10f41e29-6259-46f1-ab85-7f059d480e8a"}
+Contact failed for BELL VANESSA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"5a05e119-5b52-42c4-8897-5b39a89ae0ed"}
+Contact failed for CHRISTOPHER KEISHA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"55283c69-0162-4182-8c69-e36575e2ad5c"}
+Contact failed for MUNIZ ORSINI HERBERTH J: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9c202c6a-4184-4a60-a743-b8c8a19d5284"}
+Contact failed for JOHNSON GAIL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"75d86431-57b4-4aa9-bbe9-7211272023e3"}
+Contact failed for MARQUEZ JESSICA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"db1694f0-9e51-4ae9-922e-9df42e915eb9"}
+Contact failed for RUANO LAZARO O: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"58939146-2487-457d-9844-f472ec1efcf7"}
+Contact failed for KELLEY JARED C: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"1585c1be-6660-4320-9097-7f94fc2f300a"}
+Contact failed for ODPARLIK HORST: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"67b61722-eecf-424b-8d24-f7979afdb2bd"}
+Contact failed for MOSLEY CHARLENE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"96a0a1da-74f2-4a01-a874-2ad08d183fb7"}
+Contact failed for WALLACE BRITTANY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"1df5833d-82c5-4a46-b227-c217c0fde2d6"}
+Contact failed for GONZALEZ LESTER: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"40035caa-aa4b-4e54-b0e9-4d8a2765d16c"}
+Contact failed for FABIAN RASSINIQUA A: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"45aa9793-c174-4bcb-9ee9-35ae36d7cf3a"}
+Contact failed for WALLACE OTIS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"af9c4ea9-ff66-41ca-813f-d9ac4cb7119a"}
+Contact failed for ELLIS CHRISTOPHER C: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"4d702ce6-f2de-48bc-bcff-483a10e4fc0a"}
+Contact failed for RADER CHRISTIAN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"fca5baf6-7167-46c2-80fe-3c4cb6581174"}
+Contact failed for WHITE CHRISTOPHER: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"e5146321-249f-40fa-8fb1-47f5cf872aa0"}
+Contact failed for MCLARI MITTCHELL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"4dd35444-17cb-4996-8d76-0105be10efdc"}
+Contact failed for TOLBERT DEBORAH RENEE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"5588b851-c103-463b-b6a7-fcef9dda6eab"}
+Contact failed for RODRIGUEZ JOSE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"258db55f-9b4d-4fb5-90e3-7a03f21ca0ce"}
+Contact failed for HOGAN LAURA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"54c7c12d-3ea3-4237-af37-8640841be5ed"}
+Contact failed for GREEN JOSHUA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"fd4dd018-785f-447a-ad68-37e96143c7a7"}
+Contact failed for WILSON MARY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"b4f50c99-18a9-4cf9-8fa3-f2e016fbe83f"}
+Contact failed for WHITE ALEXIS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"99d6ba99-7787-4f65-9263-51921125403f"}
+Contact failed for ARAFA SALMA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"06741b3e-f2ea-4e26-b63a-dbbe1ddf1022"}
+Contact failed for HERMAN TRINA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"ce2df3a0-b505-406a-b648-e71e3849fecd"}
+Contact failed for HILL TIMOTHY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"4318fa3b-0cd9-4359-80a0-eec2ebebd503"}
+Contact failed for WILLIAMS LAWRENCE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"fce59930-b48b-4204-979a-99572bbee3d2"}
+Contact failed for FRUGTE TIMOTHY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"6916dd6a-4be1-4260-8572-c2d87cf4ce66"}
+Contact failed for JOHNSON DUANE MICHAEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"782f9d68-b64f-4907-bdc7-8b19ac45c0e2"}
+Contact failed for IRVIN STEPHEN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"7914f372-fc9f-42dd-bb3e-0e4c96eda790"}
+Contact failed for JENNINGS ANDRE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"1ac93234-ff45-4f12-914d-00a057c0fb98"}
+Contact failed for BENTIVENGA JORDAN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"6e6e5812-cd16-4baa-ae22-7fd0ad2fddb6"}
+Contact failed for DAHMANI AMINE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"1b982ce2-17b6-4f4c-9697-8ce0a6758507"}
+Contact failed for BLUE SHERRILLYNE D: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"de66531f-8b9a-4c8f-9187-745a3e7d3efb"}
+Contact failed for ROCHE ONELIO ARMANDO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"34c79629-638e-45d8-b834-57d651254a86"}
+Contact failed for DELGADO ANGEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"166b8185-31f1-4bcd-a440-7b03f965154d"}
+Contact failed for CORTES ASHLEY M: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"7221d83d-a5d8-45f3-a64f-3ced76755108"}
+Contact failed for ROCK TERRI: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9dfba3e1-584f-4f8f-9a81-9b7aaf62ca27"}
+Contact failed for PIERSON DEBORAH: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"0d05f686-5a6f-4102-a0dd-ac8371f37df5"}
+Contact failed for HERRERA LIDIA ESTHER: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"12e9da69-9cbe-4a6c-87a6-cae052646ce4"}
+Contact failed for PIERSON DEBORAH: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"58a4581c-337a-4069-ac92-59b346f8fe40"}
+Contact failed for BRYANT ARGENTINA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"84c46877-cda5-456d-936a-ea748a176a08"}
+Contact failed for MITCHELL LLOYD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"a0671d21-4ebd-4fba-8ca4-56becd5bcc11"}
+Contact failed for NEIRA HECTOR DURAN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"f011cfa6-8d0f-42d8-8d82-f6f6b57abbe1"}
+Contact failed for RODRIGUEZ ELIZABETH: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"d5319c50-348f-413d-b6dd-8c4d8805de52"}
+Contact failed for GUTIERREZ LAUREN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"6ea4cb1d-83d2-49a0-93a6-9ad06c65e901"}
+Contact failed for DIAZ ALLISON MARIE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"8bc5b478-fbd7-4b50-a10e-2e6b802fc099"}
+Contact failed for SHUEY ROBERT: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"1acff5d2-cb5b-42b0-80a0-c4a124bc78be"}
+Contact failed for CHRISTENSEN SCOTT J: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"0c0d182a-680f-4ad3-98c1-c86eed024472"}
+Contact failed for SERVICES FRANK GAY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"e2502732-63c0-4e51-9b9a-509961fbbddb"}
+Contact failed for AND SERVICES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"66bf5b65-50d1-4990-84c5-50afa2d82aac"}
+Contact failed for BENNETT CHAD A: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"e73225e2-d963-40f8-80fa-3bccf43ed1c8"}
+Contact failed for ZACEK DENNIS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"b809daea-953d-432b-966f-54573c7d33d9"}
+Contact failed for WEATHER TITE WINDOWS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"c52e946c-dad8-4ce4-a6f9-22c27e2a5cd8"}
+Contact failed for RPGS CONSTRUCTIONS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"eb8b9723-4de3-4ff2-922f-dd010bee787a"}
+Contact failed for POGASH JOSEPH: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"24a4c378-59be-4cb9-b6cc-45389bb95314"}
+Contact failed for POGASH JOSEPH: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"ea1c6d10-9dad-40df-b1cc-af32c9a70024"}
+Contact failed for POGASH JOSEPH: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"6621160e-c193-4d5c-a625-07764dcba4e3"}
+Contact failed for POGASH JOSEPH: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"41792e92-8973-493a-b540-8bf02637e653"}
+Contact failed for POGASH JOSEPH: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"2ffc0ccb-bf86-4fc2-b85b-7d388aecda3f"}
+Contact failed for FRIENDS PLUMBING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"7c2ff8de-76dd-45a2-9937-07a9a31b5866"}
+Contact failed for RED CAP PLUMBING AND AIR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"95869a5a-952d-4200-afe9-34b5486f6b87"}
+Contact failed for ALVAREZ PLUMBING AND AIR CONDITIONING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"60e08eb0-bb5c-4e08-90a4-821f83c4d8ed"}
+Contact failed for HOFFMAN ELECTRICAL & AC LL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"77d6c861-d6ad-4cb6-af02-8101c3047352"}
+Contact failed for BRITTAIN CHARLES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"cbc2d5a7-661d-4146-b324-308d6eefdadd"}
+Contact failed for RODRIGUEZ EDUARDO JESUS MARRERO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"94c94c4d-c527-4237-a5e8-9d96390c892b"}
+Contact failed for MEJIAS ADDYS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"adee2eef-6ec6-4dcb-9ce7-3c41caea8f16"}
+Contact failed for ELITE BUILDERS AND DESIGN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"10352243-10a4-469c-831c-6829f05af896"}
+Contact failed for RED CAP PLUMBING AND AIR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"6c3df64d-47b3-99c8-9c5b-f470292ebbad"}
+Contact failed for CASTLE CONSTRUCTION & DESIGN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"d985df70-7609-4158-b249-7234c0af00a4"}
+Contact failed for MANES JESUS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"cc495f89-dbdd-4e57-974f-f6e436862a45"}
+Contact failed for GILBANE BUILDING COMPANY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"35f2e5a1-f4b9-44f9-b19c-c5b3de8dcbbe"}
+Contact failed for ROSARIO RICARDO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"fd8c76d4-1e9b-4380-b053-f25b6b8b0019"}
+Contact failed for MAY MATTHEW: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9e6f2753-1253-4d28-a473-986b895e6db5"}
+Contact failed for GRACEY NANCY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"a616c1c8-a5db-4148-9b43-13693684e5bc"}
+Contact failed for BOCIEK ANTON: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"2fe2f364-36df-4064-9575-df1c1d28c74d"}
+Contact failed for SHAMBLIN STEVE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"8f9c681c-90ed-48f0-915c-4372e41048b9"}
+Contact failed for RAINSTORM ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"ca30937f-51a7-4921-93be-d7eda94c8ea8"}
+Contact failed for GILBERT EDWARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"bb347c0a-b6e5-46ea-899b-45273ba31eac"}
+Contact failed for GILBERT EDWARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"e6e94a54-54a3-42a7-a6d5-97d489b6f40d"}
+Contact failed for POWER HOME REMODELING GROUP: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"6082c861-01b1-42f7-b78c-babcbffd4b79"}
+Contact failed for POWER HOME REMODELING GROUP: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"8b520b2a-833a-46ed-b455-fc9d8e9d96ab"}
+Contact failed for GILBERT EDWARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"19adbead-6eee-4e5c-96dd-81534a738c32"}
+Contact failed for GILBERT EDWARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"d6107a9a-9724-492a-acc4-b23f8bc9fb6b"}
+Contact failed for GILBERT EDWARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"6a069595-ce5d-4a05-b21a-820946f26c8c"}
+Contact failed for GILBERT EDWARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"e1cd39af-0b84-47bc-978a-74ef31183fde"}
+Contact failed for GILBERT EDWARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"08e35a52-844c-475b-8be5-6eb51779f9d1"}
+Contact failed for MAY MATTHEW: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"0d8260db-6ce7-45bd-9e76-d2dc4ed5d043"}
+Contact failed for CORNERSTONE PROS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"405d6c48-43f9-4b88-bd22-8d74a290c7de"}
+Contact failed for GALLOWAY ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"8354c02e-636c-4d4f-a193-f26ec8b657d2"}
+Contact failed for GALLOWAY ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"08da1637-e766-4a0a-b28d-914d304de24e"}
+Contact failed for YOX CONSTRUCTION SERVICES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"207265e0-9cdd-48fe-8d1a-4ad6c2c2b87a"}
+Contact failed for YOX CONSTRUCTION SERVICES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"4d345d9f-37b1-4fae-b731-fca47e3bc3cc"}
+Contact failed for YOX CONSTRUCTION SERVICES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"4687817d-a318-46bd-b897-a5e78ff2b23d"}
+Contact failed for YOX CONSTRUCTION SERVICES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"1aa32675-eed1-4f98-8457-c5187ae96260"}
+Contact failed for YOX CONSTRUCTION SERVICES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"339cfd32-fa02-4dfa-a689-6a7d67089eab"}
+Contact failed for GALLOWAY ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"ea2f7352-1754-4630-9fdf-b415c1797f21"}
+Contact failed for MIDFLORIDA CREDIT UNION: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"23d44f7a-b444-44e3-b90d-72a62eb076e5"}
+Contact failed for FASTSIGNS OF CLEARWATER: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"978a8f7a-6f70-4796-8745-3b177a6bd313"}
+Contact failed for GILBERT EDWARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"2455f369-20ee-41d3-9db8-1ac59f7c0acb"}
+Contact failed for STORM SHIELDER: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"6c2b2c56-7673-4150-94a0-485915c7e799"}
+Contact failed for GILBERT EDWARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"5533963c-162a-4466-baaf-6676e78afc8e"}
+Contact failed for TAMPA ENERGY SOLUTIONS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"778d881f-9e12-4ff7-8d44-926fe7bf380d"}
+Contact failed for VALDES YANDRA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"1f02e22e-e34a-4b6d-83f8-4c3bf8971779"}
+Contact failed for VALDES YANDRA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"f1c79eb3-8b0a-4a57-bbc0-8de7ac9d52d1"}
+Contact failed for VALDES YANDRA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"fe14e428-0100-4c38-97c3-df59b4110fdb"}
+Contact failed for VALDES YANDRA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"18dd9d40-b3d1-4130-ad96-0f241d2d1483"}
+Contact failed for VALDES YANDRA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"180938e4-e80f-4fbd-936e-7cdbfb55bdf3"}
+Contact failed for VALDES YANDRA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"4186c077-513f-4ea4-b211-39d7661acf6f"}
+Contact failed for EDWARD GILBERT POWER HOME REMODELING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9930da20-efcf-4aeb-8ae7-e4b686a1bedc"}
+Contact failed for SILVESTRE DAMARIS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"5f2de9d8-fdc5-4b30-b00f-b16fa3a4f113"}
+Contact failed for HLR CONSTRUCTION: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"73733592-a587-4389-a3b2-11e82c073f2f"}
+Contact failed for HLR CONSTRUCTION: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"aea3a866-5ed2-476f-873d-428c4d0537c7"}
+Contact failed for HLR CONSTRUCTION: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"edd18792-26b2-4ff3-a68a-87b3b58d3c66"}
+Contact failed for JENKINS JAY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"aa58a6e1-e0ea-4005-a8e6-84ccb4c5caba"}
+Contact failed for UNIVERSAL ROOF AND CONTRACTING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"44be5c0c-03fe-4978-bc53-06d15c2b0c10"}
+Contact failed for LANCI BRANDON: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"ce62ad4c-4424-445a-9b45-05c4ce591011"}
+Contact failed for GIGANTE MICHAEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"e2e8141d-bd71-453b-9022-d159f5c80e2a"}
+Contact failed for GENERX GENERATORS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"57a43517-7784-4f90-a366-3dbb6ad269c7"}
+Contact failed for RED CAP PLUMBING AND AIR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"764035d3-b66d-41cc-b493-b678035e79f2"}
+Contact failed for ROOK CHRISTOPHER: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"5fe834dc-8750-4e30-951e-da4a9c2b6fd4"}
+Contact failed for AND SERVICES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"062b83df-eb80-4b44-b8fd-ccba1e0c42e8"}
+Contact failed for WAYNE GONZALEZ ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"37ef74c0-d1fd-4ac8-944f-6e841ddbdc0a"}
+Contact failed for WAYNE GONZALEZ ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"f4093502-7f74-4076-81a3-3b3f0e61d2e0"}
+Contact failed for SOUTHSHORE ROOFING AND EXTERIORS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"fed3c37c-5d8d-4aa5-b5f0-91d1bac69451"}
+Contact failed for CARIDE JOSE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"580cbdca-66d9-912f-982c-909acd94ac56"}
+Contact failed for C & C TRUSTED ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"44413815-9fd2-41cb-bcce-dc3851c4e781"}
+Contact failed for SOUTHSHORE ROOFING & EXTERIORS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"3c22f324-ecfa-46a4-a4e6-00aa2a3f7bbf"}
+Contact failed for EDWARD GILBERT: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"8c4bf43e-b8e0-4e88-b9d3-feee80fe38a5"}
+Contact failed for GILBERT EDWARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"e611b7aa-596c-4185-8f56-6038cf3dedec"}
+Contact failed for POWER HOME REMODELING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"e9c8b5fe-f6f5-4832-8b84-439581caaa93"}
+Contact failed for GILBERT EDWARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"01ac1d53-1eca-4967-baf4-628e7ee722c5"}
+Contact failed for ROSARIO RICARDO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"de640050-dc5d-4b68-8bb5-2d8dc625801d"}
+Contact failed for ROSARIO RICARDO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"e71f03fb-03ad-45d8-8efb-8ae51dc0a236"}
+Contact failed for ROSARIO RICARDO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"71d8302b-6c07-4f33-8404-a22a2151f09b"}
+Contact failed for STRATEGIC ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"56d69f55-1fde-4da9-9ce3-0653c8ead4be"}
+Contact failed for ITASCA CONSTRUCTION ASOCIATES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"e92a1c0d-fc78-4b3a-84b9-8ec4d7a921ca"}
+Contact failed for ALVAREZ ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"f6b63dd2-4eb4-4adc-81dc-20cec001a3bd"}
+Contact failed for AND SERVICES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"1ca61f04-49af-4e37-a7c5-701a54299942"}
+Contact failed for CODY POOLS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"b8c0ab96-50eb-437e-b4d0-358fd8898035"}
+Contact failed for CODY POOLS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"25f5b5a8-2ca3-4859-a9dd-54d4588c1059"}
+Contact failed for HANDYMAN ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"3313acea-f804-4c9a-9b08-1a2aa865e2a2"}
+Contact failed for AND SERVICES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"498843fe-99ab-4b1c-882d-e3586b09d695"}
+Contact failed for HANDYMAN ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"88a1c65c-53b2-466a-8aba-3f42c154ce7d"}
+Contact failed for SELACE SOLAR INSTALLATION: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"bfe6d337-1ef5-40a5-bc74-0160b8a43d92"}
+Contact failed for MARSH JONATHAN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"568372e6-a1d2-408a-89bd-332aef803d5d"}
+Contact failed for MARSH JONATHAN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"4b18956b-6b74-4004-9f4c-07b1b05dd9bb"}
+Contact failed for SKYMARK ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"a7b31f03-c6db-458c-9943-a4bc62bad714"}
+Contact failed for ROOFING SKYMARK: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"ad309a31-1b8a-411d-bcba-a3c6014d5f6f"}
+Contact failed for REED REGINALD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"0bc2ca18-a25d-4d06-a43f-859ddbb3ab45"}
+Contact failed for SKYMARK ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"6f7186f9-21e8-4b41-b655-1e79fd382e31"}
+Contact failed for SKYMARK ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"b6f4912f-10d6-4c5c-baa6-15453c3e54f6"}
+Contact failed for SKYMARK ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"df2e9f08-66e1-4ad8-9c5d-2638c2d59925"}
+Contact failed for LIEBLER AND LIEBLER: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"5345f593-7dd1-40d1-a1b0-ece6d8f033fc"}
+Contact failed for SKYMARK ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"a19ac226-33a8-41ba-aea7-5608e2264d45"}
+Contact failed for SKYMARK ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"63349fed-d861-4172-b2b2-0b2c9ddafb10"}
+Contact failed for DALY ALUMINUM: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"a6ca3553-8afc-43a5-a1da-bb4ea540cf9b"}
+Contact failed for SKYMARK ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"1e6e6438-572f-43d8-bc48-7ed39d79333c"}
+Contact failed for SKYMARK ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"505cae6a-baa1-4f89-a903-1360407564d0"}
+Contact failed for SKYMARK ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9691e948-9cfe-480a-8678-5bfcbe8daefd"}
+Contact failed for SKYMARK ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"cca6e503-a7fc-4412-b6a9-d84e660c768a"}
+Contact failed for SKYMARK ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"1ad070d0-2a5a-4db7-8c31-74197db649d8"}
+Contact failed for SKYMARK ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"fa41d50f-e53f-4b04-91b1-af13a60de7fe"}
+Contact failed for SKYMARK ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"c0d1a043-bcc9-495a-8283-06146e8cf97a"}
+Contact failed for TREVOR TELEMACQUE: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"36f2ded0-3f33-4101-b597-20bada219c49"}
+Contact failed for SUPER ABC: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"1bb3b6a4-ed97-4a47-82cd-a1af17ff83f6"}
+Contact failed for GIGANTE MICHAEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"48ccc946-b02d-4ecd-bed6-e171e1e7f926"}
+Contact failed for JARAMILLO DARIO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"76b60fdf-3391-4a12-a1c5-e96811377aca"}
+Contact failed for JARAMILLO DARIO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"bd22a343-2b72-4de2-a802-fb5ca234381d"}
+Contact failed for ALVAREZ PLUMBING AND AC: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"04b0d992-ced6-4c65-847b-8ed01855718e"}
+Contact failed for ALVAREZ PLUMBING AND AIR CONDITIONING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"efa45e8a-6ed0-47ed-a894-85c8124dda19"}
+Contact failed for ALVAREZ PLUMBING & AIR CONDITIONING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"625073a9-d838-4432-8dff-3999ae6f7dbb"}
+Contact failed for MCCARY JOHN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"29acfe7b-febe-41fc-8400-81680824f429"}
+Contact failed for BRITTON-HARR CONTRACTING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"d0c42250-577e-46cf-be38-5294629d8930"}
+Contact failed for GIGANTE MICHAEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"de1533a8-09da-4996-9846-5d53b97fe3bb"}
+Contact failed for STEADFAST ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"5d3eb798-1e66-4c11-8e59-eb6423a05cf1"}
+Contact failed for EVERYDAYPLUMBER COM: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"ab83d365-ae0c-4386-94ee-c7c72b6914ab"}
+Contact failed for LASTORIA BRIAN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"1332a1e0-dcd2-4bba-ad07-afa42e8c1f5f"}
+Contact failed for AND SERVICES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"04c8affb-fdd6-40ff-95b5-e60f8fc3d089"}
+Contact failed for BOYKINS CLIFFORD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"c06a39e7-50fa-404f-a1ec-8a8e8f0c35ec"}
+Contact failed for SOLARIA SOLAR AND ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"c09434ff-7e0d-408c-a492-a3e4c1c54678"}
+Contact failed for SOLARIA SOLAR AND ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"6013a91c-99ea-4116-8c06-34e37c69423e"}
+Contact failed for PARRA SERGIO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"cac5f0bc-aebf-4127-8a15-78007bf7f13f"}
+Contact failed for ALPHA FOUNDATIONS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"04784c86-d977-44e9-84bd-faea6bc319b3"}
+Contact failed for SPICOLA ANDREW: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"30d218df-001f-47d7-90ea-aa8f770dfbca"}
+Contact failed for MCCAFFREY ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"f724caec-3d7c-4e2f-9691-832c6bb9fa95"}
+Contact failed for CKR SOLAR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"7e42721b-7576-48d9-8b04-d386360faf81"}
+Contact failed for GIGANTE MICHAEL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"f987f506-b652-4180-ace0-c7446b9f84c4"}
+Contact failed for HOME LOVE CONSTRUCTION: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"3f39f8bc-4439-4752-b00a-3165079588ef"}
+Contact failed for HOME LOVE CONSTRUCTION: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"ee0d0aec-e998-4007-9cf4-3be95183424a"}
+Contact failed for THE HOME DEPOT: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"d4e5b772-cfe7-4764-b09c-5177bbac0117"}
+Contact failed for THE HOME DEPOT: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"dae985d5-fc11-446e-ae4b-68c6095c8241"}
+Contact failed for OLDE WORLD REFLECTIONS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"78abd67d-2248-4ccb-950f-b14f4e532963"}
+Contact failed for OLDE WORLD REFLECTIONS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"972ece9d-fa32-4c3b-8eaf-ed77c8d25b5f"}
+Contact failed for PEINADO VICTOR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"a2649a61-6609-4f30-b2a9-aee2bd45164d"}
+Contact failed for PUKTA CORPORATION: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"2a8f9808-ba36-4241-bc3a-de71cbaa60de"}
+Contact failed for SOLARIA SOLAR AND ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"010cb1a3-1566-413e-aec7-05889506325d"}
+Contact failed for DIFFERENZA POOLS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"554e5ee5-76c0-4201-98b8-51ebbf9ef228"}
+Contact failed for RED CAP PLUMBING AND AIR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"2b2af6f0-1b08-4f9a-b82d-963597678ca7"}
+Contact failed for LEMKE KLAUS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"87934ea8-bb7c-4655-8a54-27c06b4f0566"}
+Contact failed for LEMKE KLAUS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"827e47c8-a49a-4b1d-a829-1ed6ce7b6cac"}
+Contact failed for SMALL JOBS ELECTRIC: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"c3d628f9-28d1-48b0-a3e6-4228645fa75e"}
+Contact failed for IROK CONSTRUCTION SERVICES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"e4e9564a-c42c-40e0-846d-8c0c9d7d51c9"}
+Contact failed for RENEWAL BY ANDERSEN OF FLA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"ac534847-53be-4f44-87aa-ad73b578e752"}
+Contact failed for BELLA DIFFERENZA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"95b85995-93d0-464d-99ad-bd12557099b9"}
+Contact failed for STINTON JACOB: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"b4603e07-a9e7-4e55-9540-76904bb5255c"}
+Contact failed for PARADISE POOLS OF TAMPA BAY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"ba39efeb-1de4-4c77-8a1f-1504f1e414ef"}
+Contact failed for TAMPA BAY POOLS ON THE GULF: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"70453255-4660-48a1-b596-f8d592d8745f"}
+Contact failed for TAMPA BAY POOLS ON THE GULF: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"b6b53c8e-be97-465c-a97f-72aef35b7af6"}
+Contact failed for GILBERT EDWARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"26b92e60-1a36-4b06-a631-41b4f280637c"}
+Contact failed for GILBERT EDWARD: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"56f1aecc-4044-4bdb-ad4f-98725be62fa2"}
+Contact failed for THOMAS TIFFANY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"251b96d8-fe24-49c9-9afb-3a0a9dddf4a5"}
+Contact failed for ECOVIEW WINDOWS AND DOORS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"d50ba04b-2835-4c1e-a04d-8498abcd20fd"}
+Contact failed for REECE BUILDERS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"01f41425-7aad-498d-8851-750ded13b5af"}
+Contact failed for CARL MARTIN ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"3b15eab2-8440-46d8-bcc1-bf1b0dd48406"}
+Contact failed for SOLARIA SOLAR & ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"81d364b3-6d02-4842-9d4d-00c35afabd62"}
+Contact failed for COLONY ROOFERS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"44bfb1e7-086d-4b0d-adb9-4c01d7aa4b08"}
+Contact failed for JENNINGS MH SETUP: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"02e87b3d-abd9-4dc6-80bc-f410d5563666"}
+Contact failed for GH ELECTRICAL SERVICES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"e0b674de-a8c2-4807-bcaa-9feb4cccd2ef"}
+Contact failed for STEADFAST ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"eda311cb-4616-4d68-98c1-0fda5bdb6222"}
+Contact failed for SHARPE ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"f8cf2c31-b2e2-4df6-9b42-7006af418f3b"}
+Contact failed for DAVID GREENWAY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"abc7639b-5651-4b7e-a88e-3818f4527741"}
+Contact failed for NEWSOUTH WINDOW SOLUTIONS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"848f45b2-ba9a-427a-a290-a9e05c77a26b"}
+Contact failed for CORN ELIZABETH: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"c56da357-7bd3-47fe-86ab-b72bcd7c44c8"}
+Contact failed for CREATIVE OUTDOOR KITCHENS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"effc0278-7569-4d11-8d01-5be90ab8e522"}
+Contact failed for MAHAN PAUL: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"b9af0b9a-a28f-4abf-a857-20588092d504"}
+Contact failed for RED CAP PLUMBING AND AIR: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9ec58b0f-ac1a-40ef-bbfe-90c1cffa2c00"}
+Contact failed for RODRIGUEZ CARLOS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"147ab4f2-e487-4258-8ff8-e96068b99df0"}
+Contact failed for JOSEPHS JASON: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"e9ed2387-f183-405d-947f-d2f8dce838a8"}
+Contact failed for SOLFLO ENERGY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"97999e26-009c-4332-b955-b4599f97d205"}
+Contact failed for CRUZ ANTONIO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"34f05a15-f2c5-49cf-ab01-c6adbd2c22b2"}
+Contact failed for AND SERVICES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"6c204b35-040b-4537-ac7f-969007cde63e"}
+Contact failed for AND SERVICES: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"790556e8-cd94-4087-b5ac-dc92f17dadf8"}
+Contact failed for MAINES STEVEN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"40a4fdee-7f19-45fe-9bfa-92f649fbd72c"}
+Contact failed for MAINES STEVEN: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"525e8fef-13dd-4c62-8a1e-4f4b483a80c6"}
+Contact failed for RENEWAL BY ANDERSEN OF FLA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"b093adc7-2f66-4484-b75e-ab3feabae3e0"}
+Contact failed for RENEWAL BY ANDERSEN OF FLA: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"2e34a9f4-6b3e-4dc0-87b1-ed6afe74e939"}
+Contact failed for ECOVIEW TAMPA BAY: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"9c831563-1e2f-4034-830a-ab6c52172471"}
+Contact failed for SOLARIA SOLAR AND ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"568574bc-019d-44a4-970c-acf82870114a"}
+Contact failed for SOUTHERN SAFE CONSTRUCTION: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"1d70e4e1-e2dc-41a8-b522-1e3fb5b411a4"}
+Contact failed for ALPHA FOUNDATIONS: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"51da9676-7c36-46ce-ae49-cb814c2781c4"}
+Contact failed for FARLEY KRISTI: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"e9f4c221-0a3c-4b59-b469-9706d75b91f9"}
+Contact failed for ROOFING COASTAL PRO: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"6ec92278-8ec8-491e-8ccd-b51dc20c7a31"}
+Contact failed for COASTAL PRO ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"2e150c99-ae04-46a5-a80e-3add389abd37"}
+Contact failed for COASTAL PRO ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"74cfbdab-7793-476c-97ed-69908a7de579"}
+Contact failed for COASTAL PRO ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"72410dfc-bb7b-42f6-bc7d-460cbf647fcb"}
+Contact failed for GOLD SEAL ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"99e10e8a-feea-4bf4-8fd7-e3c2394b4d92"}
+Contact failed for COASTAL PRO ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"a8734aef-253a-4410-868b-49c1652503ae"}
+Contact failed for SHINGLE MASTERS ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"1a4908b3-fa62-423d-90fc-b8b843546a8a"}
+Contact failed for SHINGLE MASTERS ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"93908e27-fc1d-4fbb-983f-d1d06a0fb7ba"}
+Contact failed for SHINGLE MASTERS ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"caaad13f-e19f-4521-a404-c56b11c86b5b"}
+Contact failed for SHINGLE MASTERS ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"6e09e144-e32f-4512-a998-1b8fe0e474a0"}
+Contact failed for SHINGLE MASTERS ROOFING: {"message":"Pass at least one of number, email query parameter","error":"Bad Request","statusCode":400,"traceId":"5bc71130-01ce-435a-9ee8-a55023438728"}
+GHL: 0 added to workflow, 664 failed
+Sending notifications...
+Email sent!
+Text sent!
+Done! 0 contacts pushed to GHL, 664 ready for Xleads.
